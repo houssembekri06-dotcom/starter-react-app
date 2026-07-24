@@ -120,6 +120,13 @@ export default function News() {
       </header>
 
       <section className="news-hero">
+        <img
+          src={newsHeroAsset.url}
+          alt="Illustration des marchés financiers"
+          className="news-hero-image"
+          width={1024}
+          height={512}
+        />
         <div className="news-hero-content">
           <span className="news-hero-tag">À la une</span>
           <h2 className="news-hero-title">
@@ -128,18 +135,6 @@ export default function News() {
           <p className="news-hero-summary">
             Un regard ludique sur les mécanismes qui font bouger les cours chaque matin.
           </p>
-        </div>
-        <div className="news-hero-chart" aria-hidden="true">
-          <svg viewBox="0 0 120 60" preserveAspectRatio="none">
-            <path
-              d="M0,50 C20,45 30,55 50,30 S80,10 120,15"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-            <circle cx="120" cy="15" r="4" fill="currentColor" />
-          </svg>
         </div>
       </section>
 
