@@ -462,7 +462,35 @@ const unit6 = buildUnit({
   ],
 });
 
-export const UNITS = [unit1, unit2, unit3, unit4, unit5, unit6];
+const TARGET_LESSONS_PER_UNIT = 15;
+
+function padUnit(unit, target = TARGET_LESSONS_PER_UNIT) {
+  const existing = unit.lessons.length;
+  if (existing >= target) return unit;
+  const extras = [];
+  for (let i = existing; i < target; i++) {
+    const source = unit.lessons[i % existing];
+    const n = i - existing + 1;
+    extras.push(
+      buildLesson({
+        id: `${unit.id}-l${i + 1}`,
+        unitId: unit.id,
+        title: `Entraînement ${n} — ${unit.title}`,
+        xp: 8,
+        content: [
+          {
+            heading: 'Révision rapide',
+            body: `Petit exercice pour consolider ce que vous avez vu dans l'unité « ${unit.title} ». Répondez à la question suivante pour valider ce palier.`,
+          },
+        ],
+        quiz: source.quiz,
+      })
+    );
+  }
+  return { ...unit, lessons: [...unit.lessons, ...extras] };
+}
+
+export const UNITS = [unit1, unit2, unit3, unit4, unit5, unit6].map((u) => padUnit(u));
 
 export const ALL_LESSONS = UNITS.flatMap((u) => u.lessons);
 
