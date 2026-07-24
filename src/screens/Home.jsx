@@ -50,28 +50,26 @@ export default function Home() {
       <div className="home-dashboard-card">
         <div className="home-dashboard-left">
           <div className="home-points">
-            <Icon name="coin" size={22} stroke={2} color="var(--color-coral)" />
+            <Icon name="coin" size={18} stroke={2} color="var(--color-coral)" />
             <span className="home-points-value">{coins}</span>
           </div>
-          <span className="home-points-label">Connaissances points</span>
+          <span className="home-points-label">Points</span>
         </div>
 
         <div className="home-dashboard-center">
-          <CircularProgress value={unitProgressPct} size={64} strokeWidth={6} />
+          <CircularProgress value={unitProgressPct} size={44} strokeWidth={5} />
           <div className="home-progress-labels">
-            <span className="home-progress-title">Progression du Module</span>
+            <span className="home-progress-title">Progression</span>
             <span className="home-progress-subtitle">{selectedUnit.title}</span>
           </div>
         </div>
 
         <div className="home-dashboard-right">
-          <div className="home-reward-card">
-            <div className="home-reward-icon">
-              <Icon name="building-bank" size={22} stroke={1.8} color="var(--color-indigo)" />
-            </div>
+          <div className="home-reward-badge">
+            <Icon name="building-bank" size={18} stroke={1.8} color="var(--color-indigo)" />
             <div className="home-reward-content">
-              <span className="home-reward-title">Récompense Active</span>
-              <span className="home-reward-text">DÉBLOQUER : 80€ de Bonus</span>
+              <span className="home-reward-title">Récompense</span>
+              <span className="home-reward-text">80 € de bonus</span>
             </div>
           </div>
         </div>
