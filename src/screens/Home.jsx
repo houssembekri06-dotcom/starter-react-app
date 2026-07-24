@@ -6,6 +6,8 @@ import Pill from '../components/Pill';
 import ProgressBar from '../components/ProgressBar';
 import LessonChart from '../components/LessonChart';
 import MarketTicker from '../components/MarketTicker';
+import UnitEnvironmentBanner from '../components/UnitEnvironmentBanner';
+import { getEnvironment } from '../data/environments';
 import Icon from '../components/Icon';
 import './Home.css';
 
@@ -36,6 +38,8 @@ export default function Home() {
   const activeLessonId = unitUnlocked
     ? (selectedUnit.lessons.find((l) => !completedLessonIds.includes(l.id))?.id ?? null)
     : null;
+
+  const env = getEnvironment(selectedUnit.id);
 
   function handleNodeClick(lesson) {
     navigate(`/lesson/${lesson.id}`);
@@ -89,13 +93,17 @@ export default function Home() {
           <p>Terminez l'unité précédente pour débloquer celle-ci.</p>
         </div>
       ) : (
-        <LessonChart
-          lessons={selectedUnit.lessons}
-          completedLessonIds={completedLessonIds}
-          activeLessonId={activeLessonId}
-          unitUnlocked={unitUnlocked}
-          onSelect={handleNodeClick}
-        />
+        <>
+          <UnitEnvironmentBanner env={env} unitTitle={selectedUnit.title} />
+          <LessonChart
+            lessons={selectedUnit.lessons}
+            completedLessonIds={completedLessonIds}
+            activeLessonId={activeLessonId}
+            unitUnlocked={unitUnlocked}
+            accent={env.accent}
+            onSelect={handleNodeClick}
+          />
+        </>
       )}
     </div>
   );
