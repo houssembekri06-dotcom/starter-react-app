@@ -45,11 +45,6 @@ export default function Home() {
     <div className="screen home-screen">
       <MarketTicker />
 
-      <div className="home-pills-row">
-        <Pill icon="flame" iconColor="var(--color-coral)" tone="coral">{streakDays}</Pill>
-        <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
-      </div>
-
       <div className="home-units-scroll">
         {UNITS.map((u, i) => {
           const locked = i > 0 && !isUnitComplete(UNITS[i - 1], completedLessonIds);
@@ -90,6 +85,12 @@ export default function Home() {
           <ProgressBar value={completedInUnit} max={selectedUnit.lessons.length} tone="indigo" />
         </div>
       </div>
+
+      <div className="home-pills-row">
+        <Pill icon="flame" iconColor="var(--color-coral)" tone="coral">{streakDays}</Pill>
+        <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
+      </div>
+
 
       {!unitUnlocked ? (
         <div className="home-locked-unit">
