@@ -60,6 +60,32 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
         preserveAspectRatio="none"
         aria-hidden="true"
       >
+        {/* Finance-style grid */}
+        {Array.from({ length: Math.ceil(height / 60) }).map((_, i) => (
+          <line
+            key={`h-${i}`}
+            x1="0"
+            x2="100"
+            y1={i * 60}
+            y2={i * 60}
+            stroke="rgba(91, 79, 232, 0.08)"
+            strokeDasharray="2 4"
+            vectorEffect="non-scaling-stroke"
+            style={{ strokeWidth: 1 }}
+          />
+        ))}
+        {[20, 40, 60, 80].map((x) => (
+          <line
+            key={`v-${x}`}
+            x1={x}
+            x2={x}
+            y1="0"
+            y2={height}
+            stroke="rgba(91, 79, 232, 0.05)"
+            vectorEffect="non-scaling-stroke"
+            style={{ strokeWidth: 1 }}
+          />
+        ))}
         {n > 1 && (
           <polyline
             points={lessons
@@ -70,7 +96,7 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
-            style={{ strokeWidth: 2.5 }}
+            style={{ strokeWidth: 4 }}
           />
         )}
       </svg>
