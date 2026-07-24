@@ -57,7 +57,7 @@ export default function Home() {
         </div>
 
         <div className="home-dashboard-center">
-          <CircularProgress value={unitProgressPct} size={72} strokeWidth={7} />
+          <CircularProgress value={unitProgressPct} size={64} strokeWidth={6} />
           <div className="home-progress-labels">
             <span className="home-progress-title">Progression du Module</span>
             <span className="home-progress-subtitle">{selectedUnit.title}</span>
