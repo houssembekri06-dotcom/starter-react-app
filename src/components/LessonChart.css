@@ -98,7 +98,6 @@
   max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: thelabel;
   white-space: nowrap;
   box-shadow: none;
 }
