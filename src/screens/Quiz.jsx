@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from '@/lib/router-compat';
 import { getLessonById } from '../data/lessons';
 import { useProgress } from '../context/ProgressContext';
 import Pill from '../components/Pill';

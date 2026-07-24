@@ -38,7 +38,7 @@ type LinkProps = {
 
 export function Link({ to, children, ...rest }: LinkProps) {
   return (
-    // @ts-expect-error runtime string path
+    // @ts-ignore runtime string path
     <TSRLink to={to} {...rest}>
       {children}
     </TSRLink>
@@ -59,7 +59,7 @@ export function NavLink({ to, end, className, children, ...rest }: NavLinkProps)
   const cls = typeof className === "function" ? className({ isActive }) : className;
   const kids = typeof children === "function" ? children({ isActive }) : children;
   return (
-    // @ts-expect-error runtime string path
+    // @ts-ignore runtime string path
     <TSRLink to={to} className={cls} {...rest}>
       {kids}
     </TSRLink>

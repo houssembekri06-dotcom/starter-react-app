@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from '@/lib/router-compat';
 import { getLessonById, getUnitById } from '../data/lessons';
 import ProgressBar from '../components/ProgressBar';
 import Icon from '../components/Icon';

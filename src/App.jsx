@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from '@/lib/router-compat';
 import { ProgressProvider, useProgress } from './context/ProgressContext';
 import PhoneFrame from './components/PhoneFrame';
 import TabBar from './components/TabBar';

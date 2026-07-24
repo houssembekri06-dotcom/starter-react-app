@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-compat';
 import { useProgress } from '../context/ProgressContext';
 import { getAssetById, ASSETS, ASSET_TYPE_LABELS } from '../data/assets';
 import { formatEUR, formatShares } from '../utils/format';
