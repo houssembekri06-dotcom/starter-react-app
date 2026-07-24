@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import Icon from '../components/Icon';
+import newsHeroAsset from '../assets/news-hero.png.asset.json';
 import './News.css';
 
 const MOCK_NEWS = [
