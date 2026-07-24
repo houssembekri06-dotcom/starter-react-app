@@ -42,28 +42,6 @@ export default function Home() {
     <div className="screen home-screen">
       <MarketTicker />
 
-      <div className="home-units-scroll">
-        {UNITS.map((u, i) => {
-          const locked = i > 0 && !isUnitComplete(UNITS[i - 1], completedLessonIds);
-          const active = u.id === selectedUnit.id;
-          return (
-            <button
-              key={u.id}
-              className={
-                'unit-chip' +
-                (active ? ' unit-chip--active' : '') +
-                (locked ? ' unit-chip--locked' : '')
-              }
-              disabled={locked}
-              onClick={() => setSelectedUnitId(u.id)}
-            >
-              {locked && <Icon name="lock" size={15} stroke={2.4} />}
-              <span>{`Unité ${u.order}`}</span>
-            </button>
-          );
-        })}
-      </div>
-
       <div className="unit-info-card">
         <div className="unit-info-head">
           <h2 className="unit-info-title">{selectedUnit.title}</h2>
