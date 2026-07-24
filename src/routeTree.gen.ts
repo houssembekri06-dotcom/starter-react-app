@@ -9,38 +9,220 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WalletRouteImport } from './routes/wallet'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as LeagueRouteImport } from './routes/league'
+import { Route as HomeRouteImport } from './routes/home'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LessonLessonIdRouteImport } from './routes/lesson.$lessonId'
+import { Route as AssetAssetIdRouteImport } from './routes/asset.$assetId'
+import { Route as LessonLessonIdQuizRouteImport } from './routes/lesson.$lessonId.quiz'
 
+const WalletRoute = WalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeagueRoute = LeagueRouteImport.update({
+  id: '/league',
+  path: '/league',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LessonLessonIdRoute = LessonLessonIdRouteImport.update({
+  id: '/lesson/$lessonId',
+  path: '/lesson/$lessonId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssetAssetIdRoute = AssetAssetIdRouteImport.update({
+  id: '/asset/$assetId',
+  path: '/asset/$assetId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LessonLessonIdQuizRoute = LessonLessonIdQuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => LessonLessonIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/home': typeof HomeRoute
+  '/league': typeof LeagueRoute
+  '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
+  '/profile': typeof ProfileRoute
+  '/signup': typeof SignupRoute
+  '/wallet': typeof WalletRoute
+  '/asset/$assetId': typeof AssetAssetIdRoute
+  '/lesson/$lessonId': typeof LessonLessonIdRouteWithChildren
+  '/lesson/$lessonId/quiz': typeof LessonLessonIdQuizRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/home': typeof HomeRoute
+  '/league': typeof LeagueRoute
+  '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
+  '/profile': typeof ProfileRoute
+  '/signup': typeof SignupRoute
+  '/wallet': typeof WalletRoute
+  '/asset/$assetId': typeof AssetAssetIdRoute
+  '/lesson/$lessonId': typeof LessonLessonIdRouteWithChildren
+  '/lesson/$lessonId/quiz': typeof LessonLessonIdQuizRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/home': typeof HomeRoute
+  '/league': typeof LeagueRoute
+  '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
+  '/profile': typeof ProfileRoute
+  '/signup': typeof SignupRoute
+  '/wallet': typeof WalletRoute
+  '/asset/$assetId': typeof AssetAssetIdRoute
+  '/lesson/$lessonId': typeof LessonLessonIdRouteWithChildren
+  '/lesson/$lessonId/quiz': typeof LessonLessonIdQuizRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/home'
+    | '/league'
+    | '/login'
+    | '/onboarding'
+    | '/profile'
+    | '/signup'
+    | '/wallet'
+    | '/asset/$assetId'
+    | '/lesson/$lessonId'
+    | '/lesson/$lessonId/quiz'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/home'
+    | '/league'
+    | '/login'
+    | '/onboarding'
+    | '/profile'
+    | '/signup'
+    | '/wallet'
+    | '/asset/$assetId'
+    | '/lesson/$lessonId'
+    | '/lesson/$lessonId/quiz'
+  id:
+    | '__root__'
+    | '/'
+    | '/home'
+    | '/league'
+    | '/login'
+    | '/onboarding'
+    | '/profile'
+    | '/signup'
+    | '/wallet'
+    | '/asset/$assetId'
+    | '/lesson/$lessonId'
+    | '/lesson/$lessonId/quiz'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HomeRoute: typeof HomeRoute
+  LeagueRoute: typeof LeagueRoute
+  LoginRoute: typeof LoginRoute
+  OnboardingRoute: typeof OnboardingRoute
+  ProfileRoute: typeof ProfileRoute
+  SignupRoute: typeof SignupRoute
+  WalletRoute: typeof WalletRoute
+  AssetAssetIdRoute: typeof AssetAssetIdRoute
+  LessonLessonIdRoute: typeof LessonLessonIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wallet': {
+      id: '/wallet'
+      path: '/wallet'
+      fullPath: '/wallet'
+      preLoaderRoute: typeof WalletRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/league': {
+      id: '/league'
+      path: '/league'
+      fullPath: '/league'
+      preLoaderRoute: typeof LeagueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +230,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lesson/$lessonId': {
+      id: '/lesson/$lessonId'
+      path: '/lesson/$lessonId'
+      fullPath: '/lesson/$lessonId'
+      preLoaderRoute: typeof LessonLessonIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/asset/$assetId': {
+      id: '/asset/$assetId'
+      path: '/asset/$assetId'
+      fullPath: '/asset/$assetId'
+      preLoaderRoute: typeof AssetAssetIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lesson/$lessonId/quiz': {
+      id: '/lesson/$lessonId/quiz'
+      path: '/quiz'
+      fullPath: '/lesson/$lessonId/quiz'
+      preLoaderRoute: typeof LessonLessonIdQuizRouteImport
+      parentRoute: typeof LessonLessonIdRoute
+    }
   }
 }
 
+interface LessonLessonIdRouteChildren {
+  LessonLessonIdQuizRoute: typeof LessonLessonIdQuizRoute
+}
+
+const LessonLessonIdRouteChildren: LessonLessonIdRouteChildren = {
+  LessonLessonIdQuizRoute: LessonLessonIdQuizRoute,
+}
+
+const LessonLessonIdRouteWithChildren = LessonLessonIdRoute._addFileChildren(
+  LessonLessonIdRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HomeRoute: HomeRoute,
+  LeagueRoute: LeagueRoute,
+  LoginRoute: LoginRoute,
+  OnboardingRoute: OnboardingRoute,
+  ProfileRoute: ProfileRoute,
+  SignupRoute: SignupRoute,
+  WalletRoute: WalletRoute,
+  AssetAssetIdRoute: AssetAssetIdRoute,
+  LessonLessonIdRoute: LessonLessonIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
