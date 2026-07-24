@@ -5,6 +5,7 @@ import './TabBar.css';
 const TABS = [
   { to: '/home', icon: 'home', label: 'Accueil' },
   { to: '/wallet', icon: 'wallet', label: 'Portefeuille' },
+  { to: '/news', icon: 'news', label: 'Actualités' },
   { to: '/league', icon: 'trophy', label: 'Ligue' },
   { to: '/profile', icon: 'user', label: 'Profil' },
 ];
