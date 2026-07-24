@@ -6,7 +6,6 @@ import Pill from '../components/Pill';
 import ProgressBar from '../components/ProgressBar';
 import LessonChart from '../components/LessonChart';
 import MarketTicker from '../components/MarketTicker';
-import { getEnvironment } from '../data/environments';
 import Icon from '../components/Icon';
 import './Home.css';
 
@@ -27,8 +26,8 @@ export default function Home() {
   const selectedUnit = UNITS.find((u) => u.id === selectedUnitId) || firstIncompleteUnit;
 
   const unitIndex = UNITS.findIndex((u) => u.id === selectedUnit.id);
-  // Dev: toutes les unités débloquées pour prévisualisation
-  const unitUnlocked = true;
+  const unitUnlocked =
+    unitIndex === 0 || isUnitComplete(UNITS[unitIndex - 1], completedLessonIds);
 
   const completedInUnit = selectedUnit.lessons.filter((l) =>
     completedLessonIds.includes(l.id)
@@ -37,8 +36,6 @@ export default function Home() {
   const activeLessonId = unitUnlocked
     ? (selectedUnit.lessons.find((l) => !completedLessonIds.includes(l.id))?.id ?? null)
     : null;
-
-  const env = getEnvironment(selectedUnit.id);
 
   function handleNodeClick(lesson) {
     navigate(`/lesson/${lesson.id}`);
@@ -55,7 +52,7 @@ export default function Home() {
 
       <div className="home-units-scroll">
         {UNITS.map((u, i) => {
-          const locked = false;
+          const locked = i > 0 && !isUnitComplete(UNITS[i - 1], completedLessonIds);
           const done = isUnitComplete(u, completedLessonIds);
           return (
             <button
@@ -92,21 +89,13 @@ export default function Home() {
           <p>Terminez l'unité précédente pour débloquer celle-ci.</p>
         </div>
       ) : (
-        <>
-          <div className="home-env-caption" style={{ '--env-accent': env.accent }}>
-            <span className="home-env-chapter">{env.chapter}</span>
-            <span className="home-env-place">{env.place}</span>
-          </div>
-          <LessonChart
-            lessons={selectedUnit.lessons}
-            completedLessonIds={completedLessonIds}
-            activeLessonId={activeLessonId}
-            unitUnlocked={unitUnlocked}
-            accent={env.accent}
-            decor={env.decor}
-            onSelect={handleNodeClick}
-          />
-        </>
+        <LessonChart
+          lessons={selectedUnit.lessons}
+          completedLessonIds={completedLessonIds}
+          activeLessonId={activeLessonId}
+          unitUnlocked={unitUnlocked}
+          onSelect={handleNodeClick}
+        />
       )}
     </div>
   );

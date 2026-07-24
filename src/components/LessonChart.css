@@ -4,18 +4,6 @@
   margin-top: 8px;
 }
 
-.lesson-chart-decor {
-  position: absolute;
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-  filter:
-    drop-shadow(0 6px 8px rgba(15, 23, 42, 0.18))
-    drop-shadow(0 2px 3px rgba(15, 23, 42, 0.12));
-  transition: transform 0.3s ease;
-  z-index: 0;
-}
-
 .lesson-chart-svg {
   position: absolute;
   inset: 0;
@@ -58,7 +46,7 @@
 
 .lesson-chart-node--completed,
 .lesson-chart-node--active {
-  background: var(--chart-accent, var(--color-indigo));
+  background: var(--color-indigo);
 }
 
 .lesson-chart-node--active {
@@ -79,7 +67,6 @@
   color: var(--color-text);
   white-space: nowrap;
 }
-
 
 .lesson-chart-label--locked {
   color: var(--color-text-disabled);

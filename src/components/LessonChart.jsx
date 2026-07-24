@@ -30,8 +30,7 @@ function hashString(str) {
   return h >>> 0;
 }
 
-export default function LessonChart({ lessons, completedLessonIds, activeLessonId, unitUnlocked, accent, decor, onSelect }) {
-  const strokeColor = accent || 'var(--color-indigo)';
+export default function LessonChart({ lessons, completedLessonIds, activeLessonId, unitUnlocked, onSelect }) {
   const n = lessons.length;
   const height = PAD_TOP + (n - 1) * ROW_H + PAD_BOTTOM + NODE;
 
@@ -78,7 +77,7 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
   }, [points]);
 
   return (
-    <div className="lesson-chart" style={{ height, '--chart-accent': strokeColor }}>
+    <div className="lesson-chart" style={{ height }}>
       <svg
         className="lesson-chart-svg"
         viewBox={`0 0 100 ${height}`}
@@ -115,7 +114,7 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
           <path
             d={pathD}
             fill="none"
-            stroke={strokeColor}
+            stroke="var(--color-indigo)"
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
@@ -123,28 +122,6 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
           />
         )}
       </svg>
-
-      {decor && decor.length > 0 && lessons.map((lesson, i) => {
-        const nodeX = xPositions[i] * 100;
-        const onLeft = nodeX > 50;
-        const emoji = decor[i % decor.length];
-        const rot = ((i * 37) % 21) - 10;
-        const size = 34 + ((i * 13) % 18);
-        const yTop = PAD_TOP + i * ROW_H + NODE / 2 - size / 2;
-        const sideStyle = onLeft
-          ? { left: `${Math.max(4, nodeX - 34)}%`, transform: `translateX(-100%) rotate(${rot}deg)` }
-          : { left: `${Math.min(96, nodeX + 34)}%`, transform: `rotate(${rot}deg)` };
-        return (
-          <div
-            key={`decor-${lesson.id}`}
-            className="lesson-chart-decor"
-            style={{ top: yTop, fontSize: size, ...sideStyle }}
-            aria-hidden="true"
-          >
-            {emoji}
-          </div>
-        );
-      })}
 
       {lessons.map((lesson, i) => {
         const completed = completedLessonIds.includes(lesson.id);
