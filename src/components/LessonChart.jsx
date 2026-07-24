@@ -57,41 +57,14 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
     y: PAD_TOP + i * ROW_H + NODE / 2,
   }));
 
-  const areaPoints =
-    n > 1
-      ? `${X_MIN * 100},${points[0].y} ` +
-        points.map((p) => `${p.x},${p.y}`).join(' ') +
-        ` ${X_MIN * 100},${points[n - 1].y}`
-      : '';
-
   return (
     <div className="lesson-chart" style={{ height }}>
-      <div className="lesson-chart-axis" aria-hidden="true">
-        {Array.from({ length: n }).map((_, i) => {
-          const price = (100 + (n - i) * 4.25).toFixed(2);
-          return (
-            <span key={i} className="lesson-chart-axis-tick" style={{ top: PAD_TOP + i * ROW_H + NODE / 2 - 6 }}>
-              {price}
-            </span>
-          );
-        })}
-      </div>
       <svg
         className="lesson-chart-svg"
         viewBox={`0 0 100 ${height}`}
         preserveAspectRatio="none"
         aria-hidden="true"
       >
-        <defs>
-          <linearGradient id="lc-bull-area" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="rgba(22, 163, 74, 0)" />
-            <stop offset="100%" stopColor="rgba(22, 163, 74, 0.22)" />
-          </linearGradient>
-          <linearGradient id="lc-bull-line" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#16a34a" />
-            <stop offset="100%" stopColor="#0e7c39" />
-          </linearGradient>
-        </defs>
         {/* Finance-style grid */}
         {Array.from({ length: Math.ceil(height / 60) }).map((_, i) => (
           <line
@@ -119,16 +92,10 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
           />
         ))}
         {n > 1 && (
-          <polygon
-            points={areaPoints}
-            fill="url(#lc-bull-area)"
-          />
-        )}
-        {n > 1 && (
           <polyline
             points={points.map((p) => `${p.x},${p.y}`).join(' ')}
             fill="none"
-            stroke="url(#lc-bull-line)"
+            stroke="var(--color-indigo)"
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
