@@ -1,0 +1,30 @@
+.lesson-screen {
+  min-height: 100%;
+}
+
+.lesson-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
+}
+
+.lesson-title {
+  font-size: 21px;
+  font-weight: 700;
+  margin: 0 0 18px;
+  line-height: 1.3;
+}
+
+.lesson-block-heading {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--color-indigo-dark);
+}
+
+.lesson-block-body {
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+  color: var(--color-text);
+}

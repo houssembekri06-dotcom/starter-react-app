@@ -1,0 +1,87 @@
+.invest-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 8px;
+}
+
+.invest-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.invest-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.invest-amount-display {
+  font-size: var(--font-size-money-lg);
+  font-weight: 700;
+  text-align: center;
+  padding: 6px 0 2px;
+}
+
+.quick-amounts-row, .order-type-row {
+  display: flex;
+  gap: 8px;
+}
+
+.invest-mini-rows {
+  background: var(--color-gray-bg);
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+}
+
+.invest-mini-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-top: 1px solid var(--color-border);
+  font-size: var(--font-size-sm);
+}
+
+.invest-mini-row:first-child {
+  border-top: none;
+}
+
+.invest-mini-row--warn strong {
+  color: var(--color-rose);
+}
+
+.invest-preview {
+  background: var(--color-indigo-tint);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+
+.invest-preview-title {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-indigo-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 4px;
+}
+
+.invest-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  font-size: var(--font-size-base);
+  background: var(--color-white);
+  color: var(--color-text);
+}
+
+.protections-row {
+  display: flex;
+  gap: 8px;
+}
+
+.protections-row .invest-input {
+  flex: 1;
+}

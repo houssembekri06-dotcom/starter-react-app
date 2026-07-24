@@ -1,0 +1,10 @@
+@import './theme.css';
+@import './components/ui.css';
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100dvh;
+}

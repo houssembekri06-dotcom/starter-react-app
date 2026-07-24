@@ -1,0 +1,82 @@
+.confirmation-screen {
+  align-items: center;
+  text-align: center;
+  padding-top: 36px;
+}
+
+.confirmation-icon {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: var(--color-teal-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.confirmation-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.confirmation-sub {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: 4px 0 0;
+}
+
+.confirmation-xp-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-coral-light);
+  color: var(--color-coral-text);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  margin-top: 6px;
+}
+
+.confirmation-recap {
+  width: 100%;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: 6px var(--space-lg);
+  margin-top: 10px;
+}
+
+.recap-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-top: 1px solid var(--color-gray-bg);
+  font-size: var(--font-size-base);
+}
+
+.recap-row:first-child {
+  border-top: none;
+}
+
+.recap-label {
+  color: var(--color-text-secondary);
+}
+
+.recap-value {
+  font-weight: 700;
+}
+
+.confirmation-message {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  line-height: 1.5;
+  margin: 4px 8px;
+}
+
+.confirmation-cta {
+  margin-top: auto;
+}
