@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import Icon from './Icon';
 import './LessonChart.css';
 
@@ -6,11 +7,50 @@ const ROW_H = 110;
 const PAD_X = 28;
 const PAD_TOP = 40;
 const PAD_BOTTOM = 30;
-const X_PATTERN = [0.18, 0.5, 0.82, 0.5];
+const X_MIN = 0.15;
+const X_MAX = 0.85;
+
+function mulberry32(seed) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function hashString(str) {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
 
 export default function LessonChart({ lessons, completedLessonIds, activeLessonId, unitUnlocked, onSelect }) {
   const n = lessons.length;
   const height = PAD_TOP + (n - 1) * ROW_H + PAD_BOTTOM + NODE;
+
+  const xPositions = useMemo(() => {
+    const seed = hashString(lessons[0]?.unitId || lessons[0]?.id || 'seed');
+    const rand = mulberry32(seed);
+    const out = [];
+    let prev = 0.5;
+    for (let i = 0; i < n; i++) {
+      let next;
+      let tries = 0;
+      do {
+        next = X_MIN + rand() * (X_MAX - X_MIN);
+        tries++;
+      } while (Math.abs(next - prev) < 0.22 && tries < 8);
+      out.push(next);
+      prev = next;
+    }
+    return out;
+  }, [lessons, n]);
 
   return (
     <div className="lesson-chart" style={{ height }}>
@@ -20,36 +60,18 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
         preserveAspectRatio="none"
         aria-hidden="true"
       >
-        <defs>
-          <linearGradient id="lc-area" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="var(--color-indigo)" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="var(--color-indigo)" stopOpacity="0.04" />
-          </linearGradient>
-        </defs>
         {n > 1 && (
-          <>
-            <polygon
-              points={
-                lessons
-                  .map((_, i) => `${X_PATTERN[i % X_PATTERN.length] * 100},${(PAD_TOP + i * ROW_H + NODE / 2)}`)
-                  .join(' ') +
-                ` ${X_PATTERN[(n - 1) % X_PATTERN.length] * 100},${height} ${X_PATTERN[0] * 100},${height}`
-              }
-              fill="url(#lc-area)"
-            />
-            <polyline
-              points={lessons
-                .map((_, i) => `${X_PATTERN[i % X_PATTERN.length] * 100},${(PAD_TOP + i * ROW_H + NODE / 2)}`)
-                .join(' ')}
-              fill="none"
-              stroke="var(--color-indigo)"
-              strokeWidth="0.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              vectorEffect="non-scaling-stroke"
-              style={{ strokeWidth: 2.5 }}
-            />
-          </>
+          <polyline
+            points={lessons
+              .map((_, i) => `${xPositions[i] * 100},${PAD_TOP + i * ROW_H + NODE / 2}`)
+              .join(' ')}
+            fill="none"
+            stroke="var(--color-indigo)"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+            style={{ strokeWidth: 2.5 }}
+          />
         )}
       </svg>
 
@@ -58,7 +80,7 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
         const active = unitUnlocked && lesson.id === activeLessonId;
         const state = completed ? 'completed' : active ? 'active' : 'locked';
         const iconName = completed ? 'check' : active ? 'chart-line' : 'lock';
-        const xPct = X_PATTERN[i % X_PATTERN.length] * 100;
+        const xPct = xPositions[i] * 100;
         const top = PAD_TOP + i * ROW_H;
         return (
           <div
