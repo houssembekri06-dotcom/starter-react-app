@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
   margin-top: 8px;
+  overflow: hidden;
 }
 
 .lesson-chart-svg {
@@ -12,9 +13,21 @@
   pointer-events: none;
 }
 
-.lesson-chart-skyline {
-  fill: rgba(99, 102, 241, 0.14);
-  opacity: 0.85;
+.lesson-chart-buildings {
+  fill: rgba(99, 102, 241, 0.12);
+  stroke: rgba(99, 102, 241, 0.22);
+  stroke-width: 0.3;
+}
+
+.lesson-chart-road {
+  fill: rgba(226, 232, 240, 0.65);
+  rx: 2;
+}
+
+.lesson-chart-road-line {
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 1.2;
+  stroke-dasharray: 6 6;
 }
 
 .lesson-chart-slot {
@@ -23,6 +36,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 2;
 }
 
 .lesson-chart-node {
