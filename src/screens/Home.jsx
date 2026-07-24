@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from '@/lib/router-compat';
 import { useProgress } from '../context/ProgressContext';
 import { UNITS } from '../data/lessons';
