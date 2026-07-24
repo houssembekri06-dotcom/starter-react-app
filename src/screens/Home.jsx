@@ -43,6 +43,8 @@ export default function Home() {
 
   return (
     <div className="screen home-screen">
+      <MarketTicker />
+
       <div className="home-pills-row">
         <Pill icon="flame" iconColor="var(--color-coral)" tone="coral">{streakDays}</Pill>
         <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
