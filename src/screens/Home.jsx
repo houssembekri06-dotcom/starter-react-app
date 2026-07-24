@@ -5,6 +5,7 @@ import { UNITS } from '../data/lessons';
 import Pill from '../components/Pill';
 import ProgressBar from '../components/ProgressBar';
 import LessonChart from '../components/LessonChart';
+import MarketTicker from '../components/MarketTicker';
 import Icon from '../components/Icon';
 import './Home.css';
 
