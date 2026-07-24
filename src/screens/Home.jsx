@@ -44,7 +44,10 @@ export default function Home() {
 
       <div className="unit-info-card">
         <div className="unit-info-head">
-          <h2 className="unit-info-title">{selectedUnit.title}</h2>
+          <div className="unit-info-title-wrap">
+            <span className="unit-info-order">Unité {selectedUnit.order}</span>
+            <h2 className="unit-info-title">{selectedUnit.title}</h2>
+          </div>
           <span className="unit-info-status">
             {unitUnlocked ? 'En cours' : 'Verrouillée'}
           </span>
