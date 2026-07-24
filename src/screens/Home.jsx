@@ -103,7 +103,7 @@ export default function Home() {
             activeLessonId={activeLessonId}
             unitUnlocked={unitUnlocked}
             accent={env.accent}
-            backgroundImage={env.image}
+            decor={env.decor}
             onSelect={handleNodeClick}
           />
         </>
