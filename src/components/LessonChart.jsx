@@ -122,7 +122,6 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
       <svg
         className="lesson-chart-svg"
         viewBox={`${VB_MIN_X} 0 ${VB_MAX_X - VB_MIN_X} ${height}`}
-        preserveAspectRatio="xMidYMin slice"
         aria-hidden="true"
       >
         {/* Buildings on both sides of the road */}
