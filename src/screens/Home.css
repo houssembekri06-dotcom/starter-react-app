@@ -130,16 +130,16 @@
   cursor: not-allowed;
 }
 
-/* Unit info card (selected direction: Row + carte progression) */
+/* Unit info card — minimal */
 .unit-info-card {
   background: #fff;
-  border: 2px solid #EEF0F4;
-  border-radius: 28px;
-  padding: 20px 20px 22px;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 18px 18px 20px;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 .unit-info-head {
   display: flex;
@@ -148,20 +148,20 @@
   gap: 12px;
 }
 .unit-info-title {
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 19px;
+  font-weight: 700;
   color: var(--color-text-primary);
   margin: 0;
   line-height: 1.2;
 }
 .unit-info-status {
-  background: var(--color-indigo-tint);
-  color: var(--color-indigo);
+  background: #F1F5F9;
+  color: var(--color-text-secondary);
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  padding: 5px 10px;
+  padding: 4px 9px;
   border-radius: 999px;
   flex: none;
 }
