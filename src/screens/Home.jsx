@@ -6,7 +6,6 @@ import Pill from '../components/Pill';
 import ProgressBar from '../components/ProgressBar';
 import LessonChart from '../components/LessonChart';
 import MarketTicker from '../components/MarketTicker';
-import UnitEnvironmentBanner from '../components/UnitEnvironmentBanner';
 import { getEnvironment } from '../data/environments';
 import Icon from '../components/Icon';
 import './Home.css';
@@ -94,13 +93,17 @@ export default function Home() {
         </div>
       ) : (
         <>
-          <UnitEnvironmentBanner env={env} unitTitle={selectedUnit.title} />
+          <div className="home-env-caption" style={{ '--env-accent': env.accent }}>
+            <span className="home-env-chapter">{env.chapter}</span>
+            <span className="home-env-place">{env.place}</span>
+          </div>
           <LessonChart
             lessons={selectedUnit.lessons}
             completedLessonIds={completedLessonIds}
             activeLessonId={activeLessonId}
             unitUnlocked={unitUnlocked}
             accent={env.accent}
+            backgroundImage={env.image}
             onSelect={handleNodeClick}
           />
         </>
