@@ -5,7 +5,6 @@ import { UNITS } from '../data/lessons';
 import Pill from '../components/Pill';
 import ProgressBar from '../components/ProgressBar';
 import LessonChart from '../components/LessonChart';
-import CircularProgress from '../components/CircularProgress';
 import Icon from '../components/Icon';
 import './Home.css';
 
@@ -14,7 +13,7 @@ function isUnitComplete(unit, completedLessonIds) {
 }
 
 export default function Home() {
-  const { completedLessonIds, streakDays, coins, hearts, maxHearts } = useProgress();
+  const { completedLessonIds, streakDays, hearts, maxHearts } = useProgress();
   const navigate = useNavigate();
 
   const firstIncompleteUnit = useMemo(
@@ -41,40 +40,8 @@ export default function Home() {
     navigate(`/lesson/${lesson.id}`);
   }
 
-  const unitProgressPct = selectedUnit.lessons.length > 0
-    ? (completedInUnit / selectedUnit.lessons.length) * 100
-    : 0;
-
   return (
     <div className="screen home-screen">
-      <div className="home-dashboard-card">
-        <div className="home-dashboard-left">
-          <div className="home-points">
-            <Icon name="coin" size={18} stroke={2} color="var(--color-coral)" />
-            <span className="home-points-value">{coins}</span>
-          </div>
-          <span className="home-points-label">Points</span>
-        </div>
-
-        <div className="home-dashboard-center">
-          <CircularProgress value={unitProgressPct} size={44} strokeWidth={5} />
-          <div className="home-progress-labels">
-            <span className="home-progress-title">Progression</span>
-            <span className="home-progress-subtitle">{selectedUnit.title}</span>
-          </div>
-        </div>
-
-        <div className="home-dashboard-right">
-          <div className="home-reward-badge">
-            <Icon name="building-bank" size={18} stroke={1.8} color="var(--color-indigo)" />
-            <div className="home-reward-content">
-              <span className="home-reward-title">Récompense</span>
-              <span className="home-reward-text">80 € de bonus</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="home-pills-row">
         <Pill icon="flame" iconColor="var(--color-coral)" tone="coral">{streakDays}</Pill>
         <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
