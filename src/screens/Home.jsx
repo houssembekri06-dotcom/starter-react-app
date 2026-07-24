@@ -13,7 +13,7 @@ function isUnitComplete(unit, completedLessonIds) {
 }
 
 export default function Home() {
-  const { completedLessonIds, streakDays, coins, hearts, maxHearts } = useProgress();
+  const { completedLessonIds, streakDays, hearts, maxHearts } = useProgress();
   const navigate = useNavigate();
 
   const firstIncompleteUnit = useMemo(
