@@ -30,6 +30,47 @@ function hashString(str) {
   return h >>> 0;
 }
 
+function buildSkylinePath(height) {
+  // Generates a repeating New-York-style building silhouette across the chart.
+  // Coordinates are in the 0-100 x / 0-height y viewBox space.
+  const buildings = [
+    { x: 0, w: 10, h: 14, roof: 1 },
+    { x: 9, w: 8, h: 22, roof: 2 },
+    { x: 16, w: 11, h: 10, roof: 0 },
+    { x: 26, w: 7, h: 28, roof: 3 },
+    { x: 32, w: 10, h: 16, roof: 1 },
+    { x: 41, w: 9, h: 20, roof: 2 },
+    { x: 49, w: 12, h: 12, roof: 0 },
+    { x: 60, w: 8, h: 26, roof: 3 },
+    { x: 67, w: 10, h: 15, roof: 1 },
+    { x: 76, w: 9, h: 19, roof: 2 },
+    { x: 84, w: 8, h: 11, roof: 0 },
+    { x: 91, w: 9, h: 24, roof: 3 },
+  ];
+
+  let d = '';
+  const floorY = height - 4;
+  for (const b of buildings) {
+    const roofY = floorY - b.h;
+    let roof = '';
+    if (b.roof === 1) {
+      // flat with antenna
+      roof = `M ${b.x} ${roofY} L ${b.x + b.w / 2} ${roofY - 4} L ${b.x + b.w} ${roofY}`;
+    } else if (b.roof === 2) {
+      // peaked
+      roof = `L ${b.x + b.w / 2} ${roofY - 5} L ${b.x + b.w} ${roofY}`;
+    } else if (b.roof === 3) {
+      // stepped
+      roof = `L ${b.x + 2} ${roofY - 3} L ${b.x + 2} ${roofY - 6} L ${b.x + b.w - 2} ${roofY - 6} L ${b.x + b.w - 2} ${roofY - 3} L ${b.x + b.w} ${roofY}`;
+    } else {
+      // flat
+      roof = `L ${b.x + b.w} ${roofY}`;
+    }
+    d += `M ${b.x} ${floorY} V ${roofY} ${roof} V ${floorY} Z `;
+  }
+  return d;
+}
+
 export default function LessonChart({ lessons, completedLessonIds, activeLessonId, unitUnlocked, onSelect }) {
   const n = lessons.length;
   const height = PAD_TOP + (n - 1) * ROW_H + PAD_BOTTOM + NODE;
@@ -84,6 +125,11 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
         preserveAspectRatio="none"
         aria-hidden="true"
       >
+        {/* New York skyline silhouette */}
+        <g className="lesson-chart-skyline">
+          <path d={buildSkylinePath(height)} />
+        </g>
+
         {/* Finance-style grid */}
         {Array.from({ length: Math.ceil(height / 60) }).map((_, i) => (
           <line

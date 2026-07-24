@@ -12,6 +12,11 @@
   pointer-events: none;
 }
 
+.lesson-chart-skyline {
+  fill: rgba(99, 102, 241, 0.14);
+  opacity: 0.85;
+}
+
 .lesson-chart-slot {
   position: absolute;
   width: 56px;
