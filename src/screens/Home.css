@@ -1,7 +1,29 @@
+.home-screen {
+  position: relative;
+  background-color: var(--color-cream, #FDFBF9);
+}
+
+.home-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at center, var(--color-border) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-screen > * {
+  position: relative;
+  z-index: 1;
+}
+
 .home-pills-row {
   display: flex;
   gap: 8px;
 }
+
 
 .home-ticker {
   display: flex;
