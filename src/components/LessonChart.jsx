@@ -45,7 +45,7 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
           const active = unitUnlocked && lesson.id === activeLessonId;
           const state = completed ? 'completed' : active ? 'active' : 'locked';
           const iconName = completed ? 'check' : active ? 'chart-line' : 'lock';
-          const iconSize = state === 'active' ? 40 : state === 'completed' ? 36 : 28;
+          const iconSize = state === 'active' ? 30 : state === 'completed' ? 26 : 22;
           const iconColor = state === 'active' ? '#10B981' : state === 'locked' ? '#94A3B8' : '#FFFFFF';
           return (
             <div
