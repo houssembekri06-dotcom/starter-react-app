@@ -136,18 +136,20 @@
 }
 
 .home-progress-title {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.3px;
+  white-space: nowrap;
 }
 
 .home-progress-subtitle {
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--color-text);
   line-height: 1.2;
+  max-width: 110px;
 }
 
 .home-dashboard-right {
