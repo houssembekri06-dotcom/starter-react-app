@@ -16,10 +16,10 @@ export default function TabBar() {
         <NavLink
           key={tab.to}
           to={tab.to}
+          aria-label={tab.label}
           className={({ isActive }) => 'tab-bar-item' + (isActive ? ' tab-bar-item--active' : '')}
         >
-          <Icon name={tab.icon} size={22} stroke={2} />
-          <span>{tab.label}</span>
+          <Icon name={tab.icon} size={24} stroke={2} />
         </NavLink>
       ))}
     </nav>
