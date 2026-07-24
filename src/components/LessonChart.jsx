@@ -84,6 +84,11 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
         preserveAspectRatio="none"
         aria-hidden="true"
       >
+        {/* New York skyline silhouette */}
+        <g className="lesson-chart-skyline">
+          <path d={buildSkylinePath(height)} />
+        </g>
+
         {/* Finance-style grid */}
         {Array.from({ length: Math.ceil(height / 60) }).map((_, i) => (
           <line
