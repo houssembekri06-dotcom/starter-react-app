@@ -6,7 +6,9 @@ const NODE = 56;
 const ROW_H = 130;
 const PAD_TOP = 60;
 const PAD_BOTTOM = 60;
-const ROAD_W = 34; // road width as % of chart
+const ROAD_W = 30; // road width as % of chart
+const VB_MIN_X = -35;
+const VB_MAX_X = 135;
 
 function mulberry32(seed) {
   let a = seed >>> 0;
@@ -28,17 +30,14 @@ function hashString(str) {
   return h >>> 0;
 }
 
-// Generate a block of buildings on one side for a given vertical segment.
 function sideBlocks(rand, count, side, segmentY, segmentH) {
   const blocks = [];
   for (let i = 0; i < count; i++) {
     const y = segmentY + rand() * segmentH;
-    const h = 18 + rand() * 34;
-    const w = 10 + rand() * 16;
-    // side: -1 left, 1 right
-    const x = side === -1
-      ? -w - rand() * 18
-      : 100 + rand() * 18;
+    const h = 16 + rand() * 30;
+    const w = 10 + rand() * 14;
+    const gap = 2 + rand() * 10;
+    const x = side === -1 ? (100 - ROAD_W) / 2 - w - gap : (100 + ROAD_W) / 2 + gap;
     const roofType = Math.floor(rand() * 4);
     blocks.push({ x, y, w, h, roofType });
   }
@@ -75,7 +74,7 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
       let next;
       let tries = 0;
       do {
-        next = 35 + rand() * 30; // keep nodes in the road corridor
+        next = 38 + rand() * 24;
         tries++;
       } while (Math.abs(next - prev) < 10 && tries < 8);
       xs.push(next);
@@ -83,10 +82,10 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
     }
 
     const allBlocks = [];
-    const segments = Math.max(1, Math.floor(height / 120));
+    const segments = Math.max(1, Math.floor(height / 110));
     for (let s = 0; s < segments; s++) {
-      const segY = s * 120;
-      const segH = 120;
+      const segY = s * 110;
+      const segH = 110;
       allBlocks.push(...sideBlocks(rand, 2 + Math.floor(rand() * 2), -1, segY, segH));
       allBlocks.push(...sideBlocks(rand, 2 + Math.floor(rand() * 2), 1, segY, segH));
     }
@@ -122,8 +121,8 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
     <div className="lesson-chart" style={{ height }}>
       <svg
         className="lesson-chart-svg"
-        viewBox={`0 0 100 ${height}`}
-        preserveAspectRatio="none"
+        viewBox={`${VB_MIN_X} 0 ${VB_MAX_X - VB_MIN_X} ${height}`}
+        preserveAspectRatio="xMidYMin slice"
         aria-hidden="true"
       >
         {/* Buildings on both sides of the road */}
