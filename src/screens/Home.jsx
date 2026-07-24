@@ -4,11 +4,9 @@ import { useProgress } from '../context/ProgressContext';
 import { UNITS } from '../data/lessons';
 import Pill from '../components/Pill';
 import ProgressBar from '../components/ProgressBar';
-import LessonPathNode from '../components/LessonPathNode';
+import LessonChart from '../components/LessonChart';
 import Icon from '../components/Icon';
 import './Home.css';
-
-const WAVE_OFFSETS = [0, -46, -66, -46, 0, 46, 66, 46];
 
 function isUnitComplete(unit, completedLessonIds) {
   return unit.lessons.every((l) => completedLessonIds.includes(l.id));
@@ -89,22 +87,13 @@ export default function Home() {
           <p>Terminez l'unité précédente pour débloquer celle-ci.</p>
         </div>
       ) : (
-        <div className="lesson-path">
-          {selectedUnit.lessons.map((lesson, i) => {
-            const completed = completedLessonIds.includes(lesson.id);
-            const active = lesson.id === activeLessonId;
-            const state = completed ? 'completed' : active ? 'active' : 'locked';
-            return (
-              <LessonPathNode
-                key={lesson.id}
-                label={`Leçon ${i + 1}`}
-                state={state}
-                offset={WAVE_OFFSETS[i % WAVE_OFFSETS.length]}
-                onClick={() => (state !== 'locked' ? handleNodeClick(lesson) : null)}
-              />
-            );
-          })}
-        </div>
+        <LessonChart
+          lessons={selectedUnit.lessons}
+          completedLessonIds={completedLessonIds}
+          activeLessonId={activeLessonId}
+          unitUnlocked={unitUnlocked}
+          onSelect={handleNodeClick}
+        />
       )}
     </div>
   );
