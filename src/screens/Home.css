@@ -144,9 +144,26 @@
 }
 .unit-info-head {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
+}
+.unit-info-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.unit-info-order {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--color-indigo);
+  background: var(--color-indigo-tint);
+  padding: 4px 10px;
+  border-radius: 999px;
+  width: fit-content;
 }
 .unit-info-title {
   font-size: 20px;

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from '@/lib/router-compat';
 import { useProgress } from '../context/ProgressContext';
 import { UNITS } from '../data/lessons';
@@ -17,13 +17,10 @@ export default function Home() {
   const { completedLessonIds, streakDays, hearts, maxHearts } = useProgress();
   const navigate = useNavigate();
 
-  const firstIncompleteUnit = useMemo(
+  const selectedUnit = useMemo(
     () => UNITS.find((u) => !isUnitComplete(u, completedLessonIds)) || UNITS[UNITS.length - 1],
     [completedLessonIds]
   );
-
-  const [selectedUnitId, setSelectedUnitId] = useState(firstIncompleteUnit.id);
-  const selectedUnit = UNITS.find((u) => u.id === selectedUnitId) || firstIncompleteUnit;
 
   const unitIndex = UNITS.findIndex((u) => u.id === selectedUnit.id);
   const unitUnlocked =
@@ -45,31 +42,12 @@ export default function Home() {
     <div className="screen home-screen">
       <MarketTicker />
 
-      <div className="home-units-scroll">
-        {UNITS.map((u, i) => {
-          const locked = i > 0 && !isUnitComplete(UNITS[i - 1], completedLessonIds);
-          const active = u.id === selectedUnit.id;
-          return (
-            <button
-              key={u.id}
-              className={
-                'unit-chip' +
-                (active ? ' unit-chip--active' : '') +
-                (locked ? ' unit-chip--locked' : '')
-              }
-              disabled={locked}
-              onClick={() => setSelectedUnitId(u.id)}
-            >
-              {locked && <Icon name="lock" size={15} stroke={2.4} />}
-              <span>{`Unité ${u.order}`}</span>
-            </button>
-          );
-        })}
-      </div>
-
       <div className="unit-info-card">
         <div className="unit-info-head">
-          <h2 className="unit-info-title">{selectedUnit.title}</h2>
+          <div className="unit-info-title-wrap">
+            <span className="unit-info-order">Unité {selectedUnit.order}</span>
+            <h2 className="unit-info-title">{selectedUnit.title}</h2>
+          </div>
           <span className="unit-info-status">
             {unitUnlocked ? 'En cours' : 'Verrouillée'}
           </span>
