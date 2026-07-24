@@ -91,7 +91,6 @@ export default function Home() {
         <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
       </div>
 
-
       {!unitUnlocked ? (
         <div className="home-locked-unit">
           <Icon name="lock" size={26} stroke={1.8} color="var(--color-text-disabled)" />
