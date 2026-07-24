@@ -4,42 +4,16 @@
   margin-top: 8px;
 }
 
-.lesson-chart--with-bg {
-  border-radius: 20px;
-  overflow: hidden;
-  isolation: isolate;
-  padding: 4px 0;
-  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.06);
-}
-
-.lesson-chart--with-bg::before {
-  content: '';
+.lesson-chart-decor {
   position: absolute;
-  inset: 0;
-  background-image: var(--chart-bg);
-  background-repeat: repeat-y;
-  background-position: center top;
-  background-size: 100% auto;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  filter:
+    drop-shadow(0 6px 8px rgba(15, 23, 42, 0.18))
+    drop-shadow(0 2px 3px rgba(15, 23, 42, 0.12));
+  transition: transform 0.3s ease;
   z-index: 0;
-  opacity: 0.9;
-}
-
-.lesson-chart--with-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.35) 0%,
-    rgba(255, 255, 255, 0.55) 50%,
-    rgba(255, 255, 255, 0.35) 100%
-  );
-  z-index: 1;
-}
-
-.lesson-chart--with-bg .lesson-chart-svg,
-.lesson-chart--with-bg .lesson-chart-slot {
-  z-index: 2;
 }
 
 .lesson-chart-svg {
@@ -106,13 +80,6 @@
   white-space: nowrap;
 }
 
-.lesson-chart--with-bg .lesson-chart-label,
-.lesson-chart--with-bg .lesson-chart-title {
-  background: rgba(255, 255, 255, 0.82);
-  padding: 2px 8px;
-  border-radius: 6px;
-  backdrop-filter: blur(2px);
-}
 
 .lesson-chart-label--locked {
   color: var(--color-text-disabled);
