@@ -100,46 +100,47 @@
   align-items: center;
   gap: 6px;
   flex: none;
-  padding: 9px 16px;
-  border-radius: 12px;
-  border: 1px solid var(--color-border);
+  padding: 10px 18px;
+  border-radius: 16px;
+  border: none;
+  border-bottom: 4px solid var(--color-border);
   background: var(--color-white);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text-secondary);
   white-space: nowrap;
-  transition: transform 0.08s ease, border-color 0.08s ease, background-color 0.08s ease;
+  transition: transform 0.08s ease, border-color 0.08s ease;
   cursor: pointer;
 }
 .unit-chip:not(:disabled):active {
-  transform: scale(0.98);
-  background: #F8FAFC;
+  transform: translateY(2px);
+  border-bottom-width: 2px;
 }
 
 .unit-chip--active {
   background: var(--color-indigo);
   color: #fff;
-  border-color: var(--color-indigo);
-  box-shadow: 0 2px 8px rgba(91, 79, 232, 0.16);
+  border-bottom-color: #4338CA;
+  box-shadow: 0 6px 14px -6px rgba(91, 79, 232, 0.5);
 }
 
 .unit-chip--locked {
   color: var(--color-text-disabled);
-  background: #F8FAFC;
-  border-color: #E2E8F0;
+  background: #F1F3F6;
+  border-bottom-color: #D9DEE5;
   cursor: not-allowed;
 }
 
-/* Unit info card — minimal */
+/* Unit info card (selected direction: Row + carte progression) */
 .unit-info-card {
   background: #fff;
-  border: 1px solid var(--color-border);
-  border-radius: 20px;
-  padding: 18px 18px 20px;
-  box-shadow: none;
+  border: 2px solid #EEF0F4;
+  border-radius: 28px;
+  padding: 20px 20px 22px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 .unit-info-head {
   display: flex;
@@ -148,20 +149,20 @@
   gap: 12px;
 }
 .unit-info-title {
-  font-size: 19px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 800;
   color: var(--color-text-primary);
   margin: 0;
   line-height: 1.2;
 }
 .unit-info-status {
-  background: #F1F5F9;
-  color: var(--color-text-secondary);
+  background: var(--color-indigo-tint);
+  color: var(--color-indigo);
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  padding: 4px 9px;
+  padding: 5px 10px;
   border-radius: 999px;
   flex: none;
 }

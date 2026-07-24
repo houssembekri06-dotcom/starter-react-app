@@ -87,8 +87,8 @@ export default function Home() {
       </div>
 
       <div className="home-pills-row">
-        <Pill icon="flame" iconColor="var(--color-text-secondary)" tone="soft">{streakDays}</Pill>
-        <Pill icon="heart-filled" iconColor="var(--color-text-secondary)" tone="soft">{hearts}/{maxHearts}</Pill>
+        <Pill icon="flame" iconColor="var(--color-coral)" tone="coral">{streakDays}</Pill>
+        <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
       </div>
 
       {!unitUnlocked ? (

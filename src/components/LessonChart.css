@@ -1,9 +1,9 @@
-/* Minimalist lesson path — flat, quiet, finance-inspired */
+/* Minted Coin Path — tactile 3D pressable lesson nodes */
 .lesson-chart {
   position: relative;
   width: 100%;
-  margin-top: 8px;
-  padding-bottom: 12px;
+  margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .lesson-chart-svg {
@@ -21,18 +21,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
-  padding: 4px 0;
+  gap: 44px;
+  padding: 8px 0;
 }
 
 .lesson-chart-slot {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 220px;
+  max-width: 180px;
 }
 
-/* --- Node button (flat, minimal) --- */
+/* --- Node button (base, 3D pressable) --- */
 .lesson-chart-node {
   position: relative;
   border: none;
@@ -41,75 +41,98 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 .lesson-chart-node:disabled {
   cursor: default;
 }
 
-/* Completed — soft green dot */
+/* Completed — emerald circle */
 .lesson-chart-node--completed {
-  width: 44px;
-  height: 44px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
-  background: #DCFCE7;
-  box-shadow: none;
+  background: #10B981;
+  box-shadow: 0 6px 0 0 #047857;
 }
 .lesson-chart-node--completed:active {
-  transform: scale(0.96);
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 0 #047857;
 }
 
-/* Active — indigo rounded square */
+/* Active — dark rounded square with emerald icon */
 .lesson-chart-node--active {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  background: var(--color-indigo);
-  box-shadow: 0 2px 8px rgba(91, 79, 232, 0.18);
+  width: 80px;
+  height: 80px;
+  border-radius: 22px;
+  background: #1E293B;
+  box-shadow: 0 8px 0 0 #0F172A;
 }
 .lesson-chart-node--active:active {
-  transform: scale(0.96);
-  box-shadow: 0 1px 4px rgba(91, 79, 232, 0.14);
+  transform: translateY(3px);
+  box-shadow: 0 4px 0 0 #0F172A;
 }
 
-/* Locked — pale slate dot */
+/* Locked — slate circle */
 .lesson-chart-node--locked {
-  width: 40px;
-  height: 40px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
-  background: #F1F5F9;
-  box-shadow: none;
-  opacity: 0.9;
+  background: #E2E8F0;
+  box-shadow: 0 6px 0 0 #CBD5E1;
+  opacity: 0.85;
 }
 
-/* --- Labels — plain text under node --- */
+/* --- Labels — white pill card under node --- */
 .lesson-chart-label {
-  margin-top: 10px;
-  background: transparent;
-  padding: 0 8px;
-  border-radius: 0;
-  border: none;
-  font-size: 13px;
-  font-weight: 500;
-  text-transform: none;
-  letter-spacing: 0;
-  color: var(--color-text-secondary);
+  margin-top: 16px;
+  background: #FFFFFF;
+  padding: 6px 14px;
+  border-radius: 16px;
+  border: 2px solid #E2E8F0;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #64748B;
   text-align: center;
-  max-width: 200px;
+  max-width: 160px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  box-shadow: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 .lesson-chart-label--active {
-  color: var(--color-text-primary);
-  font-weight: 600;
-  font-size: 13px;
-  padding: 0 8px;
-  box-shadow: none;
+  border-color: #1E293B;
+  color: #1E293B;
+  font-size: 12px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 0 0 #1E293B;
 }
 .lesson-chart-label--locked {
-  color: var(--color-text-disabled);
+  color: #94A3B8;
+}
+
+/* --- START HERE gold badge --- */
+.lesson-chart-badge {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FFD700;
+  color: #7A4B00;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  box-shadow: 0 3px 0 0 #B8860B;
+  animation: lesson-badge-bounce 1.6s ease-in-out infinite;
+}
+@keyframes lesson-badge-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
 }
 
 /* Horizontal offset per row for the zigzag rhythm */
