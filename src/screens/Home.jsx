@@ -17,13 +17,10 @@ export default function Home() {
   const { completedLessonIds, streakDays, hearts, maxHearts } = useProgress();
   const navigate = useNavigate();
 
-  const firstIncompleteUnit = useMemo(
+  const selectedUnit = useMemo(
     () => UNITS.find((u) => !isUnitComplete(u, completedLessonIds)) || UNITS[UNITS.length - 1],
     [completedLessonIds]
   );
-
-  const [selectedUnitId, setSelectedUnitId] = useState(firstIncompleteUnit.id);
-  const selectedUnit = UNITS.find((u) => u.id === selectedUnitId) || firstIncompleteUnit;
 
   const unitIndex = UNITS.findIndex((u) => u.id === selectedUnit.id);
   const unitUnlocked =
