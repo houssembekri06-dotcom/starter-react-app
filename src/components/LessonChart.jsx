@@ -30,7 +30,7 @@ function hashString(str) {
   return h >>> 0;
 }
 
-export default function LessonChart({ lessons, completedLessonIds, activeLessonId, unitUnlocked, accent, onSelect }) {
+export default function LessonChart({ lessons, completedLessonIds, activeLessonId, unitUnlocked, accent, backgroundImage, onSelect }) {
   const strokeColor = accent || 'var(--color-indigo)';
   const n = lessons.length;
   const height = PAD_TOP + (n - 1) * ROW_H + PAD_BOTTOM + NODE;
@@ -78,7 +78,14 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
   }, [points]);
 
   return (
-    <div className="lesson-chart" style={{ height, '--chart-accent': strokeColor }}>
+    <div
+      className={`lesson-chart${backgroundImage ? ' lesson-chart--with-bg' : ''}`}
+      style={{
+        height,
+        '--chart-accent': strokeColor,
+        ...(backgroundImage ? { '--chart-bg': `url(${backgroundImage})` } : null),
+      }}
+    >
       <svg
         className="lesson-chart-svg"
         viewBox={`0 0 100 ${height}`}
