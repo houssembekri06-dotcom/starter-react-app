@@ -5,6 +5,7 @@ import { UNITS } from '../data/lessons';
 import Pill from '../components/Pill';
 import ProgressBar from '../components/ProgressBar';
 import LessonChart from '../components/LessonChart';
+import MarketTicker from '../components/MarketTicker';
 import Icon from '../components/Icon';
 import './Home.css';
 
@@ -42,6 +43,8 @@ export default function Home() {
 
   return (
     <div className="screen home-screen">
+      <MarketTicker />
+
       <div className="home-pills-row">
         <Pill icon="flame" iconColor="var(--color-coral)" tone="coral">{streakDays}</Pill>
         <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
