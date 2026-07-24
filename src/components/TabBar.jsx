@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from '@/lib/router-compat';
 import Icon from './Icon';
 import './TabBar.css';
 
