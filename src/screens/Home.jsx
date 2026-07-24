@@ -28,8 +28,8 @@ export default function Home() {
   const selectedUnit = UNITS.find((u) => u.id === selectedUnitId) || firstIncompleteUnit;
 
   const unitIndex = UNITS.findIndex((u) => u.id === selectedUnit.id);
-  const unitUnlocked =
-    unitIndex === 0 || isUnitComplete(UNITS[unitIndex - 1], completedLessonIds);
+  // Dev: toutes les unités débloquées pour prévisualisation
+  const unitUnlocked = true;
 
   const completedInUnit = selectedUnit.lessons.filter((l) =>
     completedLessonIds.includes(l.id)
@@ -56,7 +56,7 @@ export default function Home() {
 
       <div className="home-units-scroll">
         {UNITS.map((u, i) => {
-          const locked = i > 0 && !isUnitComplete(UNITS[i - 1], completedLessonIds);
+          const locked = false;
           const done = isUnitComplete(u, completedLessonIds);
           return (
             <button
