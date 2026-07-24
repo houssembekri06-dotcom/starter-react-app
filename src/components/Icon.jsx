@@ -41,6 +41,7 @@ import {
   IconArrowsExchange,
   IconCalendarStats,
   IconScale,
+  IconNews,
 } from '@tabler/icons-react';
 
 const ICONS = {
@@ -86,6 +87,7 @@ const ICONS = {
   exchange: IconArrowsExchange,
   calendar: IconCalendarStats,
   scale: IconScale,
+  news: IconNews,
 };
 
 export default function Icon({ name, size = 20, color, stroke = 1.9, className }) {
