@@ -48,6 +48,17 @@ export default function Home() {
         <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
       </div>
 
+      <div className="home-ticker">
+        <div className="home-ticker-label">
+          <Icon name="chart-line" size={14} stroke={2.2} color="var(--color-indigo)" />
+          <span>Portefeuille éducatif</span>
+        </div>
+        <div className="home-ticker-value">
+          <span className="home-ticker-price">{(1000 + coins * 3.14).toFixed(2)} €</span>
+          <span className="home-ticker-delta">▲ +{(completedLessonIds.length * 1.2).toFixed(2)}%</span>
+        </div>
+      </div>
+
       <div className="home-units-scroll">
         {UNITS.map((u, i) => {
           const locked = i > 0 && !isUnitComplete(UNITS[i - 1], completedLessonIds);
