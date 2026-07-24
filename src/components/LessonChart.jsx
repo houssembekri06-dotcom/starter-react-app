@@ -30,7 +30,8 @@ function hashString(str) {
   return h >>> 0;
 }
 
-export default function LessonChart({ lessons, completedLessonIds, activeLessonId, unitUnlocked, onSelect }) {
+export default function LessonChart({ lessons, completedLessonIds, activeLessonId, unitUnlocked, accent, onSelect }) {
+  const strokeColor = accent || 'var(--color-indigo)';
   const n = lessons.length;
   const height = PAD_TOP + (n - 1) * ROW_H + PAD_BOTTOM + NODE;
 
@@ -77,7 +78,7 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
   }, [points]);
 
   return (
-    <div className="lesson-chart" style={{ height }}>
+    <div className="lesson-chart" style={{ height, '--chart-accent': strokeColor }}>
       <svg
         className="lesson-chart-svg"
         viewBox={`0 0 100 ${height}`}
@@ -114,7 +115,7 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
           <path
             d={pathD}
             fill="none"
-            stroke="var(--color-indigo)"
+            stroke={strokeColor}
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
