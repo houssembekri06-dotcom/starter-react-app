@@ -53,35 +53,43 @@ export default function Home() {
       <div className="home-units-scroll">
         {UNITS.map((u, i) => {
           const locked = i > 0 && !isUnitComplete(UNITS[i - 1], completedLessonIds);
-          const done = isUnitComplete(u, completedLessonIds);
+          const active = u.id === selectedUnit.id;
           return (
             <button
               key={u.id}
               className={
                 'unit-chip' +
-                (u.id === selectedUnit.id ? ' unit-chip--active' : '') +
+                (active ? ' unit-chip--active' : '') +
                 (locked ? ' unit-chip--locked' : '')
               }
               disabled={locked}
               onClick={() => setSelectedUnitId(u.id)}
             >
-              {locked ? <Icon name="lock" size={13} stroke={2.2} /> : done ? <Icon name="check" size={13} stroke={2.4} /> : null}
-              {`Unité ${u.order}`}
+              {locked && <Icon name="lock" size={15} stroke={2.4} />}
+              <span>{`Unité ${u.order}`}</span>
             </button>
           );
         })}
       </div>
 
-      <div className="home-unit-header">
-        <div>
-          <div className="home-unit-title">{selectedUnit.title}</div>
-          <div className="home-unit-subtitle">{selectedUnit.subtitle}</div>
+      <div className="unit-info-card">
+        <div className="unit-info-head">
+          <h2 className="unit-info-title">{selectedUnit.title}</h2>
+          <span className="unit-info-status">
+            {unitUnlocked ? 'En cours' : 'Verrouillée'}
+          </span>
         </div>
-        <span className="home-unit-count">
-          {completedInUnit}/{selectedUnit.lessons.length}
-        </span>
+        <p className="unit-info-subtitle">{selectedUnit.subtitle}</p>
+        <div className="unit-info-progress">
+          <div className="unit-info-progress-row">
+            <span className="unit-info-progress-label">Progression</span>
+            <span className="unit-info-progress-count">
+              {completedInUnit} / {selectedUnit.lessons.length} leçons
+            </span>
+          </div>
+          <ProgressBar value={completedInUnit} max={selectedUnit.lessons.length} tone="indigo" />
+        </div>
       </div>
-      <ProgressBar value={completedInUnit} max={selectedUnit.lessons.length} tone="coral" />
 
       {!unitUnlocked ? (
         <div className="home-locked-unit">
