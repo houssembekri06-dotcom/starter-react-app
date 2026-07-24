@@ -13,6 +13,7 @@ import { Route as WalletRouteImport } from './routes/wallet'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as NewsRouteImport } from './routes/news'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LeagueRouteImport } from './routes/league'
 import { Route as HomeRouteImport } from './routes/home'
@@ -39,6 +40,11 @@ const ProfileRoute = ProfileRouteImport.update({
 const OnboardingRoute = OnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof HomeRoute
   '/league': typeof LeagueRoute
   '/login': typeof LoginRoute
+  '/news': typeof NewsRoute
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
   '/signup': typeof SignupRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/home': typeof HomeRoute
   '/league': typeof LeagueRoute
   '/login': typeof LoginRoute
+  '/news': typeof NewsRoute
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
   '/signup': typeof SignupRoute
@@ -109,6 +117,7 @@ export interface FileRoutesById {
   '/home': typeof HomeRoute
   '/league': typeof LeagueRoute
   '/login': typeof LoginRoute
+  '/news': typeof NewsRoute
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
   '/signup': typeof SignupRoute
@@ -124,6 +133,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/league'
     | '/login'
+    | '/news'
     | '/onboarding'
     | '/profile'
     | '/signup'
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/league'
     | '/login'
+    | '/news'
     | '/onboarding'
     | '/profile'
     | '/signup'
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/league'
     | '/login'
+    | '/news'
     | '/onboarding'
     | '/profile'
     | '/signup'
@@ -164,6 +176,7 @@ export interface RootRouteChildren {
   HomeRoute: typeof HomeRoute
   LeagueRoute: typeof LeagueRoute
   LoginRoute: typeof LoginRoute
+  NewsRoute: typeof NewsRoute
   OnboardingRoute: typeof OnboardingRoute
   ProfileRoute: typeof ProfileRoute
   SignupRoute: typeof SignupRoute
@@ -200,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -271,6 +291,7 @@ const rootRouteChildren: RootRouteChildren = {
   HomeRoute: HomeRoute,
   LeagueRoute: LeagueRoute,
   LoginRoute: LoginRoute,
+  NewsRoute: NewsRoute,
   OnboardingRoute: OnboardingRoute,
   ProfileRoute: ProfileRoute,
   SignupRoute: SignupRoute,
