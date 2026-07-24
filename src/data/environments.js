@@ -15,6 +15,7 @@ export const ENVIRONMENTS = {
     image: env1.url,
     accent: '#3E8E5A',
     accentSoft: 'rgba(62, 142, 90, 0.12)',
+    decor: ['🌳', '🏡', '🌲', '🐄', '🌻', '⛪', '🚜', '🌾'],
   },
   u2: {
     chapter: 'Chapitre 2',
@@ -23,6 +24,7 @@ export const ENVIRONMENTS = {
     image: env2.url,
     accent: '#2FA6A0',
     accentSoft: 'rgba(47, 166, 160, 0.12)',
+    decor: ['🏬', '🏪', '🏦', '🌳', '🚲', '☕', '🏘️', '🚌'],
   },
   u3: {
     chapter: 'Chapitre 3',
@@ -31,6 +33,7 @@ export const ENVIRONMENTS = {
     image: env3.url,
     accent: '#2F80D6',
     accentSoft: 'rgba(47, 128, 214, 0.12)',
+    decor: ['🏛️', '🏢', '💼', '📈', '🗞️', '🚕', '🏦', '📊'],
   },
   u4: {
     chapter: 'Chapitre 4',
@@ -39,6 +42,7 @@ export const ENVIRONMENTS = {
     image: env4.url,
     accent: '#5B4FE8',
     accentSoft: 'rgba(91, 79, 232, 0.12)',
+    decor: ['🏙️', '🏢', '🚇', '🚖', '🌆', '💳', '🏬', '🛣️'],
   },
   u5: {
     chapter: 'Chapitre 5',
@@ -47,6 +51,7 @@ export const ENVIRONMENTS = {
     image: env5.url,
     accent: '#8B5CF6',
     accentSoft: 'rgba(139, 92, 246, 0.12)',
+    decor: ['🏦', '💷', '📈', '🕰️', '🎩', '🏛️', '🚕', '📰'],
   },
   u6: {
     chapter: 'Chapitre 6',
@@ -55,6 +60,7 @@ export const ENVIRONMENTS = {
     image: env6.url,
     accent: '#C79A2A',
     accentSoft: 'rgba(199, 154, 42, 0.14)',
+    decor: ['🗽', '🏛️', '📈', '💰', '🐂', '💵', '🏦', '🚖'],
   },
 };
 
