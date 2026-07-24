@@ -3,12 +3,10 @@ import Icon from './Icon';
 import './LessonChart.css';
 
 const NODE = 56;
-const ROW_H = 110;
-const PAD_X = 28;
-const PAD_TOP = 40;
-const PAD_BOTTOM = 30;
-const X_MIN = 0.22;
-const X_MAX = 0.88;
+const ROW_H = 130;
+const PAD_TOP = 60;
+const PAD_BOTTOM = 60;
+const ROAD_W = 34; // road width as % of chart
 
 function mulberry32(seed) {
   let a = seed >>> 0;
@@ -30,44 +28,37 @@ function hashString(str) {
   return h >>> 0;
 }
 
-function buildSkylinePath(height) {
-  // Generates a repeating New-York-style building silhouette across the chart.
-  // Coordinates are in the 0-100 x / 0-height y viewBox space.
-  const buildings = [
-    { x: 0, w: 10, h: 14, roof: 1 },
-    { x: 9, w: 8, h: 22, roof: 2 },
-    { x: 16, w: 11, h: 10, roof: 0 },
-    { x: 26, w: 7, h: 28, roof: 3 },
-    { x: 32, w: 10, h: 16, roof: 1 },
-    { x: 41, w: 9, h: 20, roof: 2 },
-    { x: 49, w: 12, h: 12, roof: 0 },
-    { x: 60, w: 8, h: 26, roof: 3 },
-    { x: 67, w: 10, h: 15, roof: 1 },
-    { x: 76, w: 9, h: 19, roof: 2 },
-    { x: 84, w: 8, h: 11, roof: 0 },
-    { x: 91, w: 9, h: 24, roof: 3 },
-  ];
-
-  let d = '';
-  const floorY = height - 4;
-  for (const b of buildings) {
-    const roofY = floorY - b.h;
-    let roof = '';
-    if (b.roof === 1) {
-      // flat with antenna
-      roof = `M ${b.x} ${roofY} L ${b.x + b.w / 2} ${roofY - 4} L ${b.x + b.w} ${roofY}`;
-    } else if (b.roof === 2) {
-      // peaked
-      roof = `L ${b.x + b.w / 2} ${roofY - 5} L ${b.x + b.w} ${roofY}`;
-    } else if (b.roof === 3) {
-      // stepped
-      roof = `L ${b.x + 2} ${roofY - 3} L ${b.x + 2} ${roofY - 6} L ${b.x + b.w - 2} ${roofY - 6} L ${b.x + b.w - 2} ${roofY - 3} L ${b.x + b.w} ${roofY}`;
-    } else {
-      // flat
-      roof = `L ${b.x + b.w} ${roofY}`;
-    }
-    d += `M ${b.x} ${floorY} V ${roofY} ${roof} V ${floorY} Z `;
+// Generate a block of buildings on one side for a given vertical segment.
+function sideBlocks(rand, count, side, segmentY, segmentH) {
+  const blocks = [];
+  for (let i = 0; i < count; i++) {
+    const y = segmentY + rand() * segmentH;
+    const h = 18 + rand() * 34;
+    const w = 10 + rand() * 16;
+    // side: -1 left, 1 right
+    const x = side === -1
+      ? -w - rand() * 18
+      : 100 + rand() * 18;
+    const roofType = Math.floor(rand() * 4);
+    blocks.push({ x, y, w, h, roofType });
   }
+  return blocks;
+}
+
+function blockPath(b) {
+  const floorY = b.y + b.h;
+  const roofY = b.y;
+  let d = `M ${b.x} ${floorY} V ${roofY}`;
+  if (b.roofType === 1) {
+    d += ` L ${b.x + b.w / 2} ${roofY - 5} L ${b.x + b.w} ${roofY}`;
+  } else if (b.roofType === 2) {
+    d += ` L ${b.x + 3} ${roofY - 4} L ${b.x + 3} ${roofY - 8} L ${b.x + b.w - 3} ${roofY - 8} L ${b.x + b.w - 3} ${roofY - 4} L ${b.x + b.w} ${roofY}`;
+  } else if (b.roofType === 3) {
+    d += ` L ${b.x + b.w / 2} ${roofY - 6} L ${b.x + b.w} ${roofY}`;
+  } else {
+    d += ` L ${b.x + b.w} ${roofY}`;
+  }
+  d += ` V ${floorY} Z`;
   return d;
 }
 
@@ -75,26 +66,36 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
   const n = lessons.length;
   const height = PAD_TOP + (n - 1) * ROW_H + PAD_BOTTOM + NODE;
 
-  const xPositions = useMemo(() => {
+  const { xPositions, blocks } = useMemo(() => {
     const seed = hashString(lessons[0]?.unitId || lessons[0]?.id || 'seed');
     const rand = mulberry32(seed);
-    const out = [];
-    let prev = 0.5;
+    const xs = [];
+    let prev = 50;
     for (let i = 0; i < n; i++) {
       let next;
       let tries = 0;
       do {
-        next = X_MIN + rand() * (X_MAX - X_MIN);
+        next = 35 + rand() * 30; // keep nodes in the road corridor
         tries++;
-      } while (Math.abs(next - prev) < 0.22 && tries < 8);
-      out.push(next);
+      } while (Math.abs(next - prev) < 10 && tries < 8);
+      xs.push(next);
       prev = next;
     }
-    return out;
-  }, [lessons, n]);
+
+    const allBlocks = [];
+    const segments = Math.max(1, Math.floor(height / 120));
+    for (let s = 0; s < segments; s++) {
+      const segY = s * 120;
+      const segH = 120;
+      allBlocks.push(...sideBlocks(rand, 2 + Math.floor(rand() * 2), -1, segY, segH));
+      allBlocks.push(...sideBlocks(rand, 2 + Math.floor(rand() * 2), 1, segY, segH));
+    }
+
+    return { xPositions: xs, blocks: allBlocks };
+  }, [lessons, n, height]);
 
   const points = lessons.map((_, i) => ({
-    x: xPositions[i] * 100,
+    x: xPositions[i],
     y: PAD_TOP + i * ROW_H + NODE / 2,
   }));
 
@@ -125,37 +126,33 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
         preserveAspectRatio="none"
         aria-hidden="true"
       >
-        {/* New York skyline silhouette */}
-        <g className="lesson-chart-skyline">
-          <path d={buildSkylinePath(height)} />
+        {/* Buildings on both sides of the road */}
+        <g className="lesson-chart-buildings">
+          {blocks.map((b, i) => (
+            <path key={`b-${i}`} d={blockPath(b)} />
+          ))}
         </g>
 
-        {/* Finance-style grid */}
-        {Array.from({ length: Math.ceil(height / 60) }).map((_, i) => (
-          <line
-            key={`h-${i}`}
-            x1="0"
-            x2="100"
-            y1={i * 60}
-            y2={i * 60}
-            stroke="rgba(15, 23, 42, 0.08)"
-            strokeDasharray="2 4"
-            vectorEffect="non-scaling-stroke"
-            style={{ strokeWidth: 1 }}
-          />
-        ))}
-        {[20, 40, 60, 80].map((x) => (
-          <line
-            key={`v-${x}`}
-            x1={x}
-            x2={x}
-            y1="0"
-            y2={height}
-            stroke="rgba(15, 23, 42, 0.04)"
-            vectorEffect="non-scaling-stroke"
-            style={{ strokeWidth: 1 }}
-          />
-        ))}
+        {/* Road surface */}
+        <rect
+          x={(100 - ROAD_W) / 2}
+          y="0"
+          width={ROAD_W}
+          height={height}
+          className="lesson-chart-road"
+        />
+
+        {/* Road center dashed line */}
+        <line
+          x1="50"
+          x2="50"
+          y1="0"
+          y2={height}
+          className="lesson-chart-road-line"
+          vectorEffect="non-scaling-stroke"
+        />
+
+        {/* Lesson path */}
         {n > 1 && (
           <path
             d={pathD}
@@ -164,7 +161,7 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
-            style={{ strokeWidth: 4.5 }}
+            style={{ strokeWidth: 5 }}
           />
         )}
       </svg>
@@ -174,7 +171,7 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
         const active = unitUnlocked && lesson.id === activeLessonId;
         const state = completed ? 'completed' : active ? 'active' : 'locked';
         const iconName = completed ? 'check' : active ? 'chart-line' : 'lock';
-        const xPct = xPositions[i] * 100;
+        const xPct = xPositions[i];
         const top = PAD_TOP + i * ROW_H;
         return (
           <div
