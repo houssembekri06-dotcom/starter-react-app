@@ -68,6 +68,7 @@
 .pill--indigo { background: var(--color-indigo-tint); color: var(--color-indigo-dark); }
 .pill--teal { background: var(--color-teal-light); color: var(--color-teal); }
 .pill--rose { background: var(--color-rose-light); color: var(--color-rose); }
+.pill--soft { background: #F1F5F9; color: var(--color-text-secondary); }
 
 /* SimulationBadge */
 .sim-badge {

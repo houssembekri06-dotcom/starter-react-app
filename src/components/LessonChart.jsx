@@ -45,8 +45,8 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
           const active = unitUnlocked && lesson.id === activeLessonId;
           const state = completed ? 'completed' : active ? 'active' : 'locked';
           const iconName = completed ? 'check' : active ? 'chart-line' : 'lock';
-          const iconSize = state === 'active' ? 30 : state === 'completed' ? 26 : 22;
-          const iconColor = state === 'active' ? '#10B981' : state === 'locked' ? '#94A3B8' : '#FFFFFF';
+          const iconSize = state === 'active' ? 24 : state === 'completed' ? 20 : 18;
+          const iconColor = state === 'active' ? '#FFFFFF' : state === 'locked' ? '#94A3B8' : '#16A34A';
           return (
             <div
               key={lesson.id}
@@ -60,8 +60,7 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
                 disabled={state === 'locked'}
                 aria-label={`Leçon ${i + 1}: ${lesson.title}`}
               >
-                {active && <span className="lesson-chart-badge">COMMENCER</span>}
-                <Icon name={iconName} size={iconSize} stroke={2.6} color={iconColor} />
+                <Icon name={iconName} size={iconSize} stroke={2.4} color={iconColor} />
               </button>
               <span className={`lesson-chart-label lesson-chart-label--${state}`}>
                 {lesson.title}
