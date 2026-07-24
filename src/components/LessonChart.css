@@ -46,7 +46,7 @@
 
 .lesson-chart-node--completed,
 .lesson-chart-node--active {
-  background: var(--color-indigo);
+  background: var(--chart-accent, var(--color-indigo));
 }
 
 .lesson-chart-node--active {
