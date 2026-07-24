@@ -2,11 +2,11 @@ import { useMemo } from 'react';
 import Icon from './Icon';
 import './LessonChart.css';
 
-const NODE = 56;
-const ROW_H = 110;
+const NODE = 48;
+const ROW_H = 108;
 const PAD_X = 28;
-const PAD_TOP = 40;
-const PAD_BOTTOM = 30;
+const PAD_TOP = 36;
+const PAD_BOTTOM = 24;
 const X_MIN = 0.22;
 const X_MAX = 0.88;
 
@@ -144,10 +144,13 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
               disabled={state === 'locked'}
               aria-label={`Leçon ${i + 1}`}
             >
-              <Icon name={iconName} size={24} stroke={2.4} color="#fff" />
+              <Icon name={iconName} size={22} stroke={2.4} color="#fff" />
             </button>
             <span className={`lesson-chart-label lesson-chart-label--${state}`}>
               Leçon {i + 1}
+            </span>
+            <span className={`lesson-chart-title lesson-chart-title--${state}`}>
+              {lesson.title}
             </span>
           </div>
         );

@@ -5,6 +5,7 @@ import { UNITS } from '../data/lessons';
 import Pill from '../components/Pill';
 import ProgressBar from '../components/ProgressBar';
 import LessonChart from '../components/LessonChart';
+import CircularProgress from '../components/CircularProgress';
 import Icon from '../components/Icon';
 import './Home.css';
 
@@ -40,23 +41,45 @@ export default function Home() {
     navigate(`/lesson/${lesson.id}`);
   }
 
+  const unitProgressPct = selectedUnit.lessons.length > 0
+    ? (completedInUnit / selectedUnit.lessons.length) * 100
+    : 0;
+
   return (
     <div className="screen home-screen">
-      <div className="home-pills-row">
-        <Pill icon="flame" iconColor="var(--color-coral)" tone="coral">{streakDays}</Pill>
-        <Pill icon="coins" iconColor="var(--color-indigo)" tone="indigo">{coins}</Pill>
-        <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
+      <div className="home-dashboard-card">
+        <div className="home-dashboard-left">
+          <div className="home-points">
+            <Icon name="coin" size={22} stroke={2} color="var(--color-coral)" />
+            <span className="home-points-value">{coins}</span>
+          </div>
+          <span className="home-points-label">Connaissances points</span>
+        </div>
+
+        <div className="home-dashboard-center">
+          <CircularProgress value={unitProgressPct} size={64} strokeWidth={6} />
+          <div className="home-progress-labels">
+            <span className="home-progress-title">Progression du Module</span>
+            <span className="home-progress-subtitle">{selectedUnit.title}</span>
+          </div>
+        </div>
+
+        <div className="home-dashboard-right">
+          <div className="home-reward-card">
+            <div className="home-reward-icon">
+              <Icon name="building-bank" size={22} stroke={1.8} color="var(--color-indigo)" />
+            </div>
+            <div className="home-reward-content">
+              <span className="home-reward-title">Récompense Active</span>
+              <span className="home-reward-text">DÉBLOQUER : 80€ de Bonus</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="home-ticker">
-        <div className="home-ticker-label">
-          <Icon name="chart-line" size={14} stroke={2.2} color="var(--color-indigo)" />
-          <span>Portefeuille éducatif</span>
-        </div>
-        <div className="home-ticker-value">
-          <span className="home-ticker-price">{(1000 + coins * 3.14).toFixed(2)} €</span>
-          <span className="home-ticker-delta">▲ +{(completedLessonIds.length * 1.2).toFixed(2)}%</span>
-        </div>
+      <div className="home-pills-row">
+        <Pill icon="flame" iconColor="var(--color-coral)" tone="coral">{streakDays}</Pill>
+        <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
       </div>
 
       <div className="home-units-scroll">
