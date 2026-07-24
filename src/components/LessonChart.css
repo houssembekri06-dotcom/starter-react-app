@@ -2,6 +2,31 @@
   position: relative;
   width: 100%;
   margin-top: 8px;
+  padding-left: 34px;
+  background:
+    linear-gradient(180deg, rgba(22, 163, 74, 0.04), rgba(255, 255, 255, 0)) ,
+    var(--color-white);
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.lesson-chart-axis {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 34px;
+  pointer-events: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.lesson-chart-axis-tick {
+  position: absolute;
+  right: 4px;
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(15, 23, 42, 0.45);
+  font-variant-numeric: tabular-nums;
 }
 
 .lesson-chart-svg {
@@ -45,13 +70,14 @@
 
 .lesson-chart-node--completed,
 .lesson-chart-node--active {
-  background: var(--color-indigo);
+  background: #16a34a;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
 }
 
 .lesson-chart-node--active {
   width: 62px;
   height: 62px;
-  box-shadow: 0 6px 18px rgba(91, 79, 232, 0.4);
+  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.45);
 }
 
 .lesson-chart-node--locked {
