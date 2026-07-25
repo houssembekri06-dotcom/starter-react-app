@@ -4,6 +4,7 @@ export default function PhoneFrame({ children, statusBar = true, noPadding = fal
   return (
     <div className="phone-outer">
       <div className="phone-frame">
+        <div className="phone-notch" aria-hidden="true" />
         {statusBar && <StatusBar />}
         <div className={noPadding ? 'phone-content phone-content--flush' : 'phone-content'}>
           {children}

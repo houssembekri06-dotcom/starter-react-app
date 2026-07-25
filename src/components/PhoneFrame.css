@@ -31,6 +31,24 @@
   }
 }
 
+.phone-notch {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96px;
+  height: 28px;
+  background: #0b0c10;
+  border-radius: 999px;
+  z-index: 50;
+}
+
+@media (max-width: 479px) {
+  .phone-notch {
+    display: none;
+  }
+}
+
 .status-bar {
   height: var(--statusbar-height);
   flex: none;
