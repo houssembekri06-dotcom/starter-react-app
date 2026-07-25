@@ -17,14 +17,6 @@ export default function Lesson() {
   const block = lesson.content[blockIndex];
   const isLastBlock = blockIndex === lesson.content.length - 1;
 
-  const blockIcons = ['sparkles', 'target', 'trending-up', 'stack-2', 'piggy-bank', 'calendar'];
-  const blockTones = ['indigo', 'teal', 'amber', 'rose', 'violet', 'sky'];
-  const tone = blockTones[blockIndex % blockTones.length];
-  const blockIcon = blockIcons[blockIndex % blockIcons.length];
-  const sentences = (block.body || '').match(/[^.!?]+[.!?]+/g) || [block.body];
-  const keyIdea = sentences[0]?.trim();
-  const rest = sentences.slice(1).join(' ').trim();
-
   function handleContinue() {
     if (isLastBlock) navigate(`/lesson/${lesson.id}/quiz`);
     else setBlockIndex((i) => i + 1);
@@ -105,23 +97,12 @@ export default function Lesson() {
         <span className="lesson-eyebrow">{unit?.title}</span>
         <h1 className="lesson-title">{lesson.title}</h1>
 
-        <div className={`lesson-visual-card tone-${tone}`}>
-          <div className="lesson-visual-header">
-            <div className="lesson-visual-icon">
-              <Icon name={blockIcon} size={26} stroke={2} />
-            </div>
-            <span className="lesson-visual-step">
-              Part {blockIndex + 1} · {lesson.content.length}
-            </span>
-          </div>
+        <div className="lesson-visual-card">
+          <span className="lesson-visual-step">
+            Part {blockIndex + 1} of {lesson.content.length}
+          </span>
           {block.heading && <h2 className="lesson-visual-heading">{block.heading}</h2>}
-          {keyIdea && (
-            <div className="lesson-key-idea">
-              <span className="lesson-key-idea-label">Key idea</span>
-              <p>{keyIdea}</p>
-            </div>
-          )}
-          {rest && <p className="lesson-visual-body">{rest}</p>}
+          <p className="lesson-visual-body">{block.body}</p>
         </div>
 
         <div className="lesson-dots" aria-hidden>
