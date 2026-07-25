@@ -45,11 +45,11 @@ export default function InvestSheet({ asset, position, completedLessonsCount, ca
   }
 
   return (
-    <BottomSheet open onClose={onClose} title={`Investir dans ${asset.symbol}`}>
+    <BottomSheet open onClose={onClose} title={`Invest in ${asset.symbol}`}>
       <div className="invest-sheet">
         {/* Level 1 — montant */}
         <div className="invest-section">
-          <label className="invest-label">Montant à investir</label>
+          <label className="invest-label">Amount to invest</label>
           <div className="invest-amount-display">{formatEUR(amount)}</div>
           <div className="quick-amounts-row">
             {QUICK_AMOUNTS.map((v) => (
@@ -58,7 +58,7 @@ export default function InvestSheet({ asset, position, completedLessonsCount, ca
                 className={`quick-amount-btn${amount === v ? ' quick-amount-btn--active' : ''}`}
                 onClick={() => setAmount(v)}
               >
-                {v} €
+                ${v}
               </button>
             ))}
             <button
@@ -73,36 +73,36 @@ export default function InvestSheet({ asset, position, completedLessonsCount, ca
         {/* Level 2 — frais + solde */}
         {unlocked(2) && (
           <div className="invest-mini-rows">
-            <MiniRow label="Frais de transaction" value={formatEUR(fees)} />
-            <MiniRow label="Solde disponible" value={formatEUR(cashBalance)} warn={insufficientFunds} />
+            <MiniRow label="Transaction fees" value={formatEUR(fees)} />
+            <MiniRow label="Available balance" value={formatEUR(cashBalance)} warn={insufficientFunds} />
           </div>
         )}
 
         {/* Level 3 — aperçu après achat */}
         {unlocked(3) && amount > 0 && (
           <div className="invest-preview">
-            <div className="invest-preview-title">Aperçu après achat</div>
-            <MiniRow label="Total de parts" value={`${formatShares(newTotalShares)} parts`} />
-            <MiniRow label="Nouveau prix moyen" value={formatEUR(newAvgPrice)} />
+            <div className="invest-preview-title">Preview after purchase</div>
+            <MiniRow label="Total shares" value={`${formatShares(newTotalShares)} shares`} />
+            <MiniRow label="New average price" value={formatEUR(newAvgPrice)} />
           </div>
         )}
 
         {/* Level 4 — type d'ordre */}
         {unlocked(4) && (
           <div className="invest-section">
-            <label className="invest-label">Type d'ordre</label>
+            <label className="invest-label">Order type</label>
             <div className="order-type-row">
               <button
                 className={`quick-amount-btn${orderType === 'market' ? ' quick-amount-btn--active' : ''}`}
                 onClick={() => setOrderType('market')}
               >
-                Marché
+                Market
               </button>
               <button
                 className={`quick-amount-btn${orderType === 'limit' ? ' quick-amount-btn--active' : ''}`}
                 onClick={() => setOrderType('limit')}
               >
-                Limite
+                Limit
               </button>
             </div>
             {orderType === 'limit' && (
@@ -111,7 +111,7 @@ export default function InvestSheet({ asset, position, completedLessonsCount, ca
                 className="invest-input"
                 value={limitPrice}
                 onChange={(e) => setLimitPrice(e.target.value)}
-                placeholder="Prix limite (€)"
+                placeholder="Limit price ($)"
               />
             )}
           </div>
@@ -120,21 +120,21 @@ export default function InvestSheet({ asset, position, completedLessonsCount, ca
         {/* Level 5 — protections */}
         {unlocked(5) && (
           <div className="invest-section">
-            <label className="invest-label">Protections (optionnel)</label>
+            <label className="invest-label">Protections (optional)</label>
             <div className="protections-row">
               <input
                 type="number"
                 className="invest-input"
                 value={stopLoss}
                 onChange={(e) => setStopLoss(e.target.value)}
-                placeholder="Stop-loss (€)"
+                placeholder="Stop-loss ($)"
               />
               <input
                 type="number"
                 className="invest-input"
                 value={takeProfit}
                 onChange={(e) => setTakeProfit(e.target.value)}
-                placeholder="Take-profit (€)"
+                placeholder="Take-profit ($)"
               />
             </div>
           </div>
@@ -143,9 +143,9 @@ export default function InvestSheet({ asset, position, completedLessonsCount, ca
         {/* Level 6 — détails pro */}
         {unlocked(6) && (
           <div className="invest-mini-rows">
-            <MiniRow label="Prix d'exécution estimé" value={formatEUR(execPrice)} />
-            <MiniRow label="Frais maker / taker" value={orderType === 'limit' ? '0,10 % / 0,20 %' : '0,20 % / 0,20 %'} />
-            <MiniRow label="Tolérance de slippage" value="0,50 % max" />
+            <MiniRow label="Estimated execution price" value={formatEUR(execPrice)} />
+            <MiniRow label="Maker / taker fees" value={orderType === 'limit' ? '0.10% / 0.20%' : '0.20% / 0.20%'} />
+            <MiniRow label="Slippage tolerance" value="0.50% max" />
           </div>
         )}
 
@@ -159,7 +159,7 @@ export default function InvestSheet({ asset, position, completedLessonsCount, ca
         <SimulationBadge compact />
 
         <button className="btn btn-primary" disabled={amount <= 0 || insufficientFunds} onClick={handleConfirm}>
-          {insufficientFunds ? 'Solde insuffisant' : 'Confirmer l\'investissement'}
+          {insufficientFunds ? 'Insufficient balance' : 'Confirm investment'}
         </button>
       </div>
     </BottomSheet>

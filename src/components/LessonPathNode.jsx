@@ -6,7 +6,7 @@ export default function LessonPathNode({ label, state, offset = 0, onClick }) {
 
   return (
     <div className="path-node-wrap" style={{ transform: `translateX(${offset}px)` }}>
-      {state === 'active' && <div className="path-node-badge">COMMENCER</div>}
+      {state === 'active' && <div className="path-node-badge">START</div>}
       <button
         className={`path-node path-node--${state}`}
         onClick={onClick}

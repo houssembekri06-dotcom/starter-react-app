@@ -17,7 +17,7 @@ export default function League() {
   const { xpTotal, league } = useProgress();
 
   const ranking = useMemo(() => {
-    const players = [...BOTS, { name: 'Vous', xp: xpTotal, isUser: true }];
+    const players = [...BOTS, { name: 'You', xp: xpTotal, isUser: true }];
     return players.sort((a, b) => b.xp - a.xp);
   }, [xpTotal]);
 
@@ -28,7 +28,7 @@ export default function League() {
           <Icon name="trophy" size={30} stroke={1.6} color="var(--color-coral)" />
         </div>
         <div className="league-title">{league}</div>
-        <p className="league-subtitle">Gagnez de l'XP en terminant des leçons pour grimper au classement.</p>
+        <p className="league-subtitle">Earn XP by completing lessons to climb the leaderboard.</p>
       </div>
 
       <Card>

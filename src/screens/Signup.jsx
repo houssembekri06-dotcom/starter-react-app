@@ -6,15 +6,15 @@ import Icon from '../components/Icon';
 import './Signup.css';
 
 const GOALS = [
-  { key: 'apprendre', icon: 'piggy-bank', title: 'Apprendre les bases', body: "Je veux d'abord comprendre comment fonctionne la finance." },
-  { key: 'epargner', icon: 'target', title: 'Épargner régulièrement', body: 'Je veux prendre de bonnes habitudes pour mettre de côté chaque mois.' },
-  { key: 'investir', icon: 'rocket', title: "Investir pour l'avenir", body: 'Je veux apprendre à faire fructifier mon argent sur le long terme.' },
+  { key: 'learn', icon: 'piggy-bank', title: 'Learn the basics', body: "I want to first understand how finance works." },
+  { key: 'save', icon: 'target', title: 'Save regularly', body: 'I want to build good habits and set money aside each month.' },
+  { key: 'invest', icon: 'rocket', title: "Invest for the future", body: 'I want to learn how to grow my money for the long term.' },
 ];
 
 const LEVELS = [
-  { key: 'debutant', title: 'Débutant', body: "Je découvre tout juste ces sujets." },
-  { key: 'intermediaire', title: 'Intermédiaire', body: "J'ai déjà quelques notions de base." },
-  { key: 'avance', title: 'Avancé', body: "Je connais déjà bien la finance et l'investissement." },
+  { key: 'beginner', title: 'Beginner', body: "I'm just discovering these topics." },
+  { key: 'intermediate', title: 'Intermediate', body: "I already know some basics." },
+  { key: 'advanced', title: 'Advanced', body: "I'm already comfortable with finance and investing." },
 ];
 
 const TOTAL_STEPS = 3;
@@ -52,7 +52,7 @@ export default function Signup() {
   return (
     <div className="screen signup-screen">
       <div className="lesson-top-row">
-        <button className="icon-btn" onClick={handleBack} aria-label="Retour">
+        <button className="icon-btn" onClick={handleBack} aria-label="Back">
           <Icon name="back" size={17} stroke={2.2} />
         </button>
         <ProgressBar value={step} max={TOTAL_STEPS} tone="indigo" />
@@ -60,28 +60,28 @@ export default function Signup() {
 
       {step === 1 && (
         <div className="signup-body">
-          <h1 className="signup-title">Créez votre compte</h1>
-          <p className="signup-subtitle">Vos informations restent sur cet appareil, aucune donnée réelle n'est envoyée.</p>
+          <h1 className="signup-title">Create your account</h1>
+          <p className="signup-subtitle">Your info stays on this device — no real data is sent.</p>
 
           <div className="signup-field">
-            <label className="invest-label">Prénom</label>
-            <input className="invest-input" value={name} onChange={(e) => setName(e.target.value)} placeholder="Camille" />
+            <label className="invest-label">First name</label>
+            <input className="invest-input" value={name} onChange={(e) => setName(e.target.value)} placeholder="Alex" />
           </div>
           <div className="signup-field">
             <label className="invest-label">Email</label>
-            <input className="invest-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="camille@exemple.fr" />
+            <input className="invest-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="alex@example.com" />
           </div>
           <div className="signup-field">
-            <label className="invest-label">Mot de passe</label>
-            <input className="invest-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="8 caractères minimum" />
+            <label className="invest-label">Password</label>
+            <input className="invest-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="8 characters minimum" />
           </div>
         </div>
       )}
 
       {step === 2 && (
         <div className="signup-body">
-          <h1 className="signup-title">Quel est votre objectif principal ?</h1>
-          <p className="signup-subtitle">On personnalise votre parcours en fonction de votre réponse.</p>
+          <h1 className="signup-title">What is your main goal?</h1>
+          <p className="signup-subtitle">We'll tailor your journey based on your answer.</p>
           <div className="choice-list">
             {GOALS.map((g) => (
               <button
@@ -104,8 +104,8 @@ export default function Signup() {
 
       {step === 3 && (
         <div className="signup-body">
-          <h1 className="signup-title">Quel est votre niveau en finance ?</h1>
-          <p className="signup-subtitle">Cela nous aide à calibrer le rythme de vos premières leçons.</p>
+          <h1 className="signup-title">What is your finance level?</h1>
+          <p className="signup-subtitle">This helps us pace your first lessons.</p>
           <div className="choice-list">
             {LEVELS.map((l) => (
               <button
@@ -128,7 +128,7 @@ export default function Signup() {
         disabled={(step === 1 && !step1Valid) || (step === 2 && !goal) || (step === 3 && !level)}
         onClick={handleContinue}
       >
-        {step === 3 ? "Terminer l'inscription" : 'Continuer'}
+        {step === 3 ? 'Finish sign up' : 'Continue'}
       </button>
     </div>
   );

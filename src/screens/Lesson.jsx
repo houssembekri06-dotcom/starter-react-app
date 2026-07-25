@@ -24,7 +24,7 @@ export default function Lesson() {
   return (
     <div className="screen lesson-screen">
       <div className="lesson-top-row">
-        <button className="icon-btn" onClick={() => navigate('/home')} aria-label="Quitter">
+        <button className="icon-btn" onClick={() => navigate('/home')} aria-label="Close">
           <Icon name="close" size={16} stroke={2.2} />
         </button>
         <ProgressBar value={blockIndex + 1} max={lesson.content.length} tone="indigo" />
@@ -38,7 +38,7 @@ export default function Lesson() {
       </div>
 
       <button className="btn btn-primary" onClick={handleContinue}>
-        {isLastBlock ? 'Passer au quiz' : 'Continuer'}
+        {isLastBlock ? 'Take the quiz' : 'Continue'}
       </button>
     </div>
   );

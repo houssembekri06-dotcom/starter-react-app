@@ -9,5 +9,5 @@ export const Route = createFileRoute("/league")({
       <League />
     </TabScreen>
   ),
-  head: () => ({ meta: [{ title: "Ligue" }] }),
+  head: () => ({ meta: [{ title: "League" }] }),
 });

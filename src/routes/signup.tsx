@@ -4,5 +4,5 @@ import Signup from "../screens/Signup";
 
 export const Route = createFileRoute("/signup")({
   component: Signup,
-  head: () => ({ meta: [{ title: "Créer un compte" }] }),
+  head: () => ({ meta: [{ title: "Create account" }] }),
 });

@@ -21,30 +21,30 @@ export default function Login() {
   return (
     <div className="screen signup-screen">
       <div className="lesson-top-row">
-        <button className="icon-btn" onClick={() => navigate('/onboarding')} aria-label="Retour">
+        <button className="icon-btn" onClick={() => navigate('/onboarding')} aria-label="Back">
           <Icon name="back" size={17} stroke={2.2} />
         </button>
       </div>
 
       <div className="signup-body">
-        <h1 className="signup-title">Content de vous revoir</h1>
-        <p className="signup-subtitle">Connectez-vous pour retrouver votre progression.</p>
+        <h1 className="signup-title">Welcome back</h1>
+        <p className="signup-subtitle">Sign in to pick up where you left off.</p>
 
         <div className="signup-field">
           <label className="invest-label">Email</label>
-          <input className="invest-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="camille@exemple.fr" />
+          <input className="invest-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="alex@example.com" />
         </div>
         <div className="signup-field">
-          <label className="invest-label">Mot de passe</label>
-          <input className="invest-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="8 caractères minimum" />
+          <label className="invest-label">Password</label>
+          <input className="invest-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="8 characters minimum" />
         </div>
       </div>
 
       <button className="btn btn-primary" disabled={!valid} onClick={handleSubmit}>
-        Se connecter
+        Sign in
       </button>
       <button className="text-link" onClick={() => navigate('/signup')}>
-        Créer un compte
+        Create account
       </button>
     </div>
   );

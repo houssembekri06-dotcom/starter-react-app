@@ -4,18 +4,18 @@ import './Onboarding.css';
 
 const SLIDES = [
   {
-    title: 'La finance, expliquée simplement',
-    body: "Apprenez les bases de l'épargne et de l'investissement en quelques minutes par jour, avec des leçons courtes et interactives.",
+    title: 'Finance, explained simply',
+    body: "Learn the basics of saving and investing in a few minutes a day, with short and interactive lessons.",
     illustration: <IllustrationGrowth />,
   },
   {
-    title: 'Entraînez-vous sans risque',
-    body: "Un portefeuille 100 % fictif vous permet d'acheter et de suivre de vrais types d'actifs, sans jamais utiliser de véritable argent.",
+    title: 'Practice risk-free',
+    body: "A 100% fictional portfolio lets you buy and follow real asset types, without ever using real money.",
     illustration: <IllustrationWallet />,
   },
   {
-    title: 'Progressez à votre rythme',
-    body: 'Chaque leçon débloque un peu plus les outils d\'une vraie plateforme d\'investissement. Zéro pression, juste de la pratique.',
+    title: 'Progress at your own pace',
+    body: "Each lesson unlocks a bit more of a real investment platform's tools. No pressure — just practice.",
     illustration: <IllustrationPath />,
   },
 ];
@@ -52,10 +52,10 @@ export default function Onboarding() {
 
       <div className="onboarding-actions">
         <button className="btn btn-primary" onClick={next}>
-          {isLast ? 'Créer un compte' : 'Suivant'}
+          {isLast ? 'Create account' : 'Next'}
         </button>
         <button className="text-link" onClick={() => navigate('/login')}>
-          J'ai déjà un compte
+          I already have an account
         </button>
       </div>
     </div>
@@ -75,9 +75,9 @@ function IllustrationGrowth() {
       <polyline points="24,150 70,120 100,140 140,90 170,100 216,50" fill="none" stroke="#5B4FE8" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="216" cy="50" r="9" fill="#FF7A3D" />
       <circle cx="60" cy="60" r="16" fill="#FFE4D2" />
-      <text x="60" y="66" fontSize="16" textAnchor="middle" fill="#993C1D" fontWeight="700">€</text>
+      <text x="60" y="66" fontSize="16" textAnchor="middle" fill="#993C1D" fontWeight="700">$</text>
       <circle cx="190" cy="140" r="13" fill="#D7F5F0" />
-      <text x="190" y="145" fontSize="13" textAnchor="middle" fill="#0F6E56" fontWeight="700">€</text>
+      <text x="190" y="145" fontSize="13" textAnchor="middle" fill="#0F6E56" fontWeight="700">$</text>
     </svg>
   );
 }

@@ -9,5 +9,5 @@ export const Route = createFileRoute("/asset/$assetId")({
       <AssetDetail />
     </Gate>
   ),
-  head: () => ({ meta: [{ title: "Actif" }] }),
+  head: () => ({ meta: [{ title: "Asset" }] }),
 });

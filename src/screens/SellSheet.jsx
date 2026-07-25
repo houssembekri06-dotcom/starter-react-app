@@ -16,11 +16,11 @@ export default function SellSheet({ asset, position, feeRate, onClose, onConfirm
   const fees = proceeds * feeRate;
 
   return (
-    <BottomSheet open onClose={onClose} title={`Vendre ${asset.symbol}`}>
+    <BottomSheet open onClose={onClose} title={`Sell ${asset.symbol}`}>
       <div className="invest-sheet">
         <div className="invest-section">
-          <label className="invest-label">Quantité à vendre</label>
-          <div className="invest-amount-display">{formatShares(shares)} parts</div>
+          <label className="invest-label">Shares to sell</label>
+          <div className="invest-amount-display">{formatShares(shares)} shares</div>
           <div className="quick-amounts-row">
             {FRACTIONS.map((f) => (
               <button
@@ -35,15 +35,15 @@ export default function SellSheet({ asset, position, feeRate, onClose, onConfirm
         </div>
 
         <div className="invest-mini-rows">
-          <div className="invest-mini-row"><span>Valeur estimée</span><strong>{formatEUR(proceeds)}</strong></div>
-          <div className="invest-mini-row"><span>Frais de transaction</span><strong>{formatEUR(fees)}</strong></div>
-          <div className="invest-mini-row"><span>Montant net reçu</span><strong>{formatEUR(proceeds - fees)}</strong></div>
+          <div className="invest-mini-row"><span>Estimated value</span><strong>{formatEUR(proceeds)}</strong></div>
+          <div className="invest-mini-row"><span>Transaction fees</span><strong>{formatEUR(fees)}</strong></div>
+          <div className="invest-mini-row"><span>Net amount received</span><strong>{formatEUR(proceeds - fees)}</strong></div>
         </div>
 
         <SimulationBadge compact />
 
         <button className="btn btn-rose-outline" onClick={() => onConfirm(shares)}>
-          Confirmer la vente
+          Confirm sale
         </button>
       </div>
     </BottomSheet>

@@ -9,5 +9,5 @@ export const Route = createFileRoute("/wallet")({
       <Wallet />
     </TabScreen>
   ),
-  head: () => ({ meta: [{ title: "Portefeuille" }] }),
+  head: () => ({ meta: [{ title: "Wallet" }] }),
 });

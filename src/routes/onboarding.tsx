@@ -4,5 +4,5 @@ import Onboarding from "../screens/Onboarding";
 
 export const Route = createFileRoute("/onboarding")({
   component: Onboarding,
-  head: () => ({ meta: [{ title: "Bienvenue" }] }),
+  head: () => ({ meta: [{ title: "Welcome" }] }),
 });

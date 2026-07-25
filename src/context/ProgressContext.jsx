@@ -11,10 +11,10 @@ const TRANSACTION_FEE_RATE = 0.005;
 const COINS_PER_LESSON = 5;
 
 const LEAGUES = [
-  { name: 'Ligue Bronze', minXp: 0 },
-  { name: 'Ligue Argent', minXp: 100 },
-  { name: 'Ligue Or', minXp: 250 },
-  { name: 'Ligue Platine', minXp: 500 },
+  { name: 'Bronze League', minXp: 0 },
+  { name: 'Silver League', minXp: 100 },
+  { name: 'Gold League', minXp: 250 },
+  { name: 'Platinum League', minXp: 500 },
 ];
 
 function computeLeague(xpTotal) {

@@ -6,73 +6,73 @@ import './News.css';
 const MOCK_NEWS = [
   {
     id: 1,
-    source: 'Bloomberg Fictif',
-    time: 'Il y a 12 min',
-    title: 'La BCE laisse ses taux inchangés, les marchés respirent',
-    summary: 'Les investisseurs saluent la stabilité monétaire attendue pour le trimestre.',
-    tag: 'Banques centrales',
+    source: 'Bloomberg Fiction',
+    time: '12 min ago',
+    title: 'The Fed keeps rates unchanged, markets breathe again',
+    summary: 'Investors welcome the monetary stability expected for the quarter.',
+    tag: 'Central banks',
     move: 0.4,
   },
   {
     id: 2,
-    source: 'Reuters Simulé',
-    time: 'Il y a 42 min',
-    title: 'Le CAC 40 franchit les 8 000 points dans ce scénario',
-    summary: 'Une hausse des valeurs technologiques tire l’indice vers un nouveau seuil symbolique.',
+    source: 'Reuters Simulated',
+    time: '42 min ago',
+    title: 'S&P 500 breaks 5,500 points in this scenario',
+    summary: 'A rally in tech stocks pushes the index to a new symbolic milestone.',
     tag: 'Indices',
     move: 1.2,
   },
   {
     id: 3,
     source: 'Crypto Daily',
-    time: 'Il y a 1 h',
-    title: 'Bitcoin : les whales accumulent avant le halving',
-    summary: 'Les grosses adresses augmentent leurs positions malgré la volatilité récente.',
+    time: '1 h ago',
+    title: 'Bitcoin: whales accumulate ahead of the halving',
+    summary: 'Large holders are increasing positions despite recent volatility.',
     tag: 'Crypto',
     move: -0.8,
   },
   {
     id: 4,
-    source: 'Les Échos Édu',
-    time: 'Il y a 2 h',
-    title: 'Pourquoi l’inflation ralentit mais ne disparaît pas',
-    summary: 'Un décryptage simple des mécanismes qui maintiennent les prix élevés.',
-    tag: 'Économie',
+    source: 'Finance Edu',
+    time: '2 h ago',
+    title: 'Why inflation is slowing but not disappearing',
+    summary: 'A simple breakdown of the mechanisms keeping prices elevated.',
+    tag: 'Economy',
     move: 0.1,
   },
   {
     id: 5,
     source: 'MarketWatch Jr',
-    time: 'Il y a 3 h',
-    title: 'Tesla annonce un dividende exceptionnel fictif',
-    summary: 'Le constructeur récompense ses actionnaires dans cet exercice de simulation.',
-    tag: 'Actions',
+    time: '3 h ago',
+    title: 'Tesla announces a fictional special dividend',
+    summary: 'The carmaker rewards shareholders in this simulation exercise.',
+    tag: 'Stocks',
     move: 2.4,
   },
   {
     id: 6,
     source: 'Finimize Learn',
-    time: 'Il y a 5 h',
-    title: 'ETF : comment diversifier avec un seul clic',
-    summary: 'Le guide rapide pour comprendre les fonds indiciels et leurs frais.',
-    tag: 'Éducation',
+    time: '5 h ago',
+    title: 'ETFs: how to diversify with a single click',
+    summary: 'A quick guide to understanding index funds and their fees.',
+    tag: 'Education',
     move: 0.0,
   },
   {
     id: 7,
-    source: 'Boursorama Test',
-    time: 'Il y a 6 h',
-    title: 'L’or repasse au-dessus de 2 100 $ dans ce scénario',
-    summary: 'Le métal jaune profite d’un rebond de l’incertitude géopolitique simulée.',
-    tag: 'Matières premières',
+    source: 'MarketTest',
+    time: '6 h ago',
+    title: 'Gold climbs back above $2,100 in this scenario',
+    summary: 'The yellow metal benefits from a rebound in simulated geopolitical uncertainty.',
+    tag: 'Commodities',
     move: 0.6,
   },
 ];
 
 function formatMove(move) {
-  if (move === 0) return '0,00 %';
+  if (move === 0) return '0.00%';
   const sign = move > 0 ? '+' : '';
-  return `${sign}${move.toFixed(2).replace('.', ',')} %`;
+  return `${sign}${move.toFixed(2)}%`;
 }
 
 function NewsCard({ item }) {
@@ -115,25 +115,25 @@ export default function News() {
   return (
     <div className="screen news-screen">
       <header className="news-header">
-        <h1 className="news-title">Actualités</h1>
-        <span className="news-subtitle">Cours et titres simulés</span>
+        <h1 className="news-title">News</h1>
+        <span className="news-subtitle">Simulated quotes and headlines</span>
       </header>
 
       <section className="news-hero">
         <img
           src={newsHeroAsset.url}
-          alt="Illustration des marchés financiers"
+          alt="Financial markets illustration"
           className="news-hero-image"
           width={1024}
           height={512}
         />
         <div className="news-hero-content">
-          <span className="news-hero-tag">À la une</span>
+          <span className="news-hero-tag">Top story</span>
           <h2 className="news-hero-title">
-            Les marchés ouvrent en hausse dans ce scénario fictif
+            Markets open higher in this fictional scenario
           </h2>
           <p className="news-hero-summary">
-            Un regard ludique sur les mécanismes qui font bouger les cours chaque matin.
+            A playful look at the mechanisms that move prices every morning.
           </p>
         </div>
       </section>

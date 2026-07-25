@@ -17,7 +17,7 @@ import SellSheet from './SellSheet';
 import PurchaseConfirmation from './PurchaseConfirmation';
 import './AssetDetail.css';
 
-const TIMEFRAMES = ['1J', '1S', '1M', '1A', 'Tout'];
+const TIMEFRAMES = ['1D', '1W', '1M', '1Y', 'All'];
 
 export default function AssetDetail() {
   const { assetId } = useParams();
@@ -65,7 +65,7 @@ export default function AssetDetail() {
   return (
     <div className="screen asset-detail-screen">
       <div className="screen-header">
-        <button className="icon-btn" onClick={() => navigate(-1)} aria-label="Retour">
+        <button className="icon-btn" onClick={() => navigate(-1)} aria-label="Back">
           <Icon name="back" size={17} stroke={2.2} />
         </button>
         <div>
@@ -86,20 +86,20 @@ export default function AssetDetail() {
       {/* Palier 2 */}
       {unlocked(2) && (
         <Card>
-          <SectionTitle>Votre position</SectionTitle>
+          <SectionTitle>Your position</SectionTitle>
           {position ? (
             <div className="position-grid">
-              <PositionStat label="Parts détenues" value={`${formatShares(position.shares)}`} />
-              <PositionStat label="Valeur actuelle" value={formatEUR(position.shares * asset.price)} />
+              <PositionStat label="Shares held" value={`${formatShares(position.shares)}`} />
+              <PositionStat label="Current value" value={formatEUR(position.shares * asset.price)} />
               <PositionStat
-                label="Gain / perte total"
+                label="Total gain / loss"
                 value={`${gainLoss >= 0 ? '+' : ''}${formatEUR(gainLoss)}`}
                 tone={gainLoss >= 0 ? 'teal' : 'rose'}
                 sub={formatPercent(gainLossPct)}
               />
             </div>
           ) : (
-            <p className="position-empty">Investissez pour voir apparaître votre position ici.</p>
+            <p className="position-empty">Invest to see your position appear here.</p>
           )}
         </Card>
       )}
@@ -107,7 +107,7 @@ export default function AssetDetail() {
       {/* Palier 3 */}
       {unlocked(3) && (
         <Card>
-          <SectionTitle>Évolution du prix</SectionTitle>
+          <SectionTitle>Price history</SectionTitle>
           <div className="timeframe-row">
             {TIMEFRAMES.map((tf) => (
               <button
@@ -132,17 +132,17 @@ export default function AssetDetail() {
             </div>
             <span>{formatEUR(asset.range52w.high)}</span>
           </div>
-          <div className="range-52w-label">Range 52 semaines</div>
+          <div className="range-52w-label">52-week range</div>
         </Card>
       )}
 
       {/* Palier 4 */}
       {unlocked(4) && (
         <Card>
-          <SectionTitle>Achat & frais</SectionTitle>
+          <SectionTitle>Purchase & fees</SectionTitle>
           <div className="kv-rows">
-            <KvRow label="Prix moyen d'achat" value={position ? formatEUR(position.avgPrice) : '—'} />
-            <KvRow label="Frais de gestion (annuel)" value={`${asset.managementFeePct.toFixed(2).replace('.', ',')} %`} />
+            <KvRow label="Average purchase price" value={position ? formatEUR(position.avgPrice) : '—'} />
+            <KvRow label="Management fee (annual)" value={`${asset.managementFeePct.toFixed(2)}%`} />
           </div>
         </Card>
       )}
@@ -150,7 +150,7 @@ export default function AssetDetail() {
       {/* Palier 5 */}
       {unlocked(5) && asset.composition && (
         <Card>
-          <SectionTitle>Composition du fonds</SectionTitle>
+          <SectionTitle>Fund composition</SectionTitle>
           <div className="composition-list">
             {asset.composition.map((c) => (
               <div key={c.name} className="composition-row">
@@ -158,7 +158,7 @@ export default function AssetDetail() {
                   <div className="composition-bar-fill" style={{ width: `${c.pct}%` }} />
                 </div>
                 <span className="composition-name">{c.name}</span>
-                <span className="composition-pct">{c.pct.toFixed(1).replace('.', ',')} %</span>
+                <span className="composition-pct">{c.pct.toFixed(1)}%</span>
               </div>
             ))}
           </div>
@@ -168,23 +168,23 @@ export default function AssetDetail() {
       {/* Palier 6 */}
       {unlocked(6) && (
         <Card>
-          <SectionTitle>Historique d'achats</SectionTitle>
+          <SectionTitle>Purchase history</SectionTitle>
           {position && position.purchases.length > 0 ? (
             <div className="history-list">
               {position.purchases.slice().reverse().map((p, i) => (
                 <div key={i} className="history-row">
                   <span>{formatDate(p.date)}</span>
-                  <span>{formatShares(p.shares)} parts</span>
+                  <span>{formatShares(p.shares)} shares</span>
                   <span>{formatEUR(p.price)}</span>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="position-empty">Aucun achat pour le moment.</p>
+            <p className="position-empty">No purchases yet.</p>
           )}
           <div className="tip-box">
             <Icon name="info" size={16} stroke={2} color="var(--color-indigo)" />
-            <span>Investir régulièrement, plutôt qu'en une seule fois, lisse votre prix moyen d'achat dans le temps.</span>
+            <span>Investing regularly, instead of all at once, smooths out your average purchase price over time.</span>
           </div>
         </Card>
       )}
@@ -192,13 +192,13 @@ export default function AssetDetail() {
       {/* Palier 7 */}
       {unlocked(7) && (
         <Card>
-          <SectionTitle>Données de marché</SectionTitle>
+          <SectionTitle>Market data</SectionTitle>
           <div className="kv-rows">
-            <KvRow label="Classement" value={`#${asset.rank}`} />
-            <KvRow label="Capitalisation" value={formatCompactLarge(asset.marketCapEUR)} />
-            {asset.dominancePct != null && <KvRow label="Prédominance" value={`${asset.dominancePct} %`} />}
-            <KvRow label="Rendement annuel moyen" value={`${asset.avgAnnualReturnPct.toFixed(1).replace('.', ',')} %`} />
-            <KvRow label="Volume 24h" value={formatCompactLarge(asset.volume24hEUR)} />
+            <KvRow label="Rank" value={`#${asset.rank}`} />
+            <KvRow label="Market cap" value={formatCompactLarge(asset.marketCapEUR)} />
+            {asset.dominancePct != null && <KvRow label="Dominance" value={`${asset.dominancePct}%`} />}
+            <KvRow label="Average annual return" value={`${asset.avgAnnualReturnPct.toFixed(1)}%`} />
+            <KvRow label="24h volume" value={formatCompactLarge(asset.volume24hEUR)} />
           </div>
         </Card>
       )}
@@ -206,11 +206,11 @@ export default function AssetDetail() {
       {/* Palier 8 */}
       {unlocked(8) && (
         <Card>
-          <SectionTitle>Offre & plus haut historique</SectionTitle>
+          <SectionTitle>Supply & all-time high</SectionTitle>
           <div className="kv-rows">
-            <KvRow label="Offre en circulation" value={`${formatCompactNumber(asset.circulatingSupply)} parts`} />
-            <KvRow label="Plus haut historique (ATH)" value={`${formatEUR(asset.ath)} · ${formatDate(asset.athDate)}`} />
-            <KvRow label="Range 24h" value={`${formatEUR(asset.range24h.low)} – ${formatEUR(asset.range24h.high)}`} />
+            <KvRow label="Circulating supply" value={`${formatCompactNumber(asset.circulatingSupply)} shares`} />
+            <KvRow label="All-time high (ATH)" value={`${formatEUR(asset.ath)} · ${formatDate(asset.athDate)}`} />
+            <KvRow label="24h range" value={`${formatEUR(asset.range24h.low)} – ${formatEUR(asset.range24h.high)}`} />
           </div>
         </Card>
       )}
@@ -218,15 +218,15 @@ export default function AssetDetail() {
       {/* Palier 9 */}
       {unlocked(9) && (
         <Card>
-          <SectionTitle>Activité de trading</SectionTitle>
+          <SectionTitle>Trading activity</SectionTitle>
           <div className="buysell-bar">
             <div className="buysell-buy" style={{ width: `${asset.buySellRatio.buyPct}%` }} />
           </div>
           <div className="buysell-labels">
-            <span className="buysell-buy-label">{asset.buySellRatio.buyPct}% acheteurs</span>
-            <span className="buysell-sell-label">{asset.buySellRatio.sellPct}% vendeurs</span>
+            <span className="buysell-buy-label">{asset.buySellRatio.buyPct}% buyers</span>
+            <span className="buysell-sell-label">{asset.buySellRatio.sellPct}% sellers</span>
           </div>
-          <SectionTitle>À propos</SectionTitle>
+          <SectionTitle>About</SectionTitle>
           <p className="about-text">{asset.about}</p>
         </Card>
       )}
@@ -234,9 +234,9 @@ export default function AssetDetail() {
       {/* Palier 10 */}
       {unlocked(10) && (
         <Card>
-          <SectionTitle>Bougies japonaises</SectionTitle>
+          <SectionTitle>Candlestick chart</SectionTitle>
           <Candlestick candles={asset.candles} width={310} height={140} />
-          <SectionTitle>Carnet d'ordres</SectionTitle>
+          <SectionTitle>Order book</SectionTitle>
           <OrderBook bids={asset.orderBook.bids} asks={asset.orderBook.asks} />
         </Card>
       )}
@@ -250,11 +250,11 @@ export default function AssetDetail() {
       <div className="asset-detail-actions">
         {position ? (
           <>
-            <button className="btn btn-rose-outline" onClick={() => setSheetMode('sell')}>Vendre</button>
-            <button className="btn btn-primary" onClick={() => setSheetMode('buy')}>Investir plus</button>
+            <button className="btn btn-rose-outline" onClick={() => setSheetMode('sell')}>Sell</button>
+            <button className="btn btn-primary" onClick={() => setSheetMode('buy')}>Invest more</button>
           </>
         ) : (
-          <button className="btn btn-primary" onClick={() => setSheetMode('buy')}>Investir</button>
+          <button className="btn btn-primary" onClick={() => setSheetMode('buy')}>Invest</button>
         )}
       </div>
 
