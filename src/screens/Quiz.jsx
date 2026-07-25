@@ -63,7 +63,7 @@ export default function Quiz() {
               className={`quiz-hint-btn ${hintOpen ? 'is-open' : ''}`}
               onClick={() => setHintOpen((v) => !v)}
             >
-              <Icon name="bulb" size={16} stroke={2.2} />
+              <Icon name="sparkles" size={16} stroke={2.2} />
               {hintOpen ? 'Hide hint' : 'Need a hint?'}
             </button>
             {hintOpen && (

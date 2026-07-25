@@ -36,7 +36,7 @@ export default function Lesson() {
         <div className="lesson-body">
           <div className="lesson-summary-card">
             <div className="lesson-summary-icon">
-              <Icon name={unit?.icon || 'book'} size={28} stroke={2} />
+              <Icon name={unit?.icon || 'sparkles'} size={28} stroke={2} />
             </div>
             <span className="lesson-summary-eyebrow">Lesson preview</span>
             <h1 className="lesson-summary-title">{lesson.title}</h1>
