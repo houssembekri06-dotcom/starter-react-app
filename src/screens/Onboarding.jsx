@@ -75,9 +75,9 @@ function IllustrationGrowth() {
       <polyline points="24,150 70,120 100,140 140,90 170,100 216,50" fill="none" stroke="#5B4FE8" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="216" cy="50" r="9" fill="#FF7A3D" />
       <circle cx="60" cy="60" r="16" fill="#FFE4D2" />
-      <text x="60" y="66" fontSize="16" textAnchor="middle" fill="#993C1D" fontWeight="700">€</text>
+      <text x="60" y="66" fontSize="16" textAnchor="middle" fill="#993C1D" fontWeight="700">$</text>
       <circle cx="190" cy="140" r="13" fill="#D7F5F0" />
-      <text x="190" y="145" fontSize="13" textAnchor="middle" fill="#0F6E56" fontWeight="700">€</text>
+      <text x="190" y="145" fontSize="13" textAnchor="middle" fill="#0F6E56" fontWeight="700">$</text>
     </svg>
   );
 }
