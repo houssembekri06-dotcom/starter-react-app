@@ -3,6 +3,7 @@ import { useNavigate, useParams } from '@/lib/router-compat';
 import { getLessonById, getUnitById } from '../data/lessons';
 import ProgressBar from '../components/ProgressBar';
 import Icon from '../components/Icon';
+import LessonVisual from '../components/LessonVisual';
 import './Lesson.css';
 
 export default function Lesson() {
@@ -102,6 +103,11 @@ export default function Lesson() {
             Part {blockIndex + 1} of {lesson.content.length}
           </span>
           {block.heading && <h2 className="lesson-visual-heading">{block.heading}</h2>}
+          {block.visual && (
+            <div className="lesson-visual-diagram">
+              <LessonVisual visual={block.visual} />
+            </div>
+          )}
           <p className="lesson-visual-body">{block.body}</p>
         </div>
 
