@@ -20,7 +20,7 @@ import { Route as HomeRouteImport } from './routes/home'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LessonLessonIdRouteImport } from './routes/lesson.$lessonId'
 import { Route as AssetAssetIdRouteImport } from './routes/asset.$assetId'
-import { Route as LessonLessonIdQuizRouteImport } from './routes/lesson.$lessonId.quiz'
+import { Route as LessonLessonIdQuizRouteImport } from './routes/lesson.$lessonId_.quiz'
 
 const WalletRoute = WalletRouteImport.update({
   id: '/wallet',
@@ -78,9 +78,9 @@ const AssetAssetIdRoute = AssetAssetIdRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const LessonLessonIdQuizRoute = LessonLessonIdQuizRouteImport.update({
-  id: '/quiz',
-  path: '/quiz',
-  getParentRoute: () => LessonLessonIdRoute,
+  id: '/lesson/$lessonId_/quiz',
+  path: '/lesson/$lessonId/quiz',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -94,7 +94,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/wallet': typeof WalletRoute
   '/asset/$assetId': typeof AssetAssetIdRoute
-  '/lesson/$lessonId': typeof LessonLessonIdRouteWithChildren
+  '/lesson/$lessonId': typeof LessonLessonIdRoute
   '/lesson/$lessonId/quiz': typeof LessonLessonIdQuizRoute
 }
 export interface FileRoutesByTo {
@@ -108,7 +108,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/wallet': typeof WalletRoute
   '/asset/$assetId': typeof AssetAssetIdRoute
-  '/lesson/$lessonId': typeof LessonLessonIdRouteWithChildren
+  '/lesson/$lessonId': typeof LessonLessonIdRoute
   '/lesson/$lessonId/quiz': typeof LessonLessonIdQuizRoute
 }
 export interface FileRoutesById {
@@ -123,8 +123,8 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/wallet': typeof WalletRoute
   '/asset/$assetId': typeof AssetAssetIdRoute
-  '/lesson/$lessonId': typeof LessonLessonIdRouteWithChildren
-  '/lesson/$lessonId/quiz': typeof LessonLessonIdQuizRoute
+  '/lesson/$lessonId': typeof LessonLessonIdRoute
+  '/lesson/$lessonId_/quiz': typeof LessonLessonIdQuizRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -168,7 +168,7 @@ export interface FileRouteTypes {
     | '/wallet'
     | '/asset/$assetId'
     | '/lesson/$lessonId'
-    | '/lesson/$lessonId/quiz'
+    | '/lesson/$lessonId_/quiz'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -182,7 +182,8 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   WalletRoute: typeof WalletRoute
   AssetAssetIdRoute: typeof AssetAssetIdRoute
-  LessonLessonIdRoute: typeof LessonLessonIdRouteWithChildren
+  LessonLessonIdRoute: typeof LessonLessonIdRoute
+  LessonLessonIdQuizRoute: typeof LessonLessonIdQuizRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -264,27 +265,15 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AssetAssetIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lesson/$lessonId/quiz': {
-      id: '/lesson/$lessonId/quiz'
-      path: '/quiz'
+    '/lesson/$lessonId_/quiz': {
+      id: '/lesson/$lessonId_/quiz'
+      path: '/lesson/$lessonId/quiz'
       fullPath: '/lesson/$lessonId/quiz'
       preLoaderRoute: typeof LessonLessonIdQuizRouteImport
-      parentRoute: typeof LessonLessonIdRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface LessonLessonIdRouteChildren {
-  LessonLessonIdQuizRoute: typeof LessonLessonIdQuizRoute
-}
-
-const LessonLessonIdRouteChildren: LessonLessonIdRouteChildren = {
-  LessonLessonIdQuizRoute: LessonLessonIdQuizRoute,
-}
-
-const LessonLessonIdRouteWithChildren = LessonLessonIdRoute._addFileChildren(
-  LessonLessonIdRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -297,7 +286,8 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   WalletRoute: WalletRoute,
   AssetAssetIdRoute: AssetAssetIdRoute,
-  LessonLessonIdRoute: LessonLessonIdRouteWithChildren,
+  LessonLessonIdRoute: LessonLessonIdRoute,
+  LessonLessonIdQuizRoute: LessonLessonIdQuizRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
