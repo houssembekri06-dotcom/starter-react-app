@@ -75,21 +75,21 @@ const RAW_ASSETS = [
   {
     id: 'wrld',
     symbol: 'WRLD',
-    name: 'iInvest Monde',
+    name: 'iInvest World',
     type: 'etf',
     basePrice: 187.42,
     volatility: 0.012,
     managementFeePct: 0.22,
     rank: 1,
     avgAnnualReturnPct: 7.8,
-    about: "Un fonds indiciel qui réplique la performance des plus grandes entreprises mondiales, tous secteurs confondus. Une manière simple de se diversifier en un seul achat.",
+    about: "An index fund tracking the performance of the world's largest companies across all sectors. A simple way to diversify with a single purchase.",
     composition: [
       { name: 'CloudCore Systems', pct: 8.4 },
       { name: 'NovaTech', pct: 7.1 },
       { name: 'QuantumLeap Semi', pct: 6.2 },
       { name: 'UrbanMobility', pct: 5.5 },
       { name: 'MedInnov', pct: 4.8 },
-      { name: 'Autres (495 entreprises)', pct: 68.0 },
+      { name: 'Others (495 companies)', pct: 68.0 },
     ],
   },
   {
@@ -102,25 +102,25 @@ const RAW_ASSETS = [
     managementFeePct: 0,
     rank: 4,
     avgAnnualReturnPct: 14.2,
-    about: "NovaTech conçoit des logiciels professionnels utilisés par des entreprises dans le monde entier. Une valeur technologique reconnue pour sa croissance régulière.",
+    about: "NovaTech builds professional software used by companies worldwide. A well-known tech stock recognized for its steady growth.",
     composition: null,
   },
   {
     id: 'oblig',
     symbol: 'OBLI10',
-    name: 'Obligations État 10 ans',
+    name: '10Y Government Bonds',
     type: 'obligation',
     basePrice: 101.35,
     volatility: 0.004,
     managementFeePct: 0.12,
     rank: 12,
     avgAnnualReturnPct: 3.1,
-    about: "Un fonds d'obligations d'État à échéance 10 ans. Un placement réputé plus stable, avec un rendement modéré mais régulier.",
+    about: "A fund of 10-year government bonds. Considered a more stable investment with a moderate but regular yield.",
     composition: [
-      { name: 'Obligations France', pct: 40 },
-      { name: 'Obligations Allemagne', pct: 30 },
-      { name: 'Obligations Italie', pct: 15 },
-      { name: 'Obligations Espagne', pct: 15 },
+      { name: 'US Treasuries', pct: 40 },
+      { name: 'German Bunds', pct: 30 },
+      { name: 'UK Gilts', pct: 15 },
+      { name: 'Japanese JGBs', pct: 15 },
     ],
   },
   {
@@ -133,7 +133,7 @@ const RAW_ASSETS = [
     managementFeePct: 0,
     rank: 1,
     avgAnnualReturnPct: 28.5,
-    about: "La cryptomonnaie de référence par capitalisation. Très suivie, elle reste aussi la plus volatile des familles d'actifs de cette liste.",
+    about: "The reference cryptocurrency by market cap. Widely followed, it also remains the most volatile asset class in this list.",
     composition: null,
   },
   {
@@ -146,12 +146,12 @@ const RAW_ASSETS = [
     managementFeePct: 0.85,
     rank: 18,
     avgAnnualReturnPct: 4.6,
-    about: "Un fonds qui investit dans des bureaux et commerces à travers l'Europe, avec pour objectif de reverser des loyers réguliers aux porteurs de parts.",
+    about: "A fund investing in offices and retail spaces across Europe, aiming to distribute regular rental income to shareholders.",
     composition: [
-      { name: 'Bureaux Paris & IDF', pct: 34 },
-      { name: 'Commerces grandes villes', pct: 28 },
-      { name: 'Logistique & entrepôts', pct: 22 },
-      { name: 'Autres actifs européens', pct: 16 },
+      { name: 'Offices — major cities', pct: 34 },
+      { name: 'Retail — city centers', pct: 28 },
+      { name: 'Logistics & warehouses', pct: 22 },
+      { name: 'Other European assets', pct: 16 },
     ],
   },
   {
@@ -164,7 +164,7 @@ const RAW_ASSETS = [
     managementFeePct: 0,
     rank: 6,
     avgAnnualReturnPct: 19.7,
-    about: "QuantumLeap Semi conçoit des composants électroniques utilisés dans l'intelligence artificielle et l'automobile. Une valeur de croissance à forte volatilité.",
+    about: "QuantumLeap Semi designs electronic components used in AI and automotive. A high-growth stock with high volatility.",
     composition: null,
   },
   {
@@ -177,7 +177,7 @@ const RAW_ASSETS = [
     managementFeePct: 0,
     rank: 22,
     avgAnnualReturnPct: 9.4,
-    about: "SolarWave Energy développe des fermes solaires et éoliennes en Europe. Un pari sur la transition énergétique, avec un rendement plus modéré.",
+    about: "SolarWave Energy develops solar and wind farms across Europe. A bet on the energy transition, with more modest returns.",
     composition: null,
   },
 ];
@@ -190,18 +190,18 @@ function enrichAsset(raw) {
   const dayChangePct = ((price - prevClose) / prevClose) * 100;
 
   const ranges = {
-    '1J': randomWalk(seed + '-1J', price * 0.995, 24, raw.volatility * 0.3),
-    '1S': randomWalk(seed + '-1S', price * 0.97, 28, raw.volatility * 0.5),
+    '1D': randomWalk(seed + '-1D', price * 0.995, 24, raw.volatility * 0.3),
+    '1W': randomWalk(seed + '-1W', price * 0.97, 28, raw.volatility * 0.5),
     '1M': randomWalk(seed + '-1M', price * 0.9, 30, raw.volatility * 0.7),
-    '1A': randomWalk(seed + '-1A', price * 0.65, 52, raw.volatility),
-    'Tout': randomWalk(seed + '-Tout', price * 0.35, 60, raw.volatility * 1.1),
+    '1Y': randomWalk(seed + '-1Y', price * 0.65, 52, raw.volatility),
+    'All': randomWalk(seed + '-All', price * 0.35, 60, raw.volatility * 1.1),
   };
 
-  const all52w = ranges['1A'];
+  const all52w = ranges['1Y'];
   const range52w = { low: Math.min(...all52w), high: Math.max(...all52w) };
 
   const candles = buildCandles(seed, price * 0.92, 30, raw.volatility);
-  const athCandidate = Math.max(...ranges['Tout'], ...candles.map((c) => c.high), price);
+  const athCandidate = Math.max(...ranges['All'], ...candles.map((c) => c.high), price);
   const ath = athCandidate * 1.08;
   const athDate = '2026-02-14';
 
@@ -240,8 +240,8 @@ export function getAssetById(id) {
 }
 
 export const ASSET_TYPE_LABELS = {
-  etf: 'Fonds indiciel (ETF)',
-  action: 'Action',
-  obligation: 'Obligation',
-  crypto: 'Cryptomonnaie',
+  etf: 'Index fund (ETF)',
+  action: 'Stock',
+  obligation: 'Bond',
+  crypto: 'Cryptocurrency',
 };
