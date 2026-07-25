@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import Lesson from "../screens/Lesson";
 import { Gate } from "../lib/gate";
 
-export const Route = createFileRoute("/lesson/$lessonId")({
+export const Route = createFileRoute("/lesson/$lessonId/")({
   component: () => (
     <Gate>
       <Lesson />
