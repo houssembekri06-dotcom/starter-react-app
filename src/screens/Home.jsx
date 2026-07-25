@@ -39,50 +39,51 @@ export default function Home() {
   }
 
   return (
-    <div className="screen home-screen">
+    <>
       <MarketTicker />
-
-      <div className="unit-info-card">
-        <div className="unit-info-head">
-          <div className="unit-info-title-wrap">
-            <span className="unit-info-order">Unité {selectedUnit.order}</span>
-            <h2 className="unit-info-title">{selectedUnit.title}</h2>
-          </div>
-          <span className="unit-info-status">
-            {unitUnlocked ? 'En cours' : 'Verrouillée'}
-          </span>
-        </div>
-        <p className="unit-info-subtitle">{selectedUnit.subtitle}</p>
-        <div className="unit-info-progress">
-          <div className="unit-info-progress-row">
-            <span className="unit-info-progress-label">Progression</span>
-            <span className="unit-info-progress-count">
-              {completedInUnit} / {selectedUnit.lessons.length} leçons
+      <div className="screen home-screen">
+        <div className="unit-info-card">
+          <div className="unit-info-head">
+            <div className="unit-info-title-wrap">
+              <span className="unit-info-order">Unité {selectedUnit.order}</span>
+              <h2 className="unit-info-title">{selectedUnit.title}</h2>
+            </div>
+            <span className="unit-info-status">
+              {unitUnlocked ? 'En cours' : 'Verrouillée'}
             </span>
           </div>
-          <ProgressBar value={completedInUnit} max={selectedUnit.lessons.length} tone="indigo" />
+          <p className="unit-info-subtitle">{selectedUnit.subtitle}</p>
+          <div className="unit-info-progress">
+            <div className="unit-info-progress-row">
+              <span className="unit-info-progress-label">Progression</span>
+              <span className="unit-info-progress-count">
+                {completedInUnit} / {selectedUnit.lessons.length} leçons
+              </span>
+            </div>
+            <ProgressBar value={completedInUnit} max={selectedUnit.lessons.length} tone="indigo" />
+          </div>
         </div>
-      </div>
 
-      <div className="home-pills-row">
-        <Pill icon="flame" iconColor="var(--color-coral)" tone="coral">{streakDays}</Pill>
-        <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
-      </div>
-
-      {!unitUnlocked ? (
-        <div className="home-locked-unit">
-          <Icon name="lock" size={26} stroke={1.8} color="var(--color-text-disabled)" />
-          <p>Terminez l'unité précédente pour débloquer celle-ci.</p>
+        <div className="home-pills-row">
+          <Pill icon="flame" iconColor="var(--color-coral)" tone="coral">{streakDays}</Pill>
+          <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
         </div>
-      ) : (
-        <LessonChart
-          lessons={selectedUnit.lessons}
-          completedLessonIds={completedLessonIds}
-          activeLessonId={activeLessonId}
-          unitUnlocked={unitUnlocked}
-          onSelect={handleNodeClick}
-        />
-      )}
-    </div>
+
+        {!unitUnlocked ? (
+          <div className="home-locked-unit">
+            <Icon name="lock" size={26} stroke={1.8} color="var(--color-text-disabled)" />
+            <p>Terminez l'unité précédente pour débloquer celle-ci.</p>
+          </div>
+        ) : (
+          <LessonChart
+            lessons={selectedUnit.lessons}
+            completedLessonIds={completedLessonIds}
+            activeLessonId={activeLessonId}
+            unitUnlocked={unitUnlocked}
+            onSelect={handleNodeClick}
+          />
+        )}
+      </div>
+    </>
   );
 }
