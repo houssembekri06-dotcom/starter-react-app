@@ -9,5 +9,5 @@ export const Route = createFileRoute("/news")({
       <News />
     </TabScreen>
   ),
-  head: () => ({ meta: [{ title: "Actualités" }] }),
+  head: () => ({ meta: [{ title: "News" }] }),
 });

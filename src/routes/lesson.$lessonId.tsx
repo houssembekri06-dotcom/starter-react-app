@@ -9,5 +9,5 @@ export const Route = createFileRoute("/lesson/$lessonId")({
       <Lesson />
     </Gate>
   ),
-  head: () => ({ meta: [{ title: "Leçon" }] }),
+  head: () => ({ meta: [{ title: "Lesson" }] }),
 });

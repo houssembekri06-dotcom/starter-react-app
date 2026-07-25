@@ -9,5 +9,5 @@ export const Route = createFileRoute("/home")({
       <Home />
     </TabScreen>
   ),
-  head: () => ({ meta: [{ title: "Accueil" }] }),
+  head: () => ({ meta: [{ title: "Home" }] }),
 });
