@@ -28,3 +28,97 @@
   line-height: 1.6;
   color: var(--color-text);
 }
+
+/* ---------- Summary card ---------- */
+.lesson-summary-card {
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 22px 20px 20px;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+  animation: lesson-summary-in 0.35s ease-out;
+}
+@keyframes lesson-summary-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.lesson-summary-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--color-indigo-tint);
+  color: var(--color-indigo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.lesson-summary-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-indigo);
+}
+.lesson-summary-title {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin: 6px 0 18px;
+}
+.lesson-summary-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.lesson-summary-stat {
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  padding: 10px 6px;
+  text-align: center;
+}
+.lesson-summary-stat-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-indigo-dark);
+}
+.lesson-summary-stat-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.lesson-summary-outline-title {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 8px;
+}
+.lesson-summary-outline ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lesson-summary-outline li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: var(--font-size-base);
+  line-height: 1.4;
+  color: var(--color-text);
+}
+.lesson-summary-outline li svg {
+  color: var(--color-teal);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
