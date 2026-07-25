@@ -78,9 +78,9 @@ const LessonLessonIdIndexRoute = LessonLessonIdIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const LessonLessonIdQuizRoute = LessonLessonIdQuizRouteImport.update({
-  id: '/quiz',
-  path: '/quiz',
-  getParentRoute: () => LessonLessonIdRoute,
+  id: '/lesson/$lessonId/quiz',
+  path: '/lesson/$lessonId/quiz',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -182,6 +182,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   WalletRoute: typeof WalletRoute
   AssetAssetIdRoute: typeof AssetAssetIdRoute
+  LessonLessonIdQuizRoute: typeof LessonLessonIdQuizRoute
   LessonLessonIdIndexRoute: typeof LessonLessonIdIndexRoute
 }
 
@@ -266,10 +267,10 @@ declare module '@tanstack/react-router' {
     }
     '/lesson/$lessonId/quiz': {
       id: '/lesson/$lessonId/quiz'
-      path: '/quiz'
+      path: '/lesson/$lessonId/quiz'
       fullPath: '/lesson/$lessonId/quiz'
       preLoaderRoute: typeof LessonLessonIdQuizRouteImport
-      parentRoute: typeof LessonLessonIdRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -285,18 +286,9 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   WalletRoute: WalletRoute,
   AssetAssetIdRoute: AssetAssetIdRoute,
+  LessonLessonIdQuizRoute: LessonLessonIdQuizRoute,
   LessonLessonIdIndexRoute: LessonLessonIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
