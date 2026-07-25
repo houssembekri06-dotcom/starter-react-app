@@ -1,10 +1,9 @@
 .market-ticker {
-  width: calc(100% + 32px);
+  width: 100%;
   overflow: hidden;
   background: var(--color-white);
   border-bottom: 1px solid var(--color-border);
   padding: 8px 16px;
-  margin: 0 -16px;
   position: sticky;
   top: 0;
   z-index: 10;
