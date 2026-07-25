@@ -10,8 +10,8 @@ export default function LockedTeaser({ title, lessonsRemaining }) {
         <div className="locked-teaser-title">{title}</div>
         <div className="locked-teaser-hint">
           {lessonsRemaining > 0
-            ? `Débloqué dans ${lessonsRemaining} leçon${lessonsRemaining > 1 ? 's' : ''}`
-            : 'Débloqué bientôt'}
+            ? `Unlocks in ${lessonsRemaining} lesson${lessonsRemaining > 1 ? 's' : ''}`
+            : 'Unlocks soon'}
         </div>
       </div>
     </div>

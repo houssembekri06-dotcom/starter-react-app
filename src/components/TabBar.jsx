@@ -3,11 +3,11 @@ import Icon from './Icon';
 import './TabBar.css';
 
 const TABS = [
-  { to: '/home', icon: 'home', label: 'Accueil' },
-  { to: '/wallet', icon: 'wallet', label: 'Portefeuille' },
-  { to: '/news', icon: 'news', label: 'Actualités' },
-  { to: '/league', icon: 'trophy', label: 'Ligue' },
-  { to: '/profile', icon: 'user', label: 'Profil' },
+  { to: '/home', icon: 'home', label: 'Home' },
+  { to: '/wallet', icon: 'wallet', label: 'Wallet' },
+  { to: '/news', icon: 'news', label: 'News' },
+  { to: '/league', icon: 'trophy', label: 'League' },
+  { to: '/profile', icon: 'user', label: 'Profile' },
 ];
 
 export default function TabBar() {

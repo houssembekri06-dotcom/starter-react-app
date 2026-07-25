@@ -58,9 +58,9 @@ export default function LessonChart({ lessons, completedLessonIds, activeLessonI
                 className={`lesson-chart-node lesson-chart-node--${state}`}
                 onClick={() => state !== 'locked' && onSelect(lesson)}
                 disabled={state === 'locked'}
-                aria-label={`Leçon ${i + 1}: ${lesson.title}`}
+                aria-label={`Lesson ${i + 1}: ${lesson.title}`}
               >
-                {active && <span className="lesson-chart-badge">COMMENCER</span>}
+                {active && <span className="lesson-chart-badge">START</span>}
                 <Icon name={iconName} size={iconSize} stroke={2.6} color={iconColor} />
               </button>
               <span className={`lesson-chart-label lesson-chart-label--${state}`}>

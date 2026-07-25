@@ -12,11 +12,11 @@ const TICKER_ITEMS = [
   { symbol: 'SP500', name: 'S&P 500', price: 5480.15, change: +0.52 },
   { symbol: 'NVDA', name: 'NVIDIA', price: 124.3, change: +3.21 },
   { symbol: 'AMZN', name: 'Amazon', price: 198.75, change: -0.45 },
-  { symbol: 'GOLD', name: 'Or', price: 2354.6, change: +0.33 },
+  { symbol: 'GOLD', name: 'Gold', price: 2354.6, change: +0.33 },
 ];
 
 function formatPrice(price) {
-  if (price >= 1000) return price.toLocaleString('fr-FR', { maximumFractionDigits: 2 });
+  if (price >= 1000) return price.toLocaleString('en-US', { maximumFractionDigits: 2 });
   return price.toFixed(price >= 100 ? 2 : 4);
 }
 
@@ -28,7 +28,7 @@ export default function MarketTicker() {
   }, []);
 
   return (
-    <div className="market-ticker" aria-label="Cours de marché fictifs">
+    <div className="market-ticker" aria-label="Fictional market quotes">
       <div className="market-ticker-track">
         {items.map((item) => {
           const isPositive = item.change >= 0;
