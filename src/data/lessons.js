@@ -32,8 +32,30 @@ const unit1 = buildUnit({
     {
       title: 'What is money, and why save?',
       content: [
-        { heading: 'Money as a tool of exchange', body: "Money is used to trade goods and services without having to barter directly. Its real value lies in what it lets you do: feed yourself, house yourself, plan for the future." },
-        { heading: 'Why save?', body: "Saving means setting aside part of what you earn today to protect yourself from unexpected events and fund future projects — a trip, studies, a big purchase, or simply peace of mind." },
+        {
+          heading: 'Money as a tool of exchange',
+          body: "Money is used to trade goods and services without having to barter directly. Its real value lies in what it lets you do: feed yourself, house yourself, plan for the future.",
+          visual: {
+            type: 'flow',
+            steps: [
+              { icon: 'briefcase', title: 'Work', sub: 'Time & skills', color: '#6366f1' },
+              { icon: 'coin', title: 'Money', sub: 'Universal exchange', color: '#f59e0b' },
+              { icon: 'shopping-cart', title: 'Goods & services', sub: 'What you actually need', color: '#0ea5a4' },
+            ],
+          },
+        },
+        {
+          heading: 'Why save?',
+          body: "Saving means setting aside part of what you earn today to protect yourself from unexpected events and fund future projects — a trip, studies, a big purchase, or simply peace of mind.",
+          visual: {
+            type: 'stack',
+            layers: [
+              { label: 'Future projects', color: '#8b5cf6', width: 55 },
+              { label: 'Safety cushion', color: '#0ea5a4', width: 75 },
+              { label: 'Today\'s income', color: '#6366f1', width: 100 },
+            ],
+          },
+        },
       ],
       quiz: {
         question: 'What is the main benefit of saving regularly?',
@@ -45,8 +67,30 @@ const unit1 = buildUnit({
     {
       title: 'The budget: tracking income and expenses',
       content: [
-        { heading: 'The basics: know where your money goes', body: "A budget is simply the list of what you earn (income) and what you spend (fixed costs, fun, surprises). Without this overview, it's impossible to know how much you can really save." },
-        { heading: 'The simple 50/30/20 rule', body: 'A common method: 50% of income for essential needs, 30% for wants, 20% for savings and investments. Not an absolute rule, but a good starting point.' },
+        {
+          heading: 'The basics: know where your money goes',
+          body: "A budget is simply the list of what you earn (income) and what you spend (fixed costs, fun, surprises). Without this overview, it's impossible to know how much you can really save.",
+          visual: {
+            type: 'flow',
+            steps: [
+              { icon: 'wallet', title: 'Income', sub: 'What comes in', color: '#0ea5a4' },
+              { icon: 'receipt', title: 'Expenses', sub: 'Fixed · fun · surprises', color: '#f43f5e' },
+              { icon: 'piggy-bank', title: 'What\'s left', sub: 'Room to save', color: '#6366f1' },
+            ],
+          },
+        },
+        {
+          heading: 'The simple 50/30/20 rule',
+          body: 'A common method: 50% of income for essential needs, 30% for wants, 20% for savings and investments. Not an absolute rule, but a good starting point.',
+          visual: {
+            type: 'pie',
+            segments: [
+              { label: 'Needs', value: 50, color: '#6366f1' },
+              { label: 'Wants', value: 30, color: '#f59e0b' },
+              { label: 'Savings', value: 20, color: '#0ea5a4' },
+            ],
+          },
+        },
       ],
       quiz: {
         question: 'In the 50/30/20 rule, how much goes to savings?',
@@ -58,8 +102,30 @@ const unit1 = buildUnit({
     {
       title: 'Emergency savings',
       content: [
-        { heading: 'A safety cushion', body: "Emergency savings are money available immediately, reserved for surprises (car repairs, job loss, medical bills). A typical target is 3 to 6 months of expenses." },
-        { heading: 'Before investing', body: "It's best to build this emergency fund before you start investing: it prevents you from having to sell investments in a hurry — sometimes at a loss — when trouble hits." },
+        {
+          heading: 'A safety cushion',
+          body: "Emergency savings are money available immediately, reserved for surprises (car repairs, job loss, medical bills). A typical target is 3 to 6 months of expenses.",
+          visual: {
+            type: 'bars',
+            unit: 'mo ',
+            max: 6,
+            series: [
+              { label: 'Minimum', value: 3, color: '#f59e0b' },
+              { label: 'Comfortable', value: 6, color: '#0ea5a4' },
+            ],
+          },
+        },
+        {
+          heading: 'Before investing',
+          body: "It's best to build this emergency fund before you start investing: it prevents you from having to sell investments in a hurry — sometimes at a loss — when trouble hits.",
+          visual: {
+            type: 'flow',
+            steps: [
+              { icon: 'shield-check', title: 'Step 1 — Emergency fund', sub: '3 to 6 months of expenses', color: '#0ea5a4' },
+              { icon: 'trending-up', title: 'Step 2 — Invest', sub: 'Only with what remains', color: '#6366f1' },
+            ],
+          },
+        },
       ],
       quiz: {
         question: 'What should you generally do before starting to invest?',
@@ -71,8 +137,34 @@ const unit1 = buildUnit({
     {
       title: 'Compound interest',
       content: [
-        { heading: 'Interest that earns interest', body: "Compound interest means earning interest not only on your starting capital but also on interest already accumulated. Over time, the effect accelerates." },
-        { heading: 'A concrete example', body: '$1,000 invested at 5% per year grows to $1,050 after 1 year. In year 2 the 5% applies to $1,050, not to $1,000. Over 20 years, the difference vs simple interest is huge.' },
+        {
+          heading: 'Interest that earns interest',
+          body: "Compound interest means earning interest not only on your starting capital but also on interest already accumulated. Over time, the effect accelerates.",
+          visual: {
+            type: 'formula',
+            parts: [
+              { value: '$1,000', label: 'Capital', color: '#6366f1' },
+              { op: '×' },
+              { value: '(1 + 5%)', label: 'Yearly rate', color: '#0ea5a4' },
+              { op: '^' },
+              { value: 'n', label: 'Years', color: '#f59e0b' },
+            ],
+          },
+        },
+        {
+          heading: 'A concrete example',
+          body: '$1,000 invested at 5% per year grows to $1,050 after 1 year. In year 2 the 5% applies to $1,050, not to $1,000. Over 20 years, the difference vs simple interest is huge.',
+          visual: {
+            type: 'bars',
+            unit: '$',
+            max: 2653,
+            series: [
+              { label: 'Start', value: 1000, color: '#94a3b8' },
+              { label: '10 yr', value: 1629, color: '#6366f1' },
+              { label: '20 yr', value: 2653, color: '#0ea5a4' },
+            ],
+          },
+        },
       ],
       quiz: {
         question: 'What is compound interest?',
@@ -84,8 +176,32 @@ const unit1 = buildUnit({
     {
       title: 'Setting a savings goal',
       content: [
-        { heading: 'A clear, quantified, dated goal', body: 'Saving "just to save" rarely motivates people for long. A concrete goal — say $3,000 in 2 years for a specific project — gives a clear target and lets you calculate what to set aside each month.' },
-        { heading: 'Automate to stay on track', body: "Setting up an automatic transfer right after payday is one of the most effective ways to save without thinking, and without being tempted to spend the money first." },
+        {
+          heading: 'A clear, quantified, dated goal',
+          body: 'Saving "just to save" rarely motivates people for long. A concrete goal — say $3,000 in 2 years for a specific project — gives a clear target and lets you calculate what to set aside each month.',
+          visual: {
+            type: 'formula',
+            parts: [
+              { value: '$3,000', label: 'Goal', color: '#6366f1' },
+              { op: '÷' },
+              { value: '24', label: 'Months', color: '#0ea5a4' },
+              { op: '=' },
+              { value: '$125', label: '/ month', color: '#f59e0b' },
+            ],
+          },
+        },
+        {
+          heading: 'Automate to stay on track',
+          body: "Setting up an automatic transfer right after payday is one of the most effective ways to save without thinking, and without being tempted to spend the money first.",
+          visual: {
+            type: 'flow',
+            steps: [
+              { icon: 'calendar', title: 'Payday', sub: 'Money hits your account', color: '#0ea5a4' },
+              { icon: 'arrow-right', title: 'Auto-transfer', sub: 'Same day, no thinking', color: '#6366f1' },
+              { icon: 'piggy-bank', title: 'Savings grow', sub: 'Untouched, on autopilot', color: '#f59e0b' },
+            ],
+          },
+        },
       ],
       quiz: {
         question: 'Which method helps you stick to a savings goal the most?',

@@ -61,6 +61,14 @@
   color: var(--color-text);
 }
 
+.lesson-visual-diagram {
+  margin: 4px 0 16px;
+  padding: 14px;
+  background: var(--color-bg, #f7f7fb);
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+}
+
 .lesson-dots {
   display: flex;
   gap: 6px;

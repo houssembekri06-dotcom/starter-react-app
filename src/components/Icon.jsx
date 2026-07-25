@@ -42,6 +42,9 @@ import {
   IconCalendarStats,
   IconScale,
   IconNews,
+  IconBriefcase,
+  IconShoppingCart,
+  IconArrowRight,
 } from '@tabler/icons-react';
 
 const ICONS = {
@@ -88,6 +91,10 @@ const ICONS = {
   calendar: IconCalendarStats,
   scale: IconScale,
   news: IconNews,
+  briefcase: IconBriefcase,
+  'shopping-cart': IconShoppingCart,
+  'arrow-right': IconArrowRight,
+  'shield-check': IconShieldCheck,
 };
 
 export default function Icon({ name, size = 20, color, stroke = 1.9, className }) {
