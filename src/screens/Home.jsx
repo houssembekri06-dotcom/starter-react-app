@@ -45,19 +45,19 @@ export default function Home() {
         <div className="unit-info-card">
           <div className="unit-info-head">
             <div className="unit-info-title-wrap">
-              <span className="unit-info-order">Unité {selectedUnit.order}</span>
+              <span className="unit-info-order">Unit {selectedUnit.order}</span>
               <h2 className="unit-info-title">{selectedUnit.title}</h2>
             </div>
             <span className="unit-info-status">
-              {unitUnlocked ? 'En cours' : 'Verrouillée'}
+              {unitUnlocked ? 'In progress' : 'Locked'}
             </span>
           </div>
           <p className="unit-info-subtitle">{selectedUnit.subtitle}</p>
           <div className="unit-info-progress">
             <div className="unit-info-progress-row">
-              <span className="unit-info-progress-label">Progression</span>
+              <span className="unit-info-progress-label">Progress</span>
               <span className="unit-info-progress-count">
-                {completedInUnit} / {selectedUnit.lessons.length} leçons
+                {completedInUnit} / {selectedUnit.lessons.length} lessons
               </span>
             </div>
             <ProgressBar value={completedInUnit} max={selectedUnit.lessons.length} tone="indigo" />
