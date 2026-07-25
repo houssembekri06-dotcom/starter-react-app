@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 // @ts-ignore js module
-import Quiz from "../screens/Quiz";
+import Lesson from "../screens/Lesson";
 import { Gate } from "../lib/gate";
 
-export const Route = createFileRoute("/lesson/$lessonId/quiz")({
+export const Route = createFileRoute("/lesson/$lessonId")({
   component: () => (
     <Gate>
-      <Quiz />
+      <Lesson />
     </Gate>
   ),
-  head: () => ({ meta: [{ title: "Quiz" }] }),
+  head: () => ({ meta: [{ title: "Lesson" }] }),
 });
