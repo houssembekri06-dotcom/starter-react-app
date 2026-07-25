@@ -7,7 +7,6 @@ import ProgressBar from '../components/ProgressBar';
 import LessonChart from '../components/LessonChart';
 import MarketTicker from '../components/MarketTicker';
 import Icon from '../components/Icon';
-import Mascot from '../components/Mascot';
 import './Home.css';
 
 function isUnitComplete(unit, completedLessonIds) {
@@ -70,14 +69,10 @@ export default function Home() {
           <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
         </div>
 
-        <Mascot
-          tip={`Bienvenue dans « ${selectedUnit.title} ». Enchaîne les leçons pour garder ta série de ${streakDays} jour${streakDays > 1 ? 's' : ''} !`}
-        />
-
         {!unitUnlocked ? (
           <div className="home-locked-unit">
             <Icon name="lock" size={26} stroke={1.8} color="var(--color-text-disabled)" />
-            <p>Terminez l'unité précédente pour débloquer celle-ci.</p>
+            <p>Complete the previous unit to unlock this one.</p>
           </div>
         ) : (
           <LessonChart
