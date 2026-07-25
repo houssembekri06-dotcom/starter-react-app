@@ -42,15 +42,18 @@ export default function Lesson() {
             <h1 className="lesson-summary-title">{lesson.title}</h1>
 
             <div className="lesson-summary-stats">
-              <div className="lesson-summary-stat">
+              <div className="lesson-summary-stat stat-parts">
+                <div className="lesson-summary-stat-icon"><Icon name="stack-2" size={18} stroke={2.2} /></div>
                 <span className="lesson-summary-stat-value">{lesson.content.length}</span>
                 <span className="lesson-summary-stat-label">parts</span>
               </div>
-              <div className="lesson-summary-stat">
+              <div className="lesson-summary-stat stat-time">
+                <div className="lesson-summary-stat-icon"><Icon name="calendar" size={18} stroke={2.2} /></div>
                 <span className="lesson-summary-stat-value">~{minutes}</span>
                 <span className="lesson-summary-stat-label">min</span>
               </div>
-              <div className="lesson-summary-stat">
+              <div className="lesson-summary-stat stat-xp">
+                <div className="lesson-summary-stat-icon"><Icon name="sparkles" size={18} stroke={2.2} /></div>
                 <span className="lesson-summary-stat-value">+{lesson.xp}</span>
                 <span className="lesson-summary-stat-label">XP</span>
               </div>

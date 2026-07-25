@@ -73,11 +73,27 @@
   margin-bottom: 18px;
 }
 .lesson-summary-stat {
-  background: var(--color-bg);
-  border-radius: var(--radius-sm);
-  padding: 10px 6px;
+  position: relative;
+  background: #fff;
+  border: 2px solid var(--color-indigo-light, #e6e6ff);
+  border-radius: var(--radius-md, 14px);
+  padding: 14px 6px 10px;
   text-align: center;
+  box-shadow: 0 2px 0 var(--color-indigo-light, #e6e6ff);
 }
+.lesson-summary-stat-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  margin: 0 auto 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-indigo);
+  color: #fff;
+}
+.stat-time .lesson-summary-stat-icon { background: #0ea5a4; }
+.stat-xp .lesson-summary-stat-icon { background: #f59e0b; }
 .lesson-summary-stat-value {
   display: block;
   font-size: 18px;
