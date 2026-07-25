@@ -40,7 +40,7 @@ export default function Quiz() {
   return (
     <div className="screen quiz-screen">
       <div className="lesson-top-row">
-        <button className="icon-btn" onClick={() => navigate('/home')} aria-label="Quitter">
+        <button className="icon-btn" onClick={() => navigate('/home')} aria-label="Close">
           <Icon name="close" size={16} stroke={2.2} />
         </button>
         <Pill icon="heart-filled" iconColor="var(--color-rose)" tone="rose">{hearts}/{maxHearts}</Pill>
@@ -74,7 +74,7 @@ export default function Quiz() {
         <div className={`quiz-feedback ${isCorrect ? 'quiz-feedback--correct' : 'quiz-feedback--wrong'}`}>
           <div className="quiz-feedback-title">
             <Icon name={isCorrect ? 'circle-check' : 'close'} size={18} stroke={2.2} />
-            {isCorrect ? 'Bonne réponse !' : 'Pas tout à fait'}
+            {isCorrect ? 'Correct!' : 'Not quite'}
           </div>
           <p>{quiz.explanation}</p>
         </div>
@@ -82,15 +82,15 @@ export default function Quiz() {
 
       {!submitted ? (
         <button className="btn btn-primary" disabled={selected === null} onClick={handleValidate}>
-          Valider
+          Check
         </button>
       ) : isCorrect ? (
         <button className="btn btn-primary" onClick={handleContinue}>
-          Continuer (+{lesson.xp} XP)
+          Continue (+{lesson.xp} XP)
         </button>
       ) : (
         <button className="btn btn-coral" onClick={handleRetry}>
-          Réessayer
+          Try again
         </button>
       )}
     </div>

@@ -36,13 +36,13 @@ export default function Wallet() {
   return (
     <div className="screen wallet-screen">
       <div className="wallet-hero">
-        <div className="wallet-hero-label">Valeur totale investie</div>
+        <div className="wallet-hero-label">Total portfolio value</div>
         <div className="wallet-hero-value">{formatEUR(portfolioValue)}</div>
         {hasPositions && (
           <div className="wallet-hero-change">
             <PriceChangeTag value={dayChangePct} />
             <span className="wallet-hero-change-eur">
-              {dayChangeEUR >= 0 ? '+' : ''}{formatEUR(dayChangeEUR)} aujourd'hui
+              {dayChangeEUR >= 0 ? '+' : ''}{formatEUR(dayChangeEUR)} today
             </span>
           </div>
         )}
@@ -51,18 +51,18 @@ export default function Wallet() {
             <Sparkline data={aggregateSparkline} width={342} height={64} positive={dayChangeEUR >= 0} fill />
           </div>
         )}
-        <div className="wallet-hero-cash">Solde disponible : {formatEUR(cashBalance)}</div>
+        <div className="wallet-hero-cash">Available balance: {formatEUR(cashBalance)}</div>
         <SimulationBadge compact />
       </div>
 
       <div className="section-title-row">
-        <h3 className="section-title">Vos actifs</h3>
+        <h3 className="section-title">Your holdings</h3>
       </div>
 
       {!hasPositions ? (
         <Card className="wallet-empty">
-          <p>Vous ne détenez encore aucun actif.</p>
-          <p className="wallet-empty-sub">Terminez une leçon pour débloquer votre premier investissement.</p>
+          <p>You don't hold any assets yet.</p>
+          <p className="wallet-empty-sub">Complete a lesson to unlock your first investment.</p>
         </Card>
       ) : (
         <div className="asset-grid">
@@ -80,7 +80,7 @@ export default function Wallet() {
                 <div className="asset-card-name">{asset.name}</div>
                 <Sparkline data={asset.sparkline} width={120} height={30} positive={asset.dayChangePct >= 0} />
                 <div className="asset-card-value">{formatEUR(value)}</div>
-                <div className="asset-card-shares">{formatShares(pos.shares)} parts</div>
+                <div className="asset-card-shares">{formatShares(pos.shares)} shares</div>
               </Card>
             );
           })}
@@ -88,7 +88,7 @@ export default function Wallet() {
       )}
 
       <div className="section-title-row">
-        <h3 className="section-title">Découvrir</h3>
+        <h3 className="section-title">Discover</h3>
       </div>
       <div className="explore-list">
         {ASSETS.filter((a) => !heldAssetIds.includes(a.id)).map((asset) => (

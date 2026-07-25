@@ -16,7 +16,7 @@ export default function Profile() {
           <Icon name="user" size={38} stroke={1.5} color="var(--color-indigo)" />
         </div>
         <div>
-          <div className="profile-name">{userName || 'Vous'}</div>
+          <div className="profile-name">{userName || 'You'}</div>
           <div className="profile-league">{league}</div>
         </div>
       </div>
@@ -25,39 +25,39 @@ export default function Profile() {
         <Card className="profile-stat">
           <Icon name="flame" size={20} stroke={2} color="var(--color-coral)" />
           <div className="profile-stat-value">{streakDays}</div>
-          <div className="profile-stat-label">Jours de série</div>
+          <div className="profile-stat-label">Day streak</div>
         </Card>
         <Card className="profile-stat">
           <Icon name="sparkles" size={20} stroke={2} color="var(--color-indigo)" />
           <div className="profile-stat-value">{xpTotal}</div>
-          <div className="profile-stat-label">XP total</div>
+          <div className="profile-stat-label">Total XP</div>
         </Card>
         <Card className="profile-stat">
           <Icon name="coins" size={20} stroke={2} color="var(--color-coral)" />
           <div className="profile-stat-value">{coins}</div>
-          <div className="profile-stat-label">Pièces</div>
+          <div className="profile-stat-label">Coins</div>
         </Card>
         <Card className="profile-stat">
           <Icon name="trophy" size={20} stroke={2} color="var(--color-teal)" />
           <div className="profile-stat-value">{completedLessonsCount}/{totalLessons}</div>
-          <div className="profile-stat-label">Leçons</div>
+          <div className="profile-stat-label">Lessons</div>
         </Card>
       </div>
 
       <Card>
-        <div className="section-title">Paramètres</div>
+        <div className="section-title">Settings</div>
         <div className="settings-row" onClick={() => setNotifications((n) => !n)}>
-          <span>Notifications de rappel</span>
+          <span>Reminder notifications</span>
           <div className={`toggle${notifications ? ' toggle--on' : ''}`}>
             <div className="toggle-knob" />
           </div>
         </div>
         <div className="settings-row">
-          <span>Langue</span>
-          <span className="settings-value">Français</span>
+          <span>Language</span>
+          <span className="settings-value">English</span>
         </div>
         <div className="settings-row settings-row--danger" onClick={resetProgress}>
-          <span>Réinitialiser la progression</span>
+          <span>Reset progress</span>
           <Icon name="chevron-right" size={16} stroke={2} />
         </div>
       </Card>
