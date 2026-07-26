@@ -71,13 +71,28 @@ export default function Login() {
 
         <div className="social-divider"><span>or sign in with email</span></div>
 
-        <div className="signup-field">
-          <label className="invest-label">Email</label>
-          <input className="invest-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="alex@example.com" />
-        </div>
-        <div className="signup-field">
-          <label className="invest-label">Password</label>
-          <input className="invest-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="8 characters minimum" />
+        <div className="login-form-card">
+          <div className="login-field">
+            <label className="login-field-label">Email</label>
+            <div className="login-input-wrap">
+              <svg className="login-input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="m3 7 9 6 9-6" />
+              </svg>
+              <input className="login-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="alex@example.com" />
+            </div>
+          </div>
+          <div className="login-divider-thin" />
+          <div className="login-field">
+            <label className="login-field-label">Password</label>
+            <div className="login-input-wrap">
+              <svg className="login-input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="4" y="11" width="16" height="10" rx="2" />
+                <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+              </svg>
+              <input className="login-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="8 characters minimum" />
+            </div>
+          </div>
         </div>
         <button className="forgot-link" onClick={() => {}}>Forgot password?</button>
       </div>
