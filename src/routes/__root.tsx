@@ -124,13 +124,28 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+// Reads the current route and shows the tab bar only on tab routes. Kept as
+// its own component so route changes re-render only this subtree, never the
+// splash-owning RootComponent (a re-render there would restart the splash
+// entrance animation).
+function RouteTabBar() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  return TAB_ROUTES.includes(pathname) ? <TabBar /> : null;
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const [showSplash, setShowSplash] = useState(() => {
-    if (typeof window === "undefined") return true;
-    return !sessionStorage.getItem("iinvest-splash-seen");
-  });
+  // Splash is client-only: rendering it in the SSR HTML makes it a victim of
+  // this template's hydration mismatch, which recreates the subtree and pins
+  // the CSS entrance animations at frame 0 (opacity 0 → invisible). Mounting
+  // it from an effect, after hydration settles, lets it animate cleanly.
+  const [showSplash, setShowSplash] = useState(false);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("iinvest-splash-seen")) {
+      setShowSplash(true);
+    }
+  }, []);
 
   function handleSplashDone() {
     try {
@@ -139,12 +154,10 @@ function RootComponent() {
     setShowSplash(false);
   }
 
-  const showTabBar = !showSplash && TAB_ROUTES.includes(pathname);
-
   return (
     <QueryClientProvider client={queryClient}>
       <ProgressProvider>
-        <PhoneFrame noPadding bottomBar={showTabBar ? <TabBar /> : null}>
+        <PhoneFrame noPadding bottomBar={showSplash ? null : <RouteTabBar />}>
           {showSplash && <Splash onDone={handleSplashDone} />}
           <Outlet />
         </PhoneFrame>
