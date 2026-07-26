@@ -71,14 +71,16 @@
 
 .phone-content {
   flex: 1;
+  min-height: 0;
+  position: relative;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0 16px calc(var(--tabbar-height) + 16px);
+  padding: 0 16px 16px;
   -webkit-overflow-scrolling: touch;
 }
 
 .phone-content--flush {
-  padding: 0 0 calc(var(--tabbar-height));
+  padding: 0;
 }
 
 .phone-content::-webkit-scrollbar {

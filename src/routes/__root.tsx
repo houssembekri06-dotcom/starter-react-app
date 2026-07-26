@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -15,7 +16,11 @@ import { ProgressProvider } from "../context/ProgressContext";
 import PhoneFrame from "../components/PhoneFrame";
 // @ts-ignore js module
 import Splash from "../components/Splash";
+// @ts-ignore js module
+import TabBar from "../components/TabBar";
 import { useState } from "react";
+
+const TAB_ROUTES = ["/home", "/wallet", "/league", "/profile", "/news"];
 
 function NotFoundComponent() {
   return (
@@ -121,6 +126,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [showSplash, setShowSplash] = useState(() => {
     if (typeof window === "undefined") return true;
     return !sessionStorage.getItem("iinvest-splash-seen");
@@ -133,10 +139,12 @@ function RootComponent() {
     setShowSplash(false);
   }
 
+  const showTabBar = !showSplash && TAB_ROUTES.includes(pathname);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ProgressProvider>
-        <PhoneFrame noPadding>
+        <PhoneFrame noPadding bottomBar={showTabBar ? <TabBar /> : null}>
           {showSplash && <Splash onDone={handleSplashDone} />}
           <Outlet />
         </PhoneFrame>

@@ -1,6 +1,6 @@
 import './PhoneFrame.css';
 
-export default function PhoneFrame({ children, statusBar = true, noPadding = false }) {
+export default function PhoneFrame({ children, statusBar = true, noPadding = false, bottomBar = null }) {
   return (
     <div className="phone-outer">
       <div className="phone-frame">
@@ -9,6 +9,7 @@ export default function PhoneFrame({ children, statusBar = true, noPadding = fal
         <div className={noPadding ? 'phone-content phone-content--flush' : 'phone-content'}>
           {children}
         </div>
+        {bottomBar}
       </div>
     </div>
   );

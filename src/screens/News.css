@@ -1,5 +1,5 @@
 .news-screen {
-  padding: 16px 16px calc(var(--tabbar-height) + 16px);
+  padding: 16px 16px 20px;
   background: var(--color-cream);
   min-height: 100%;
 }
