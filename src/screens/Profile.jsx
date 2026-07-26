@@ -9,6 +9,14 @@ export default function Profile() {
   const { userName, streakDays, xpTotal, league, coins, completedLessonsCount, totalLessons, resetProgress } = useProgress();
   const [notifications, setNotifications] = useState(true);
 
+  // Clear the "already seen" flag and reload so the splash plays again.
+  function replayLaunchScreen() {
+    try {
+      sessionStorage.removeItem('iinvest-splash-seen');
+    } catch {}
+    window.location.href = '/';
+  }
+
   return (
     <div className="screen profile-screen">
       <div className="profile-header">
@@ -63,6 +71,10 @@ export default function Profile() {
         <div className="settings-row">
           <span>Language</span>
           <span className="settings-value">English</span>
+        </div>
+        <div className="settings-row" onClick={replayLaunchScreen}>
+          <span>Replay launch screen</span>
+          <Icon name="chevron-right" size={16} stroke={2} />
         </div>
         <div className="settings-row settings-row--danger" onClick={resetProgress}>
           <span>Reset progress</span>
