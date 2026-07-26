@@ -13,6 +13,9 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ProgressProvider } from "../context/ProgressContext";
 import PhoneFrame from "../components/PhoneFrame";
+// @ts-ignore js module
+import Splash from "../components/Splash";
+import { useState } from "react";
 
 function NotFoundComponent() {
   return (
@@ -118,11 +121,23 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const [showSplash, setShowSplash] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return !sessionStorage.getItem("iinvest-splash-seen");
+  });
+
+  function handleSplashDone() {
+    try {
+      sessionStorage.setItem("iinvest-splash-seen", "1");
+    } catch {}
+    setShowSplash(false);
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
       <ProgressProvider>
         <PhoneFrame noPadding>
+          {showSplash && <Splash onDone={handleSplashDone} />}
           <Outlet />
         </PhoneFrame>
       </ProgressProvider>
