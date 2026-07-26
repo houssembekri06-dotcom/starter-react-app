@@ -5,18 +5,21 @@
 }
 
 .profile-avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
+  width: 66px;
+  height: 66px;
+  border-radius: 22px;
   background: var(--color-indigo-tint);
+  border: 2px solid var(--color-indigo-light);
+  box-shadow: 0 4px 0 0 var(--color-indigo-light);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: none;
 }
 
 .profile-name {
   font-size: var(--font-size-lg);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .profile-league {
@@ -38,14 +41,32 @@
   gap: 6px;
 }
 
+.profile-stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.profile-stat-icon--coral { background: var(--color-coral-light); }
+.profile-stat-icon--indigo { background: var(--color-indigo-tint); }
+.profile-stat-icon--teal { background: var(--color-teal-light); }
+
 .profile-stat-value {
   font-size: var(--font-size-money);
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 .profile-stat-label {
   font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-disabled);
 }
 
 .settings-row {

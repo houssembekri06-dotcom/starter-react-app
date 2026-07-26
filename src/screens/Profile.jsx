@@ -23,22 +23,30 @@ export default function Profile() {
 
       <div className="profile-stats-grid">
         <Card className="profile-stat">
-          <Icon name="flame" size={20} stroke={2} color="var(--color-coral)" />
+          <span className="profile-stat-icon profile-stat-icon--coral">
+            <Icon name="flame" size={20} stroke={2.2} color="var(--color-coral)" />
+          </span>
           <div className="profile-stat-value">{streakDays}</div>
           <div className="profile-stat-label">Day streak</div>
         </Card>
         <Card className="profile-stat">
-          <Icon name="sparkles" size={20} stroke={2} color="var(--color-indigo)" />
+          <span className="profile-stat-icon profile-stat-icon--indigo">
+            <Icon name="sparkles" size={20} stroke={2.2} color="var(--color-indigo)" />
+          </span>
           <div className="profile-stat-value">{xpTotal}</div>
           <div className="profile-stat-label">Total XP</div>
         </Card>
         <Card className="profile-stat">
-          <Icon name="coins" size={20} stroke={2} color="var(--color-coral)" />
+          <span className="profile-stat-icon profile-stat-icon--coral">
+            <Icon name="coins" size={20} stroke={2.2} color="var(--color-coral)" />
+          </span>
           <div className="profile-stat-value">{coins}</div>
           <div className="profile-stat-label">Coins</div>
         </Card>
         <Card className="profile-stat">
-          <Icon name="trophy" size={20} stroke={2} color="var(--color-teal)" />
+          <span className="profile-stat-icon profile-stat-icon--teal">
+            <Icon name="trophy" size={20} stroke={2.2} color="var(--color-teal)" />
+          </span>
           <div className="profile-stat-value">{completedLessonsCount}/{totalLessons}</div>
           <div className="profile-stat-label">Lessons</div>
         </Card>

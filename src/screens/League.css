@@ -8,19 +8,22 @@
 }
 
 .league-badge {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  width: 68px;
+  height: 68px;
+  border-radius: 22px;
   background: var(--color-coral-light);
+  border: 2px solid #FFD3B8;
+  box-shadow: 0 5px 0 0 #FFD3B8;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .league-title {
-  font-size: var(--font-size-lg);
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 .league-subtitle {
@@ -34,7 +37,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 11px 4px;
+  padding: 10px 4px;
   border-top: 1px solid var(--color-gray-bg);
   font-size: var(--font-size-base);
 }
@@ -44,30 +47,64 @@
 }
 
 .league-rank {
-  width: 20px;
-  font-weight: 700;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-gray-bg);
+  font-weight: 800;
+  font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
+}
+
+/* Podium medals for the top 3 */
+.league-row:nth-child(1) .league-rank {
+  background: #FFD700;
+  color: #7A4B00;
+  box-shadow: 0 3px 0 0 #C79A00;
+}
+.league-row:nth-child(2) .league-rank {
+  background: #D8DEE7;
+  color: #4A5568;
+  box-shadow: 0 3px 0 0 #B4BECD;
+}
+.league-row:nth-child(3) .league-rank {
+  background: #F0C29A;
+  color: #7A4B00;
+  box-shadow: 0 3px 0 0 #D89E6A;
 }
 
 .league-name {
   flex: 1;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .league-xp {
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-indigo);
 }
 
 .league-row--user {
   background: var(--color-indigo-tint);
-  border-radius: var(--radius-sm);
-  margin: 0 -4px;
-  padding-left: 8px;
-  padding-right: 8px;
+  border-radius: 16px;
+  border: 2px solid var(--color-indigo-light);
+  margin: 4px -6px;
+  padding: 10px 8px;
+}
+
+.league-row--user + .league-row {
+  border-top: none;
 }
 
 .league-row--user .league-name,
 .league-row--user .league-rank {
   color: var(--color-indigo-dark);
+}
+
+.league-row--user .league-rank {
+  background: var(--color-indigo);
+  color: #fff;
 }
