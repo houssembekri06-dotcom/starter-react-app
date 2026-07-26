@@ -135,13 +135,19 @@ function RouteTabBar() {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  // Splash is client-only: rendering it in the SSR HTML makes it a victim of
-  // this template's hydration mismatch, which recreates the subtree and pins
-  // the CSS entrance animations at frame 0 (opacity 0 → invisible). Mounting
-  // it from an effect, after hydration settles, lets it animate cleanly.
+  // This template's dev tooling tags .jsx components differently on the server
+  // than on the client, producing a hydration mismatch on the PhoneFrame
+  // wrapper. React reacts by tearing down and rebuilding the whole tree, which
+  // flashes a blank screen and pins the splash's CSS entrance animation at
+  // frame 0 (opacity 0 — nothing visible). We render the phone shell only
+  // after the client has mounted: the server and the first client render then
+  // emit the same (empty) markup, so there is nothing to mismatch, and the app
+  // mounts cleanly on the client.
+  const [mounted, setMounted] = useState(false);
   const [showSplash, setShowSplash] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     if (!sessionStorage.getItem("iinvest-splash-seen")) {
       setShowSplash(true);
     }
@@ -157,10 +163,12 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ProgressProvider>
-        <PhoneFrame noPadding bottomBar={showSplash ? null : <RouteTabBar />}>
-          {showSplash && <Splash onDone={handleSplashDone} />}
-          <Outlet />
-        </PhoneFrame>
+        {mounted && (
+          <PhoneFrame noPadding bottomBar={showSplash ? null : <RouteTabBar />}>
+            {showSplash && <Splash onDone={handleSplashDone} />}
+            <Outlet />
+          </PhoneFrame>
+        )}
       </ProgressProvider>
     </QueryClientProvider>
   );
