@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import News from "../screens/News";
 import { TabScreen } from "../lib/gate";
 
-export const Route = createFileRoute("/news")({
+export const Route = createFileRoute("/news/")({
   component: () => (
     <TabScreen>
       <News />
