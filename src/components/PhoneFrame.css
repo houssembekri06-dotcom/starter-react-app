@@ -8,6 +8,13 @@
   padding: 24px 0;
 }
 
+/* In dark mode only the phone screen goes dark — the area around it stays
+   white. */
+.dark .phone-outer,
+.dark body {
+  background: #ffffff;
+}
+
 .phone-frame {
   width: 100%;
   max-width: var(--phone-width);
