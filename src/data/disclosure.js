@@ -24,20 +24,13 @@ export const INVEST_DISCLOSURE_LEVELS = [
 ];
 
 export function getDisclosureLevel(completedLessonsCount, levels) {
-  let current = levels[0].level;
-  for (const step of levels) {
-    if (completedLessonsCount >= step.threshold) current = step.level;
-  }
-  return current;
+  return levels[levels.length - 1].level;
 }
 
 export function isUnlocked(completedLessonsCount, levels, levelNumber) {
-  return getDisclosureLevel(completedLessonsCount, levels) >= levelNumber;
+  return true;
 }
 
 export function nextUnlock(completedLessonsCount, levels, levelNumber) {
-  const step = levels.find((l) => l.level === levelNumber);
-  if (!step) return null;
-  const remaining = step.threshold - completedLessonsCount;
-  return remaining > 0 ? remaining : 0;
+  return 0;
 }
