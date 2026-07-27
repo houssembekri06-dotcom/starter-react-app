@@ -5,8 +5,8 @@ export default function Splash({ onDone }) {
   const [leaving, setLeaving] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setLeaving(true), 1800);
-    const t2 = setTimeout(() => onDone && onDone(), 2300);
+    const t1 = setTimeout(() => setLeaving(true), 1500);
+    const t2 = setTimeout(() => onDone && onDone(), 2050);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -37,7 +37,6 @@ export default function Splash({ onDone }) {
         </svg>
       </div>
       <div className="splash-title">iInvest</div>
-      <div className="splash-tag">Learn. Practice. Grow.</div>
     </div>
   );
 }
