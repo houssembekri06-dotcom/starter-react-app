@@ -92,6 +92,13 @@
   transform: scale(0.995);
 }
 
+.news-card--link,
+a.news-hero {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
 .news-card-meta {
   display: flex;
   align-items: center;
