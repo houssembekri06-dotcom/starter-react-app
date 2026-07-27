@@ -1,4 +1,7 @@
 .market-ticker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   width: 100%;
   overflow: hidden;
   background: var(--color-white);
@@ -8,6 +11,49 @@
   top: 0;
   z-index: 10;
   box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+}
+
+/* LIVE indicator (crypto is real-time); dimmed until the first quote lands. */
+.market-ticker-live {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--color-text-disabled);
+  padding: 3px 7px;
+  border-radius: var(--radius-pill);
+  background: var(--color-gray-bg);
+}
+
+.market-ticker-live.is-on {
+  color: var(--color-teal);
+  background: var(--color-teal-light);
+}
+
+.market-ticker-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-text-disabled);
+}
+
+.market-ticker-live.is-on .market-ticker-live-dot {
+  background: var(--color-teal);
+  animation: ticker-live-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes ticker-live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.market-ticker-scroll {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .market-ticker-track {
