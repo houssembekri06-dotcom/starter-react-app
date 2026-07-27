@@ -13,7 +13,7 @@ export default function NewsArticle() {
     return (
       <div className="screen news-screen">
         <button className="article-back" onClick={() => navigate('/news')}>
-          <Icon name="arrow-left" size={18} stroke={2.2} /> Back
+          <Icon name="back" size={18} stroke={2.2} /> Back
         </button>
         <p style={{ marginTop: 24 }}>Article not found.</p>
       </div>
@@ -29,7 +29,7 @@ export default function NewsArticle() {
   return (
     <div className="screen news-screen article-screen">
       <Link to="/news" className="article-back">
-        <Icon name="arrow-left" size={18} stroke={2.2} /> News
+        <Icon name="back" size={18} stroke={2.2} /> News
       </Link>
 
       <div className="article-meta">
