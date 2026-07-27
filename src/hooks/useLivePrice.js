@@ -49,3 +49,50 @@ export function useLivePrice(asset) {
   const changePct = dayOpen ? ((price - dayOpen) / dayOpen) * 100 : 0;
   return { price, series, changePct };
 }
+
+// Same idea but for a whole list of assets at once (e.g. the portfolio page):
+// returns a map assetId -> { price, series, changePct, dayOpen }. Pass a stable
+// array (a module-level constant) so the ticking interval isn't recreated.
+export function useLiveMarket(assets) {
+  const [market, setMarket] = useState(() => {
+    const m = {};
+    for (const a of assets) {
+      m[a.id] = {
+        price: a.price,
+        series: a.sparkline?.length ? a.sparkline.slice(-WINDOW) : [a.price],
+        dayOpen: a.price / (1 + (a.dayChangePct ?? 0) / 100) || a.price,
+      };
+    }
+    return m;
+  });
+
+  useEffect(() => {
+    const iv = setInterval(() => {
+      setMarket((prev) => {
+        const next = {};
+        for (const a of assets) {
+          const cur = prev[a.id] || {
+            price: a.price,
+            series: [a.price],
+            dayOpen: a.price,
+          };
+          const vol = a.volatility ?? 0.012;
+          const delta = (Math.random() - 0.5) * vol * 0.35 * cur.price;
+          const p = Math.max(cur.price * 0.5, cur.price + delta);
+          const series = cur.series.length >= WINDOW ? cur.series.slice(1) : cur.series.slice();
+          series.push(p);
+          next[a.id] = { price: p, series, dayOpen: cur.dayOpen };
+        }
+        return next;
+      });
+    }, TICK_MS);
+    return () => clearInterval(iv);
+  }, [assets]);
+
+  const out = {};
+  for (const id in market) {
+    const m = market[id];
+    out[id] = { ...m, changePct: m.dayOpen ? ((m.price - m.dayOpen) / m.dayOpen) * 100 : 0 };
+  }
+  return out;
+}
