@@ -18,11 +18,13 @@
 }
 
 .splash-logo-img {
-  width: 62%;
-  max-width: 260px;
+  width: 82%;
+  max-width: 340px;
   height: auto;
-  filter: drop-shadow(0 14px 30px rgba(28, 20, 90, 0.35));
-  animation: splashPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Pop in with an overshoot, then keep gently "breathing". */
+  animation:
+    splashPop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+    splashBreathe 2.8s ease-in-out 0.75s infinite;
 }
 
 @keyframes splashFadeIn {
@@ -31,10 +33,32 @@
 }
 
 @keyframes splashFadeOut {
-  to { opacity: 0; transform: scale(1.08); visibility: hidden; }
+  to { opacity: 0; transform: scale(1.12); visibility: hidden; }
 }
 
 @keyframes splashPop {
-  0% { transform: scale(0.6); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.55);
+    opacity: 0;
+    filter: drop-shadow(0 10px 24px rgba(20, 14, 70, 0.15));
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 16px 36px rgba(20, 14, 70, 0.42));
+  }
+}
+
+@keyframes splashBreathe {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 16px 34px rgba(20, 14, 70, 0.38));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 20px 48px rgba(255, 255, 255, 0.22));
+  }
 }
