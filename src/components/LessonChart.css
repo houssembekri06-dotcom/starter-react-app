@@ -96,16 +96,17 @@
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.3px;
   color: #64748B;
   text-align: center;
-  max-width: 190px;
-  line-height: 1.25;
-  /* Show up to two lines, then ellipsis — long titles no longer get cut mid-word */
+  max-width: 200px;
+  line-height: 1.2;
+  /* Clamp to two lines with an ellipsis. Only the -webkit-box mechanism is used;
+     the standard `line-clamp` shorthand is intentionally omitted because it
+     forces display:flow-root here, which disables the clamp. */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  line-clamp: 2;
   overflow: hidden;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
