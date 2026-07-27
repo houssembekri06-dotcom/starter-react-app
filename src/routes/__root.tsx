@@ -135,14 +135,14 @@ function RouteTabBar() {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  // This template's dev tooling tags .jsx components differently on the server
-  // than on the client, producing a hydration mismatch on the PhoneFrame
-  // wrapper. React reacts by tearing down and rebuilding the whole tree, which
-  // flashes a blank screen and pins the splash's CSS entrance animation at
-  // frame 0 (opacity 0 — nothing visible). We render the phone shell only
-  // after the client has mounted: the server and the first client render then
-  // emit the same (empty) markup, so there is nothing to mismatch, and the app
-  // mounts cleanly on the client.
+  // This template's Lovable dev tooling stubs component modules under
+  // src/components differently on the server (a display:contents wrapper with
+  // no className) than on the client — a hydration mismatch that is NOT fixed
+  // by switching .jsx↔.tsx (verified). React would tear down and rebuild the
+  // whole tree on load (blank flash). Rendering the shell only after the client
+  // mounts makes the server and first client render emit identical (empty)
+  // markup, so there is nothing to mismatch. (Production has no tagger, so this
+  // guard is only load-time insurance there.)
   const [mounted, setMounted] = useState(false);
   const [showSplash, setShowSplash] = useState(false);
 

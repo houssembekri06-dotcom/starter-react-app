@@ -490,32 +490,10 @@ const unit6 = buildUnit({
   ],
 });
 
-const TARGET_LESSONS_PER_UNIT = 15;
-
-function padUnit(unit, target = TARGET_LESSONS_PER_UNIT) {
-  const existing = unit.lessons.length;
-  if (existing >= target) return unit;
-  const extras = [];
-  for (let i = existing; i < target; i++) {
-    const source = unit.lessons[i % existing];
-    const n = i - existing + 1;
-    extras.push(
-      buildLesson({
-        id: `${unit.id}-l${i + 1}`,
-        unitId: unit.id,
-        title: `Practice ${n} — ${unit.title}`,
-        xp: 8,
-        content: [
-          { heading: 'Quick review', body: `A short exercise to reinforce what you saw in the "${unit.title}" unit. Answer the question below to complete this step.` },
-        ],
-        quiz: source.quiz,
-      })
-    );
-  }
-  return { ...unit, lessons: [...unit.lessons, ...extras] };
-}
-
-export const UNITS = [unit1, unit2, unit3, unit4, unit5, unit6].map((u) => padUnit(u));
+// Every lesson below is real, hand-written content — no auto-generated
+// "Practice N" filler. 29 lessons total, enough to unlock every progressive
+// disclosure tier (the highest threshold is 28).
+export const UNITS = [unit1, unit2, unit3, unit4, unit5, unit6];
 export const ALL_LESSONS = UNITS.flatMap((u) => u.lessons);
 export function getLessonById(lessonId) { return ALL_LESSONS.find((l) => l.id === lessonId) || null; }
 export function getUnitById(unitId) { return UNITS.find((u) => u.id === unitId) || null; }

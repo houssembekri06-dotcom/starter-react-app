@@ -50,6 +50,23 @@
   font-weight: 600;
   color: var(--color-text-secondary);
   font-variant-numeric: tabular-nums;
+  border-radius: 4px;
+}
+
+/* Brief flash when a quote ticks up or down, like a live feed. */
+.market-ticker-item--flash-up .market-ticker-price {
+  animation: ticker-flash-up 0.7s ease;
+}
+.market-ticker-item--flash-down .market-ticker-price {
+  animation: ticker-flash-down 0.7s ease;
+}
+@keyframes ticker-flash-up {
+  0%, 25% { color: var(--color-teal); background: var(--color-teal-light); }
+  100% { color: var(--color-text-secondary); background: transparent; }
+}
+@keyframes ticker-flash-down {
+  0%, 25% { color: var(--color-rose); background: var(--color-rose-light); }
+  100% { color: var(--color-text-secondary); background: transparent; }
 }
 
 .market-ticker-change {

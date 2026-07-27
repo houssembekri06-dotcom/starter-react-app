@@ -15,8 +15,11 @@ export default function Lesson() {
 
   if (!lesson) return null;
   const unit = getUnitById(lesson.unitId);
-  const block = lesson.content[blockIndex];
-  const isLastBlock = blockIndex === lesson.content.length - 1;
+  // Clamp so a block is always defined even if blockIndex somehow overshoots
+  // (e.g. rapid double-taps) — never read `.heading` off undefined.
+  const safeIndex = Math.min(blockIndex, lesson.content.length - 1);
+  const block = lesson.content[safeIndex];
+  const isLastBlock = safeIndex === lesson.content.length - 1;
 
   function handleContinue() {
     if (isLastBlock) navigate(`/lesson/${lesson.id}/quiz`);

@@ -23,12 +23,26 @@ function computeLeague(xpTotal) {
   return current;
 }
 
+const MS_PER_DAY = 86400000;
+const MS_PER_WEEK = 7 * MS_PER_DAY;
+
 function todayStr() {
   return new Date().toISOString().slice(0, 10);
 }
 
 function daysBetween(a, b) {
-  return Math.round((new Date(b) - new Date(a)) / 86400000);
+  return Math.round((new Date(b) - new Date(a)) / MS_PER_DAY);
+}
+
+// Simple fixed 7-day buckets since the Unix epoch — enough to drive a weekly
+// league reset without a backend. Called at runtime (client), never at import.
+function currentWeekId() {
+  return Math.floor(Date.now() / MS_PER_WEEK);
+}
+
+function daysUntilWeekReset() {
+  const intoWeek = Date.now() % MS_PER_WEEK;
+  return Math.max(1, Math.ceil((MS_PER_WEEK - intoWeek) / MS_PER_DAY));
 }
 
 function defaultState() {
@@ -37,6 +51,8 @@ function defaultState() {
     userName: '',
     investorProfile: null, // { goal, level }
     xpTotal: 0,
+    weeklyXp: 0,
+    weekId: null,
     coins: 0,
     hearts: MAX_HEARTS,
     streakDays: 0,
@@ -64,6 +80,20 @@ export function ProgressProvider({ children }) {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }, [state]);
+
+  // Runs once on the client: reset a broken streak (a full day was skipped)
+  // and roll over the weekly league when a new week has started.
+  useEffect(() => {
+    setState((s) => {
+      let next = s;
+      const wk = currentWeekId();
+      if (s.weekId !== wk) next = { ...next, weekId: wk, weeklyXp: 0 };
+      if (s.lastActiveDate && s.streakDays > 0 && daysBetween(s.lastActiveDate, todayStr()) > 1) {
+        next = { ...next, streakDays: 0 };
+      }
+      return next === s ? s : next;
+    });
+  }, []);
 
   const completedLessonsCount = state.completedLessonIds.length;
   const league = useMemo(() => computeLeague(state.xpTotal), [state.xpTotal]);
@@ -95,9 +125,13 @@ export function ProgressProvider({ children }) {
     setState((s) => {
       if (s.completedLessonIds.includes(lessonId)) return s;
       const withStreak = bumpStreak(s);
+      const wk = currentWeekId();
+      const weeklyBase = withStreak.weekId === wk ? withStreak.weeklyXp : 0;
       return {
         ...withStreak,
         xpTotal: withStreak.xpTotal + lesson.xp,
+        weekId: wk,
+        weeklyXp: weeklyBase + lesson.xp,
         coins: withStreak.coins + COINS_PER_LESSON,
         completedLessonIds: [...withStreak.completedLessonIds, lessonId],
         lastCompletedLesson: { id: lesson.id, title: lesson.title, xp: lesson.xp },
@@ -190,6 +224,7 @@ export function ProgressProvider({ children }) {
     ...state,
     completedLessonsCount,
     totalLessons: ALL_LESSONS.length,
+    weeklyResetInDays: daysUntilWeekReset(),
     league,
     maxHearts: MAX_HEARTS,
     transactionFeeRate: TRANSACTION_FEE_RATE,

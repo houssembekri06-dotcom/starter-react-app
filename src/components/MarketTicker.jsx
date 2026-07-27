@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import Icon from './Icon';
 import './MarketTicker.css';
 
@@ -21,19 +21,43 @@ function formatPrice(price) {
 }
 
 export default function MarketTicker() {
-  const items = useMemo(() => {
-    // Double the list for a seamless infinite scroll loop
-    const doubled = [...TICKER_ITEMS, ...TICKER_ITEMS];
-    return doubled.map((item, i) => ({ ...item, key: `${item.symbol}-${i}` }));
+  // Start from the static list (deterministic first paint), then let the
+  // quotes drift live on the client so the ticker feels like a real feed.
+  const [quotes, setQuotes] = useState(TICKER_ITEMS);
+  const [tick, setTick] = useState(0);
+
+  useEffect(() => {
+    const iv = setInterval(() => {
+      setQuotes((prev) =>
+        prev.map((q) => {
+          // Nudge only ~40% of symbols each beat so it looks organic.
+          if (Math.random() > 0.4) return q.flash ? { ...q, flash: null } : q;
+          const drift = (Math.random() - 0.5) * 0.5; // ±0.25 percentage points
+          const decimals = q.price >= 1000 ? 2 : q.price >= 100 ? 2 : 4;
+          return {
+            ...q,
+            price: Number((q.price * (1 + drift / 100)).toFixed(decimals)),
+            change: Number((q.change + drift).toFixed(2)),
+            flash: drift >= 0 ? 'up' : 'down',
+          };
+        })
+      );
+      setTick((t) => t + 1);
+    }, 1500);
+    return () => clearInterval(iv);
   }, []);
 
+  // Double the list for a seamless infinite scroll loop.
+  const items = [...quotes, ...quotes].map((item, i) => ({ ...item, key: `${item.symbol}-${i}` }));
+
   return (
-    <div className="market-ticker" aria-label="Fictional market quotes">
+    <div className="market-ticker" aria-label="Fictional market quotes (simulated)">
       <div className="market-ticker-track">
         {items.map((item) => {
           const isPositive = item.change >= 0;
+          const flashClass = item.flash ? ` market-ticker-item--flash-${item.flash}` : '';
           return (
-            <div key={item.key} className="market-ticker-item">
+            <div key={item.key} className={`market-ticker-item${flashClass}`}>
               <span className="market-ticker-symbol">{item.symbol}</span>
               <span className="market-ticker-price">{formatPrice(item.price)}</span>
               <span className={`market-ticker-change ${isPositive ? 'market-ticker-change--up' : 'market-ticker-change--down'}`}>

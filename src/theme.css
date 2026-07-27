@@ -81,3 +81,30 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* Accessibility: visible keyboard focus ring. :focus-visible shows only for
+   keyboard / assistive-tech users, not on mouse clicks. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--color-indigo);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Respect users who prefer reduced motion: neutralise the decorative
+   animations (splash, ticker scroll, screen transitions, confetti…). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
