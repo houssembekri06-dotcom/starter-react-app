@@ -20,6 +20,7 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as WalletRouteImport } from './routes/wallet'
 import { Route as AssetAssetIdRouteImport } from './routes/asset.$assetId'
 import { Route as LessonLessonIdRouteImport } from './routes/lesson.$lessonId'
+import { Route as NewsArticleIdRouteImport } from './routes/news.$articleId'
 import { Route as LessonLessonIdQuizRouteImport } from './routes/lesson.$lessonId_.quiz'
 
 const IndexRoute = IndexRouteImport.update({
@@ -77,6 +78,11 @@ const LessonLessonIdRoute = LessonLessonIdRouteImport.update({
   path: '/lesson/$lessonId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NewsArticleIdRoute = NewsArticleIdRouteImport.update({
+  id: '/$articleId',
+  path: '/$articleId',
+  getParentRoute: () => NewsRoute,
+} as any)
 const LessonLessonIdQuizRoute = LessonLessonIdQuizRouteImport.update({
   id: '/lesson/$lessonId_/quiz',
   path: '/lesson/$lessonId/quiz',
@@ -88,13 +94,14 @@ export interface FileRoutesByFullPath {
   '/home': typeof HomeRoute
   '/league': typeof LeagueRoute
   '/login': typeof LoginRoute
-  '/news': typeof NewsRoute
+  '/news': typeof NewsRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
   '/signup': typeof SignupRoute
   '/wallet': typeof WalletRoute
   '/asset/$assetId': typeof AssetAssetIdRoute
   '/lesson/$lessonId': typeof LessonLessonIdRoute
+  '/news/$articleId': typeof NewsArticleIdRoute
   '/lesson/$lessonId/quiz': typeof LessonLessonIdQuizRoute
 }
 export interface FileRoutesByTo {
@@ -102,13 +109,14 @@ export interface FileRoutesByTo {
   '/home': typeof HomeRoute
   '/league': typeof LeagueRoute
   '/login': typeof LoginRoute
-  '/news': typeof NewsRoute
+  '/news': typeof NewsRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
   '/signup': typeof SignupRoute
   '/wallet': typeof WalletRoute
   '/asset/$assetId': typeof AssetAssetIdRoute
   '/lesson/$lessonId': typeof LessonLessonIdRoute
+  '/news/$articleId': typeof NewsArticleIdRoute
   '/lesson/$lessonId/quiz': typeof LessonLessonIdQuizRoute
 }
 export interface FileRoutesById {
@@ -117,13 +125,14 @@ export interface FileRoutesById {
   '/home': typeof HomeRoute
   '/league': typeof LeagueRoute
   '/login': typeof LoginRoute
-  '/news': typeof NewsRoute
+  '/news': typeof NewsRouteWithChildren
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
   '/signup': typeof SignupRoute
   '/wallet': typeof WalletRoute
   '/asset/$assetId': typeof AssetAssetIdRoute
   '/lesson/$lessonId': typeof LessonLessonIdRoute
+  '/news/$articleId': typeof NewsArticleIdRoute
   '/lesson/$lessonId_/quiz': typeof LessonLessonIdQuizRoute
 }
 export interface FileRouteTypes {
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/wallet'
     | '/asset/$assetId'
     | '/lesson/$lessonId'
+    | '/news/$articleId'
     | '/lesson/$lessonId/quiz'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/wallet'
     | '/asset/$assetId'
     | '/lesson/$lessonId'
+    | '/news/$articleId'
     | '/lesson/$lessonId/quiz'
   id:
     | '__root__'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/wallet'
     | '/asset/$assetId'
     | '/lesson/$lessonId'
+    | '/news/$articleId'
     | '/lesson/$lessonId_/quiz'
   fileRoutesById: FileRoutesById
 }
@@ -176,7 +188,7 @@ export interface RootRouteChildren {
   HomeRoute: typeof HomeRoute
   LeagueRoute: typeof LeagueRoute
   LoginRoute: typeof LoginRoute
-  NewsRoute: typeof NewsRoute
+  NewsRoute: typeof NewsRouteWithChildren
   OnboardingRoute: typeof OnboardingRoute
   ProfileRoute: typeof ProfileRoute
   SignupRoute: typeof SignupRoute
@@ -265,6 +277,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LessonLessonIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/news/$articleId': {
+      id: '/news/$articleId'
+      path: '/$articleId'
+      fullPath: '/news/$articleId'
+      preLoaderRoute: typeof NewsArticleIdRouteImport
+      parentRoute: typeof NewsRoute
+    }
     '/lesson/$lessonId_/quiz': {
       id: '/lesson/$lessonId_/quiz'
       path: '/lesson/$lessonId/quiz'
@@ -275,12 +294,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface NewsRouteChildren {
+  NewsArticleIdRoute: typeof NewsArticleIdRoute
+}
+
+const NewsRouteChildren: NewsRouteChildren = {
+  NewsArticleIdRoute: NewsArticleIdRoute,
+}
+
+const NewsRouteWithChildren = NewsRoute._addFileChildren(NewsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HomeRoute: HomeRoute,
   LeagueRoute: LeagueRoute,
   LoginRoute: LoginRoute,
-  NewsRoute: NewsRoute,
+  NewsRoute: NewsRouteWithChildren,
   OnboardingRoute: OnboardingRoute,
   ProfileRoute: ProfileRoute,
   SignupRoute: SignupRoute,
