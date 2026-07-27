@@ -164,7 +164,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <ProgressProvider>
         {mounted && (
-          <PhoneFrame noPadding bottomBar={showSplash ? null : <RouteTabBar />}>
+          <PhoneFrame noPadding bottomBar={showSplash ? undefined : (<RouteTabBar /> as any)}>
             {showSplash && <Splash onDone={handleSplashDone} />}
             <Outlet />
           </PhoneFrame>
