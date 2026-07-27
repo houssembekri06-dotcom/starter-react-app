@@ -6,7 +6,7 @@ import './Profile.css';
 
 
 export default function Profile() {
-  const { userName, streakDays, xpTotal, league, coins, completedLessonsCount, totalLessons, resetProgress } = useProgress();
+  const { userName, streakDays, xpTotal, league, coins, completedLessonsCount, totalLessons, resetProgress, darkMode, toggleDarkMode } = useProgress();
   const [notifications, setNotifications] = useState(true);
 
   // Clear the "already seen" flag and reload so the splash plays again.
@@ -65,6 +65,12 @@ export default function Profile() {
         <div className="settings-row" onClick={() => setNotifications((n) => !n)}>
           <span>Reminder notifications</span>
           <div className={`toggle${notifications ? ' toggle--on' : ''}`}>
+            <div className="toggle-knob" />
+          </div>
+        </div>
+        <div className="settings-row" onClick={toggleDarkMode}>
+          <span>Dark mode</span>
+          <div className={`toggle${darkMode ? ' toggle--on' : ''}`}>
             <div className="toggle-knob" />
           </div>
         </div>

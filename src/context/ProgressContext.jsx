@@ -5,6 +5,7 @@ import { getAssetById } from '../data/assets';
 const ProgressContext = createContext(null);
 
 const STORAGE_KEY = 'iinvest-progress-v1';
+const THEME_KEY = 'iinvest-dark';
 const STARTING_CASH = 1000;
 const MAX_HEARTS = 5;
 const TRANSACTION_FEE_RATE = 0.005;
@@ -76,10 +77,30 @@ function loadState() {
 
 export function ProgressProvider({ children }) {
   const [state, setState] = useState(loadState);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }, [state]);
+
+  // Apply the saved theme on load, then keep the <html> `.dark` class in sync.
+  useEffect(() => {
+    try {
+      setDarkMode(localStorage.getItem(THEME_KEY) === '1');
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle('dark', darkMode);
+    try {
+      localStorage.setItem(THEME_KEY, darkMode ? '1' : '0');
+    } catch {}
+  }, [darkMode]);
+
+  function toggleDarkMode() {
+    setDarkMode((d) => !d);
+  }
 
   // Runs once on the client: reset a broken streak (a full day was skipped)
   // and roll over the weekly league when a new week has started.
@@ -236,6 +257,8 @@ export function ProgressProvider({ children }) {
     buyAsset,
     sellAsset,
     resetProgress,
+    darkMode,
+    toggleDarkMode,
   };
 
   return <ProgressContext.Provider value={value}>{children}</ProgressContext.Provider>;

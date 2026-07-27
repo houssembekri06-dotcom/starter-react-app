@@ -89,15 +89,15 @@
 /* --- Labels — white pill card under node --- */
 .lesson-chart-label {
   margin-top: 16px;
-  background: #FFFFFF;
+  background: var(--color-white);
   padding: 6px 14px;
   border-radius: 16px;
-  border: 2px solid #E2E8F0;
+  border: 2px solid var(--color-border);
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.3px;
-  color: #64748B;
+  color: var(--color-text-secondary);
   text-align: center;
   max-width: 200px;
   line-height: 1.2;
@@ -111,11 +111,26 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 .lesson-chart-label--active {
-  border-color: #1E293B;
-  color: #1E293B;
+  border-color: var(--color-indigo);
+  color: var(--color-text);
   font-size: 12px;
   padding: 8px 16px;
-  box-shadow: 0 4px 0 0 #1E293B;
+  box-shadow: 0 4px 0 0 var(--color-indigo);
+}
+
+/* Dark-mode tuning for the game-style nodes (their base hex colours are tuned
+   for a light background). */
+.dark .lesson-chart-node--active {
+  background: var(--color-indigo);
+  box-shadow: 0 8px 0 0 var(--color-indigo-dark);
+}
+.dark .lesson-chart-node--active:active {
+  box-shadow: 0 4px 0 0 var(--color-indigo-dark);
+}
+.dark .lesson-chart-node--locked {
+  background: #2E2F3A;
+  box-shadow: 0 6px 0 0 #1E1F28;
+  opacity: 1;
 }
 .lesson-chart-label--locked {
   color: #94A3B8;

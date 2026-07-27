@@ -27,7 +27,7 @@
 .news-hero {
   overflow: hidden;
   border-radius: var(--radius-md);
-  background: #fff;
+  background: var(--color-white);
   color: var(--color-text);
   margin-bottom: 18px;
   box-shadow: var(--shadow-soft);
@@ -80,7 +80,7 @@
 }
 
 .news-card {
-  background: #fff;
+  background: var(--color-white);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 14px;
