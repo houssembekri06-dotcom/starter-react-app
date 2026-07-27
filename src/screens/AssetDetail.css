@@ -12,13 +12,40 @@
 .price-hero {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 8px;
   margin-bottom: 10px;
 }
 
 .price-hero-value {
   font-size: var(--font-size-money-lg);
   font-weight: 700;
+  margin-right: auto;
+}
+
+.price-hero-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--color-teal);
+  background: var(--color-teal-light);
+  padding: 3px 7px;
+  border-radius: var(--radius-pill);
+}
+
+.price-hero-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-teal);
+  animation: price-live-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes price-live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
 }
 
 .position-grid {

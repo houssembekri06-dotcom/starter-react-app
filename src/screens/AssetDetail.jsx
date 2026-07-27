@@ -12,6 +12,7 @@ import PriceChangeTag from '../components/PriceChangeTag';
 import LockedTeaser from '../components/LockedTeaser';
 import SimulationBadge from '../components/SimulationBadge';
 import { Card, SectionTitle } from '../components/Card';
+import { useLivePrice } from '../hooks/useLivePrice';
 import InvestSheet from './InvestSheet';
 import SellSheet from './SellSheet';
 import PurchaseConfirmation from './PurchaseConfirmation';
@@ -28,6 +29,9 @@ export default function AssetDetail() {
   const [timeframe, setTimeframe] = useState('1M');
   const [sheetMode, setSheetMode] = useState(null); // null | 'buy' | 'sell'
   const [confirmation, setConfirmation] = useState(null);
+
+  // Live-ticking price + rolling chart for the viewed asset.
+  const { price: livePrice, series: liveSeries, changePct: liveChangePct } = useLivePrice(asset);
 
   if (!asset) return null;
   const position = positions[assetId];
@@ -59,8 +63,8 @@ export default function AssetDetail() {
     );
   }
 
-  const gainLoss = position ? (asset.price - position.avgPrice) * position.shares : 0;
-  const gainLossPct = position ? ((asset.price - position.avgPrice) / position.avgPrice) * 100 : 0;
+  const gainLoss = position ? (livePrice - position.avgPrice) * position.shares : 0;
+  const gainLossPct = position ? ((livePrice - position.avgPrice) / position.avgPrice) * 100 : 0;
 
   return (
     <div className="screen asset-detail-screen">
@@ -77,10 +81,14 @@ export default function AssetDetail() {
       {/* Palier 1 */}
       <Card>
         <div className="price-hero">
-          <div className="price-hero-value">{formatEUR(asset.price)}</div>
-          <PriceChangeTag value={asset.dayChangePct} />
+          <div className="price-hero-value">{formatEUR(livePrice)}</div>
+          <PriceChangeTag value={liveChangePct} />
+          <span className="price-hero-live" aria-hidden="true">
+            <span className="price-hero-live-dot" />
+            LIVE
+          </span>
         </div>
-        <Sparkline data={asset.sparkline} width={310} height={70} positive={asset.dayChangePct >= 0} fill />
+        <Sparkline data={liveSeries} width={310} height={70} positive={liveChangePct >= 0} fill />
       </Card>
 
       {/* Palier 2 */}
@@ -90,7 +98,7 @@ export default function AssetDetail() {
           {position ? (
             <div className="position-grid">
               <PositionStat label="Shares held" value={`${formatShares(position.shares)}`} />
-              <PositionStat label="Current value" value={formatEUR(position.shares * asset.price)} />
+              <PositionStat label="Current value" value={formatEUR(position.shares * livePrice)} />
               <PositionStat
                 label="Total gain / loss"
                 value={`${gainLoss >= 0 ? '+' : ''}${formatEUR(gainLoss)}`}
