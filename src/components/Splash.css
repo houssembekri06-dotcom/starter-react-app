@@ -18,8 +18,10 @@
 }
 
 .splash-logo {
-  width: 82%;
-  max-width: 340px;
+  /* Le viewBox du SVG est recadré au dessin (aucune marge morte), donc ces
+     valeurs correspondent à la largeur réellement encrée du logo. */
+  width: 65%;
+  max-width: 260px;
   filter: drop-shadow(0 16px 34px rgba(20, 14, 70, 0.35));
   /* Gentle breathing once the characters have appeared. */
   animation: splashBreathe 2.8s ease-in-out 1.1s infinite;
@@ -54,6 +56,31 @@
 
 @keyframes splashFadeOut {
   to { opacity: 0; transform: scale(1.12); visibility: hidden; }
+}
+
+/* Pas de pop-in, pas de respiration, pas de zoom de sortie pour qui demande
+   explicitement moins d'animation : le logo est simplement là, puis disparaît.
+   On n'anime rien du tout ici — theme.css:134 écrase déjà toute
+   animation-duration à 0.001ms !important, donc une animation de sortie serait
+   de toute façon collapsée. On pose directement l'état final, ce qui évite
+   aussi le scale(1.12) de splashFadeOut, ne serait-ce que sur une frame.
+   L'ordre compte : .splash--leaving passe après .splash (même spécificité). */
+@media (prefers-reduced-motion: reduce) {
+  .splash,
+  .splash-logo {
+    animation: none;
+  }
+
+  .splash-logo .sc {
+    opacity: 1;
+    animation: none;
+  }
+
+  .splash--leaving {
+    animation: none;
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 @keyframes splashBreathe {
