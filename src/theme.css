@@ -58,6 +58,12 @@
   --phone-width: 390px;
   --tabbar-height: 64px;
   --statusbar-height: 44px;
+
+  /* Écran de lancement. Volontairement hors du remapping .dark : le splash
+     reste violet dans les deux thèmes. --color-splash-top est aussi la couleur
+     de la barre d'état pendant le splash, pour que la jointure soit invisible. */
+  --color-splash-top: #5b4fe8;
+  --color-splash-bottom: #4338ca;
 }
 
 /* Dark mode — toggled by adding the `.dark` class on <html>. Only the colour

@@ -9,7 +9,11 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background: linear-gradient(180deg, #5B4FE8 0%, #4338CA 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-splash-top) 0%,
+    var(--color-splash-bottom) 100%
+  );
   animation: splashFadeIn 0.3s ease;
 }
 

@@ -67,6 +67,10 @@
   font-weight: 600;
   color: var(--color-text);
   background: var(--color-cream);
+  /* Retour au thème normal calé sur splashFadeOut (0.55s). */
+  transition:
+    background-color 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .status-bar-icons {
@@ -74,6 +78,28 @@
   align-items: center;
   gap: 6px;
   color: var(--color-text);
+  transition: color 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Le splash est rendu dans .phone-content, donc il ne peut pas peindre la barre
+   d'état qui est son frère au-dessus : sans ça, une bande crème reste visible
+   en haut de l'écran de lancement. On la teinte donc avec le haut du dégradé
+   (--color-splash-top = la couleur exacte du splash à y=0, jointure invisible).
+   Piloté en CSS via :has() plutôt qu'en passant une prop depuis __root : la
+   classe .splash--leaving que Splash pose déjà suffit à resynchroniser le
+   retour au thème normal avec le fondu de sortie. Un navigateur sans :has()
+   retombe simplement sur la barre crème actuelle — dégradation sans casse. */
+.phone-frame:has(.splash:not(.splash--leaving)) .status-bar,
+.phone-frame:has(.splash:not(.splash--leaving)) .status-bar-icons {
+  color: #ffffff;
+  /* Entrée calée sur splashFadeIn (0.3s). */
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.phone-frame:has(.splash:not(.splash--leaving)) .status-bar {
+  background: var(--color-splash-top);
 }
 
 .phone-content {
