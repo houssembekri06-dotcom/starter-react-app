@@ -50,9 +50,25 @@
   z-index: 50;
 }
 
+/* Sur un vrai téléphone, le cadre occupe tout l'écran : plus de marge autour,
+   et surtout une hauteur DÉFINIE. Avec seulement min-height, .phone-frame est
+   un conteneur flex de hauteur auto : .phone-content (flex: 1; overflow-y:
+   auto) ne peut alors pas scroller en interne, le cadre s'étire à la taille du
+   contenu et la barre d'onglets part tout en bas d'une page très longue au
+   lieu de rester collée en bas de l'écran. Au-dessus de 480px le problème
+   n'existe pas, height: 844px fournit déjà cette hauteur définie. */
 @media (max-width: 479px) {
   .phone-notch {
     display: none;
+  }
+
+  .phone-outer {
+    padding: 0;
+  }
+
+  .phone-frame {
+    height: 100vh;
+    height: 100dvh;
   }
 }
 
@@ -100,6 +116,19 @@
 
 .phone-frame:has(.splash:not(.splash--leaving)) .status-bar {
   background: var(--color-splash-top);
+}
+
+/* Sur un vrai téléphone le système affiche déjà l'heure et la batterie : la
+   fausse barre d'état de la maquette ferait doublon et volerait 44px de
+   hauteur utile. On la masque, et le splash occupe alors réellement tout
+   l'écran. Ce bloc DOIT rester après les règles .status-bar ci-dessus : une
+   media query n'ajoute pas de spécificité, donc à égalité c'est l'ordre du
+   fichier qui tranche. La règle :has() de teinte devient sans objet ici, elle
+   reste utile pour la maquette au-dessus de 480px. */
+@media (max-width: 479px) {
+  .status-bar {
+    display: none;
+  }
 }
 
 .phone-content {

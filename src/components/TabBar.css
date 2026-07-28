@@ -1,12 +1,16 @@
 .tab-bar {
   flex: none;
-  height: var(--tabbar-height);
+  /* min-height et non height : la zone sûre (barre d'accueil iPhone) doit
+     S'AJOUTER à la hauteur, pas la rogner. Avec box-sizing: border-box, un
+     height fixe + padding-bottom retranchait l'inset des --tabbar-height,
+     réduisant d'autant la zone tactile des icônes. */
+  min-height: var(--tabbar-height);
   background: var(--color-white);
   border-top: 1px solid var(--color-border);
   display: flex;
   align-items: stretch;
   justify-content: space-around;
-  padding-bottom: env(safe-area-inset-bottom, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   z-index: 40;
 }
 
